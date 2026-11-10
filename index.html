@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>文楽 同伴リーダー | Bunraku Bilingual Companion</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Noto+Serif+JP:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0d11;
+      --bg-surface: #13171f;
+      --bg-active: rgba(212, 175, 55, 0.12);
+      --border: #232a38;
+      --border-active: #d4af37;
+      --text-main: #e2e8f0;
+      --text-muted: #8e9bb0;
+      --text-japanese: #f8fafc;
+      --text-english: #cbd5e1;
+      --accent: #d4af37;
+      --accent-glow: rgba(212, 175, 55, 0.35);
+      --badge-narrator-bg: rgba(99, 102, 241, 0.2);
+      --badge-narrator-text: #a5b4fc;
+      --badge-character-bg: rgba(245, 158, 11, 0.2);
+      --badge-character-text: #fcd34d;
+      --note-bg: rgba(16, 185, 129, 0.15);
+      --note-text: #6ee7b7;
+      --font-scale: 1rem;
+      --ruby-display: block;
+    }
+
+    body.light-mode {
+      --bg: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-active: rgba(180, 83, 9, 0.1);
+      --border: #e2e8f0;
+      --border-active: #b45309;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --text-japanese: #0f172a;
+      --text-english: #334155;
+      --accent: #b45309;
+      --accent-glow: rgba(180, 83, 9, 0.25);
+      --badge-narrator-bg: #e0e7ff;
+      --badge-narrator-text: #3730a3;
+      --badge-character-bg: #fef3c7;
+      --badge-character-text: #92400e;
+      --note-bg: #ecfdf5;
+      --note-text: #065f46;
+    }
+
+    body.hide-ruby rt {
+      display: none !important;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: "Plus Jakarta Sans", sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header & Navigation Bar */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+      padding: 0.65rem 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .brand-logo {
+      font-family: "Cinzel", serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .badge-performance {
+      font-size: 0.7rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 999px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      background: rgba(212, 175, 55, 0.15);
+      color: var(--accent);
+      border: 1px solid var(--accent);
+    }
+
+    .controls-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    select.scene-select {
+      background: var(--bg);
+      color: var(--text-main);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.45rem 0.75rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      outline: none;
+      transition: all 0.2s;
+    }
+    select.scene-select:focus {
+      border-color: var(--accent);
+    }
+
+    .btn-toggle {
+      background: var(--bg);
+      color: var(--text-main);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.45rem 0.65rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: all 0.2s;
+    }
+    .btn-toggle:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .btn-toggle.active {
+      background: var(--accent);
+      color: #0b0d11;
+      border-color: var(--accent);
+    }
+
+    /* Theater Status & Quick Help Banner */
+    .theater-banner {
+      background: linear-gradient(90deg, #171c26 0%, #1e2533 100%);
+      padding: 0.5rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .theater-banner .indicator {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: #10b981;
+    }
+    .theater-banner .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 8px #10b981;
+    }
+
+    /* Main Dual-Column Container */
+    main {
+      flex: 1;
+      max-width: 1280px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 1.25rem 1rem 6rem;
+    }
+
+    .column-header-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      padding-bottom: 0.75rem;
+      margin-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .script-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    /* Individual Bilingual Row */
+    .script-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      padding: 1rem 1.15rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+
+    .script-row:hover {
+      border-color: rgba(212, 175, 55, 0.4);
+      background: rgba(19, 23, 31, 0.9);
+    }
+
+    .script-row.active {
+      border-color: var(--border-active);
+      background: var(--bg-active);
+      box-shadow: 0 0 16px var(--accent-glow);
+    }
+
+    .script-row.active::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: var(--accent);
+      border-top-left-radius: 8px;
+      border-bottom-left-radius: 8px;
+    }
+
+    /* Metadata & Speaker Badges */
+    .row-meta {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.35rem;
+      font-size: 0.75rem;
+    }
+
+    .speaker-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.02em;
+    }
+    .speaker-badge.narrator {
+      background: var(--badge-narrator-bg);
+      color: var(--badge-narrator-text);
+      border-left: 2px solid #818cf8;
+    }
+    .speaker-badge.character {
+      background: var(--badge-character-bg);
+      color: var(--badge-character-text);
+      border-left: 2px solid #f59e0b;
+    }
+
+    .line-number {
+      color: var(--text-muted);
+      font-family: monospace;
+      font-size: 0.75rem;
+    }
+
+    /* Japanese Content Column */
+    .col-jp {
+      font-family: "Noto Serif JP", serif;
+      font-size: calc(var(--font-scale) * 1.12);
+      line-height: 2.1;
+      color: var(--text-japanese);
+      letter-spacing: 0.04em;
+    }
+
+    ruby {
+      ruby-position: over;
+    }
+
+    rt {
+      font-size: 0.58em;
+      color: var(--accent);
+      font-weight: 400;
+      font-family: "Noto Serif JP", serif;
+      letter-spacing: 0;
+      transform: translateY(-0.1em);
+    }
+
+    /* English Content Column */
+    .col-en {
+      font-family: "Plus Jakarta Sans", sans-serif;
+      font-size: var(--font-scale);
+      line-height: 1.7;
+      color: var(--text-english);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    /* Footnotes & Cultural Badges */
+    .footnote-pill {
+      margin-top: 0.65rem;
+      display: inline-flex;
+      align-items: flex-start;
+      gap: 0.4rem;
+      font-size: 0.78rem;
+      background: var(--note-bg);
+      color: var(--note-text);
+      padding: 0.35rem 0.65rem;
+      border-radius: 6px;
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      line-height: 1.45;
+    }
+    .footnote-pill .note-icon {
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+
+    /* Floating Navigation Controls for Theater One-Handed Use */
+    .floating-follower {
+      position: fixed;
+      bottom: 1.25rem;
+      right: 1.25rem;
+      z-index: 60;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(19, 23, 31, 0.95);
+      border: 1px solid var(--accent);
+      padding: 0.45rem 0.65rem;
+      border-radius: 999px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.7);
+      backdrop-filter: blur(16px);
+    }
+
+    .follower-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-main);
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: all 0.2s;
+    }
+    .follower-btn:hover {
+      background: var(--accent);
+      color: #0b0d11;
+    }
+
+    .follower-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent);
+      padding: 0 0.4rem;
+      min-width: 65px;
+      text-align: center;
+      user-select: none;
+    }
+
+    /* Responsive Mobile Mode */
+    @media (max-width: 768px) {
+      .column-header-grid {
+        display: none;
+      }
+      .script-row {
+        grid-template-columns: 1fr;
+        gap: 0.85rem;
+        padding: 0.85rem 1rem;
+      }
+      .col-jp {
+        border-bottom: 1px dashed var(--border);
+        padding-bottom: 0.65rem;
+      }
+      .floating-follower {
+        bottom: 1rem;
+        right: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation & Controls Header -->
+  <header>
+    <div class="brand-group">
+      <div class="brand-logo">
+        <span>文楽</span> BUNRAKU
+      </div>
+      <span class="badge-performance" id="partBadge">PART 1 MORNING</span>
+    </div>
+
+    <div class="controls-group">
+      <!-- Scene Selector -->
+      <select id="sceneSelect" class="scene-select">
+        <optgroup label="第1部 Morning (心中宵庚申)">
+          <option value="morning_yaoya">八百屋の段 (Greengrocer Shop)</option>
+          <option value="morning_michiyuki">道行思ひの短夜 (Travel Passage)</option>
+        </optgroup>
+        <optgroup label="第2部 Afternoon (妹背山婦女庭訓)">
+          <option value="afternoon_sugisakaya">杉酒屋の段 (Sugi Sake Shop)</option>
+          <option value="afternoon_michiyuki">道行恋苧環 (Spool of Love)</option>
+          <option value="afternoon_fukashichi">鱶七使者の段 (Fukashichi Envoy)</option>
+        </optgroup>
+      </select>
+
+      <!-- Furigana Toggle -->
+      <button id="rubyToggle" class="btn-toggle active" title="Toggle Furigana Readings">
+        <span>振仮名</span> ON
+      </button>
+
+      <!-- Font Size Toggle -->
+      <button id="fontToggle" class="btn-toggle" title="Adjust text scale">
+        <span>A+</span>
+      </button>
+
+      <!-- Light/Dark Toggle -->
+      <button id="themeToggle" class="btn-toggle" title="Toggle AMOLED Dark / Light">
+        <span>🌙</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Theater Status Indicator -->
+  <div class="theater-banner">
+    <div class="indicator">
+      <div class="dot"></div>
+      <span id="theaterModeLabel">Theater Mode: Dim / Anti-Glare Active</span>
+    </div>
+    <div id="progressStatus">Line 1 of 15</div>
+  </div>
+
+  <!-- Main Dual-Column Content -->
+  <main>
+    <div class="column-header-grid">
+      <div>日本語 (Jōruri Chanting & Dialogue)</div>
+      <div>English Translation & Context</div>
+    </div>
+
+    <div class="script-list" id="scriptList">
+      <!-- Rendered dynamically via JS -->
+    </div>
+  </main>
+
+  <!-- Floating One-Handed Follower Controls -->
+  <div class="floating-follower">
+    <button class="follower-btn" id="prevBtn" title="Previous Line (↑ or Shift+Space)">▲</button>
+    <div class="follower-label" id="followerCounter">1 / 15</div>
+    <button class="follower-btn" id="nextBtn" title="Next Line (↓ or Space)">▼</button>
+  </div>
+
+  <script>
+    // Master Dataset
+    const RAW_DATA = [{"Scene_ID": "morning_yaoya", "Scene_Title": "心中宵庚申：八百屋の段 (Yaoya no Dan)", "Line_No": 1, "Speaker": "太夫 (Narrator)", "Japanese_Ruby": "<ruby>夏<rt>なつ</rt></ruby>も<ruby>来<rt>き</rt></ruby>て、<ruby>青物見せ<rt>あおものみせ</rt></ruby>に<ruby>水<rt>みず</rt></ruby><ruby>乾<rt>かわ</rt></ruby>く、<ruby>筵庇<rt>むしろびさし</rt></ruby>に<ruby>避<rt>よ</rt></ruby>けられし、<ruby>日陰<rt>ひかげ</rt></ruby>の<ruby>千代<rt>ちよ</rt></ruby>が<ruby>男<rt>おとこ</rt></ruby>の<ruby>家<rt>いえ</rt></ruby>は<ruby>新靱<rt>しんうつぼ</rt></ruby>、<ruby>油掛町<rt>あぶらかけちょう</rt></ruby><ruby>八百屋<rt>やおや</rt></ruby><ruby>伊右衛門<rt>いえもん</rt></ruby>。", "Japanese_Plain": "夏も来て、青物見せに水乾く、筵庇に避けられし、日陰の千代が男の家は新靱、油掛町八百屋伊右衛門。", "English": "Summer arrives, and water quickly parches on the fresh vegetable display beneath the straw eaves. In the shade resides the husband of Ochiyo: the greengrocer Iemon of Aburakake-chō in Shin-Utsubo.", "Notes": "Wordplay on 'Chiyo' (wife's name) and 'hikage' (living in shadow/unfavored)."}, {"Scene_ID": "morning_yaoya", "Scene_Title": "心中宵庚申：八百屋の段 (Yaoya no Dan)", "Line_No": 2, "Speaker": "太夫 (Narrator)", "Japanese_Ruby": "<ruby>浄土宗<rt>じょうどしゅう</rt></ruby>の<ruby>願<rt>ねが</rt></ruby>ひ<ruby>手<rt>て</rt></ruby><ruby>了海坊<rt>りょうかいぼう</rt></ruby>の<ruby>談義<rt>だんぎ</rt></ruby>に<ruby>打<rt>う</rt></ruby>ち<ruby>込<rt>こ</rt></ruby>み、<ruby>開帳<rt>かいちょう</rt></ruby><ruby>回向<rt>えこう</rt></ruby>の<ruby>世話焼<rt>せわやき</rt></ruby><ruby>仲間<rt>なかま</rt></ruby>、<ruby>見世<rt>みせ</rt></ruby>は<ruby>半兵衛<rt>はんべえ</rt></ruby>に<ruby>打<rt>う</rt></ruby>ち<ruby>任<rt>まか</rt></ruby>せ、<ruby>大坂中<rt>おおさかじゅう</rt></ruby>の<ruby>寺狂<rt>てらぐる</rt></ruby>ひ。", "Japanese_Plain": "浄土宗の願ひ手了海坊の談義に打ち込み、開帳回向の世話焼仲間、見世は半兵衛に打ち任せ、大坂中の寺狂ひ。", "English": "Iemon has completely immersed himself in Buddhist sermons by priest Ryōkaibō of the Pure Land sect, bustling about arranging memorial services and unveiling ceremonies, leaving the shop entirely to Hanbei while he runs madly from temple to temple across Osaka.", "Notes": "Shows the adoptive father has neglected the family business for religious pursuits, leaving Hanbei under his abrasive stepmother's thumb."}, {"Scene_ID": "morning_yaoya", "Scene_Title": "心中宵庚申：八百屋の段 (Yaoya no Dan)", "Line_No": 3, "Speaker": "太夫 (Narrator)", "Japanese_Ruby": "<ruby>女房<rt>にょうぼう</rt></ruby>は<ruby>内外<rt>うちそと</rt></ruby>の<ruby>世話<rt>せわ</rt></ruby>に<ruby>五<rt>いつ</rt></ruby>つも<ruby>歳<rt>とし</rt></ruby><ruby>老<rt>お</rt></ruby>けて、<ruby>朝<rt>あさ</rt></ruby>から<ruby>晩<rt>ばん</rt></ruby>まで<ruby>気<rt>き</rt></ruby>は<ruby>苛立<rt>いらだ</rt></ruby>て。", "Japanese_Plain": "女房は内外の世話に五つも歳老けて、朝から晩まで気は苛立て。", "English": "His wife (Hanbei's stepmother), aging five extra years under the burden of household chores, stays furious and short-tempered from dawn till dusk.", "Notes": "The stepmother's bitter character setup."}, {"Scene_ID": "morning_yaoya", "Scene_Title": "心中宵庚申：八百屋の段 (Yaoya no Dan)", "Line_No": 4, "Speaker": "継母 (Stepmother)", "Japanese_Ruby": "「この<ruby>半兵衛<rt>はんべえ</rt></ruby>は<ruby>蔵<rt>くら</rt></ruby>にへらへら<ruby>回<rt>まわ</rt></ruby>してあやる。<ruby>見世<rt>みせ</rt></ruby>の<ruby>売物<rt>うりもの</rt></ruby>が<ruby>萎<rt>しな</rt></ruby>びる。ヤイ<ruby>松<rt>まつ</rt></ruby>め、きりきりと<ruby>水<rt>みず</rt></ruby><ruby>打<rt>う</rt></ruby>ちをろ。コリヤさんよ<ruby>糊物<rt>のりもの</rt></ruby>が<ruby>干<rt>ひ</rt></ruby>かるがな！」", "Japanese_Plain": "「この半兵衛は蔵にへらへら回してあやる。見世の売物が萎びる。ヤイ松め、きりきりと水打ちをろ。コリヤさんよ糊物が干かるがな！」", "English": "\"That Hanbei is always idling around in the storehouse! The produce out front is wilting! Hey Matsu, sprinkle water briskly on the greens! And you, the starched laundry is parching in the heat!\"", "Notes": "Rapid-fire nagging characteristic of Sewamono domestic plays."}, {"Scene_ID": "morning_yaoya", "Scene_Title": "心中宵庚申：八百屋の段 (Yaoya no Dan)", "Line_No": 5, "Speaker": "継母 (Stepmother)", "Japanese_Ruby": "「<ruby>取<rt>と</rt></ruby>りへて<ruby>畳<rt>たた</rt></ruby>んで<ruby>打盤<rt>うちばん</rt></ruby><ruby>出<rt>だ</rt></ruby>してもろききりと<ruby>打<rt>う</rt></ruby>て。よそをちよきちょきで<ruby>夕飯<rt>ゆうはん</rt></ruby>のお<ruby>根葉<rt>ねば</rt></ruby><ruby>刻<rt>きざ</rt></ruby>め。<ruby>今日<rt>きょう</rt></ruby>は<ruby>五日<rt>いつか</rt></ruby><ruby>宵庚申<rt>よいこうしん</rt></ruby>、<ruby>甲子<rt>きのえね</rt></ruby>が<ruby>近<rt>ちか</rt></ruby>い。<ruby>二股大根<rt>ふたまただいこん</rt></ruby>のけて<ruby>置<rt>お</rt></ruby>け！」", "Japanese_Plain": "「取りへて畳んで打盤出してもろききりと打て。よそをちよきちょきで夕飯のお根葉刻め。今日は五日宵庚申、甲子が近い。二股大根のけて置け！」", "English": "\"Fold up the cloth, bring out the fulling block and beat it smooth! Quickly chop the leafy greens for dinner! Today is the 5th, the eve of the Kōshin festival, and Kinoene day is near—set aside the forked radishes!\"", "Notes": "Forked radish (二股大根) is a traditional offering to Daikokuten and Shōten; Yoi Gōshin is the play's titular vigil."}, {"Scene_ID": "morning_yaoya", "Scene_Title": "心中宵庚申：八百屋の段 (Yaoya no Dan)", "Line_No": 6, "Speaker": "太夫 (Narrator)", "Japanese_Ruby": "と<ruby>商売<rt>しょうばい</rt></ruby>が<ruby>八百屋<rt>やおや</rt></ruby>とて<ruby>八百色<rt>やおいろ</rt></ruby>ほど<ruby>言<rt>い</rt></ruby>ひ<ruby>付<rt>つ</rt></ruby>ける。<ruby>口<rt>くち</rt></ruby>せかきかと<ruby>忙<rt>いそが</rt></ruby>しきは<ruby>大晦日<rt>おおつごもり</rt></ruby>の<ruby>生<rt>う</rt></ruby>まれかや。<ruby>伯母<rt>おば</rt></ruby>に<ruby>似<rt>に</rt></ruby>ぬ<ruby>甥<rt>おい</rt></ruby>の<ruby>太兵衛<rt>たへえ</rt></ruby>が<ruby>市選<rt>いちえら</rt></ruby>ひ、<ruby>走<rt>はし</rt></ruby>りの<ruby>竹<rt>たけ</rt></ruby>の<ruby>子<rt>こ</rt></ruby>...", "Japanese_Plain": "と商売が八百屋とて八百色ほど言ひ付ける。口せかきかと忙しきは大晦日の生まれかや。伯母に似ぬ甥の太兵衛が市選ひ、走りの竹の子...", "English": "Because they run a greengrocer (yaoya, 'eight hundred items'), she rattles off eight hundred different demands. With such a relentlessly hurried tongue, one wonders if she was born on New Year's Eve! Just then, her nephew Tahei—bearing no resemblance to his aunt—returns with early seasonal bamboo shoots...", "Notes": "Pun on 'yaoya' (greengrocer) and 'yao-iro' (800 varieties of chores)."}, {"Scene_ID": "morning_yaoya", "Scene_Title": "心中宵庚申：八百屋の段 (Yaoya no Dan)", "Line_No": 7, "Speaker": "太兵衛 (Tahei)", "Japanese_Ruby": "「これはさつても<ruby>早<rt>はや</rt></ruby>いことでごんすよの。<ruby>俺<rt>おれ</rt></ruby>が<ruby>戻<rt>もど</rt></ruby>りはテモ<ruby>遅<rt>おそ</rt></ruby>いことでごんすよの」", "Japanese_Plain": "「これはさつても早いことでごんすよの。俺が戻りはテモ遅いことでごんすよの」", "English": "\"Well now, aren't you up and about early! And here I am, exceptionally late getting back!\"", "Notes": "Tahei speaks with a comical merchant dialect."}, {"Scene_ID": "morning_yaoya", "Scene_Title": "心中宵庚申：八百屋の段 (Yaoya no Dan)", "Line_No": 8, "Speaker": "継母 (Stepmother)", "Japanese_Ruby": "「コリヤ<ruby>野良<rt>のら</rt></ruby>つぽ、<ruby>今朝<rt>けさ</rt></ruby><ruby>卯の刻<rt>うのこく</rt></ruby>から<ruby>内<rt>うち</rt></ruby>を<ruby>出<rt>で</rt></ruby>て<ruby>何時<rt>なんどき</rt></ruby>ぢやと<ruby>思<rt>おも</rt></ruby>ふ！<ruby>旦那衆<rt>だんなしゅ</rt></ruby>の<ruby>誂へ物<rt>あつらえもの</rt></ruby>、<ruby>高<rt>たか</rt></ruby>い<ruby>物<rt>もの</rt></ruby>を<ruby>天道干<rt>てんどうぼ</rt></ruby>しにして！」", "Japanese_Plain": "「コリヤ野良つぽ、今朝卯の刻から内を出て何時ぢやと思ふ！旦那衆の誂へ物、高い物を天道干しにして！」", "English": "\"You lazy scamp! You left at the hour of the Hare (6 AM)—what time do you think it is now? Past midday! Leaving customers' special orders baking under the scorching sun!\"", "Notes": "Stepmother turns her fury onto nephew Tahei."}, {"Scene_ID": "morning_yaoya", "Scene_Title": "心中宵庚申：八百屋の段 (Yaoya no Dan)", "Line_No": 9, "Speaker": "半兵衛 (Hanbei)", "Japanese_Ruby": "「<ruby>母者人<rt>ははじゃびと</rt></ruby>のがこりや<ruby>尤<rt>もっと</rt></ruby>も。コレ<ruby>太兵衛<rt>たへえ</rt></ruby>どこにのらくやってゐた。<ruby>大儀<rt>たいぎ</rt></ruby>ながら<ruby>母者人<rt>ははじゃびと</rt></ruby>の<ruby>機嫌直<rt>きげんなお</rt></ruby>し、つひ<ruby>一走<rt>ひとばし</rt></ruby>り<ruby>廻<rt>まわ</rt></ruby>つておぢや」", "Japanese_Plain": "「母者人のがこりや尤も。コレ太兵衛どこにのらくやってゐた。大儀ながら母者人の機嫌直し、つひ一走り廻つておぢや」", "English": "\"Mother is quite right. Tahei, where have you been loafing? I know you're tired, but to soothe Mother's temper, run along and finish the deliveries.\"", "Notes": "Hanbei plays the dutiful, mediator role to keep peace at home."}, {"Scene_ID": "morning_yaoya", "Scene_Title": "心中宵庚申：八百屋の段 (Yaoya no Dan)", "Line_No": 10, "Speaker": "太兵衛 (Tahei)", "Japanese_Ruby": "「<ruby>横町<rt>よこちょう</rt></ruby>の<ruby>山城屋<rt>やましろや</rt></ruby>から<ruby>呼<rt>よ</rt></ruby>び<ruby>込<rt>こ</rt></ruby>まれ、こなたに<ruby>誰<rt>だれ</rt></ruby>やら<ruby>逢<rt>あ</rt></ruby>ひたいとて、<ruby>今朝<rt>けさ</rt></ruby>からこゝに<ruby>待<rt>ま</rt></ruby>つてあると<ruby>言<rt>い</rt></ruby>つてくれとの<ruby>言伝<rt>ことづ</rt></ruby>て」", "Japanese_Plain": "「横町の山城屋から呼び込まれ、こなたに誰やら逢ひたいとて、今朝からこゝに待つてあると言つてくれとの言伝て」", "English": "\"The teahouse Yamashiro-ya down the alley called me in—someone is desperately waiting there since morning and begged me to tell you to come meet them!\"", "Notes": "Secret signal: Ochiyo has arrived in town and is waiting at Yamashiro-ya."}, {"Scene_ID": "morning_yaoya", "Scene_Title": "心中宵庚申：八百屋の段 (Yaoya no Dan)", "Line_No": 11, "Speaker": "継母 (Stepmother)", "Japanese_Ruby": "「<ruby>息子殿<rt>むすこどの</rt></ruby>、こりやどこへ！アノぬつくりとした<ruby>顔<rt>かお</rt></ruby>わいの！<ruby>気<rt>き</rt></ruby>に<ruby>入<rt>い</rt></ruby>らいで<ruby>去<rt>い</rt></ruby>なした<ruby>嫁<rt>よめ</rt></ruby>、<ruby>親<rt>おや</rt></ruby>の<ruby>嫌<rt>きら</rt></ruby>ふ<ruby>女房<rt>にょうぼう</rt></ruby>に<ruby>随分<rt>ずいぶん</rt></ruby>と<ruby>孝行<rt>こうこう</rt></ruby><ruby>尽<rt>づく</rt></ruby>し、<ruby>親<rt>おや</rt></ruby>には<ruby>不孝<rt>ふこう</rt></ruby><ruby>尽<rt>づく</rt></ruby>しや。<ruby>恩知<rt>おんし</rt></ruby>らずめ！」", "Japanese_Plain": "「息子殿、こりやどこへ！アノぬつくりとした顔わいの！気に入らいで去なした嫁、親の嫌ふ女房に随分と孝行尽くし、親には不孝尽くしや。恩知らずめ！」", "English": "\"My fine son, just where are you off to! Look at that innocent face! That divorced bride I threw out—you shower endless devotion on the wife your parents despise, while showing nothing but filial disrespect to us! Ungrateful wretch!\"", "Notes": "The core conflict: the mother accuses Hanbei of violating filial piety (kō)."}, {"Scene_ID": "morning_yaoya", "Scene_Title": "心中宵庚申：八百屋の段 (Yaoya no Dan)", "Line_No": 12, "Speaker": "半兵衛 (Hanbei)", "Japanese_Ruby": "「<ruby>申<rt>もう</rt></ruby>し<ruby>母者人<rt>ははじゃびと</rt></ruby>、<ruby>武士<rt>ぶし</rt></ruby>の<ruby>釜<rt>かま</rt></ruby>の<ruby>水<rt>みず</rt></ruby>で<ruby>育<rt>そだ</rt></ruby>ちしこの<ruby>半兵衛<rt>はんべえ</rt></ruby>、<ruby>御恩<rt>ごおん</rt></ruby>の<ruby>母<rt>はは</rt></ruby>の<ruby>気<rt>き</rt></ruby>に<ruby>入<rt>い</rt></ruby>らぬ<ruby>女房<rt>にょうぼう</rt></ruby>なれば<ruby>私<rt>わたくし</rt></ruby>が<ruby>離別<rt>りべつ</rt></ruby><ruby>致<rt>いた</rt></ruby>してこそ<ruby>孝行<rt>こうこう</rt></ruby>も<ruby>立<rt>た</rt></ruby>ち、<ruby>真実<rt>まこと</rt></ruby><ruby>去<rt>さ</rt></ruby>るが<ruby>定<rt>さだ</rt></ruby>めや」", "Japanese_Plain": "「申し母者人、武士の釜の水で育ちしこの半兵衛、御恩の母の気に入らぬ女房なれば私が離別致してこそ孝行も立ち、真実去るが定めや」", "English": "\"Mother, hear me. Though born of samurai blood, I was raised by your bounty. If my wife displeases the mother who sheltered me, then divorcing her is indeed the only way to fulfill my filial duty. It is decided—she shall be cast away.\"", "Notes": "Hanbei outwardly submits to preserve family honor, while privately resolving to die with Ochiyo."}, {"Scene_ID": "morning_yaoya", "Scene_Title": "心中宵庚申：八百屋の段 (Yaoya no Dan)", "Line_No": 13, "Speaker": "お千代 (Ochiyo)", "Japanese_Ruby": "「ハア<ruby>久<rt>ひさ</rt></ruby>しぶりで<ruby>内<rt>うち</rt></ruby>を<ruby>見<rt>み</rt></ruby>た、<ruby>半兵衛様<rt>はんべえさま</rt></ruby>。<ruby>今日<rt>きょう</rt></ruby>といふ<ruby>今日<rt>きょう</rt></ruby>、<ruby>町内<rt>ちょうない</rt></ruby><ruby>広<rt>ひろ</rt></ruby>う<ruby>戻<rt>もど</rt></ruby>つたわいの。ア、<ruby>嬉<rt>うれ</rt></ruby>しや」", "Japanese_Plain": "「ハア久しぶりで内を見た、半兵衛様。今日といふ今日、町内広う戻つたわいの。ア、嬉しや」", "English": "\"Ah, how long it has been since I stepped inside our home, Hanbei-sama! On this day, I have openly returned to our neighborhood. Ah, what joy!\"", "Notes": "Ochiyo arrives unaware of the mother's renewed ultimatum."}, {"Scene_ID": "morning_yaoya", "Scene_Title": "心中宵庚申：八百屋の段 (Yaoya no Dan)", "Line_No": 14, "Speaker": "継母 (Stepmother)", "Japanese_Ruby": "「コレこの<ruby>母<rt>はは</rt></ruby>が<ruby>喉笛<rt>のどぶえ</rt></ruby>を<ruby>出刃包丁<rt>でばぼうちょう</rt></ruby>でちよらいぢやぞや。<ruby>母<rt>はは</rt></ruby><ruby>殺<rt>ころ</rt></ruby>すか<ruby>女房<rt>にょうぼう</rt></ruby><ruby>去<rt>さ</rt></ruby>るか！」", "Japanese_Plain": "「コレこの母が喉笛を出刃包丁でちよらいぢやぞや。母殺すか女房去るか！」", "English": "\"Look! I will slit my own throat with this kitchen cleaver right before your eyes! Will you murder your mother, or will you cast out this woman!\"", "Notes": "Stepmother draws a knife, creating a moral deadlock."}, {"Scene_ID": "morning_yaoya", "Scene_Title": "心中宵庚申：八百屋の段 (Yaoya no Dan)", "Line_No": 15, "Speaker": "半兵衛 (Hanbei)", "Japanese_Ruby": "「<ruby>母様<rt>ははさま</rt></ruby>のお<ruby>腹<rt>はら</rt></ruby>に<ruby>叶<rt>かな</rt></ruby>ひ、<ruby>身<rt>み</rt></ruby>の<ruby>立<rt>た</rt></ruby>つ<ruby>様<rt>よう</rt></ruby>に<ruby>去<rt>い</rt></ruby>なすが<ruby>男<rt>おとこ</rt></ruby>の<ruby>道<rt>みち</rt></ruby>。<ruby>三下り半<rt>みくだりはん</rt></ruby>を<ruby>書<rt>か</rt></ruby>いて<ruby>渡<rt>わた</rt></ruby>す」", "Japanese_Plain": "「母様のお腹に叶ひ、身の立つ様に去なすが男の道。三下り半を書いて渡す」", "English": "\"To satisfy Mother's heart and fulfill a man's honor, casting you out is my only course. Here—I shall write the three-and-a-half lines of divorce and hand them to you.\"", "Notes": "Mikudarihan (三行半): the formal Edo deed of divorce."}, {"Scene_ID": "morning_michiyuki", "Scene_Title": "心中宵庚申：道行思ひの短夜 (Michiyuki)", "Line_No": 16, "Speaker": "太夫 (Narrator)", "Japanese_Ruby": "<ruby>名残<rt>なごり</rt></ruby>も<ruby>夏<rt>なつ</rt></ruby>の<ruby>薄衣<rt>うすごろも</rt></ruby>、<ruby>鶯<rt>うぐいす</rt></ruby>の<ruby>巣<rt>す</rt></ruby>に<ruby>育<rt>そだ</rt></ruby>てられ、<ruby>子<rt>こ</rt></ruby>で<ruby>子<rt>こ</rt></ruby>にならぬ<ruby>時鳥<rt>ほととぎす</rt></ruby>、<ruby>我<rt>われ</rt></ruby>も<ruby>二八<rt>にはち</rt></ruby>の<ruby>年月<rt>としつき</rt></ruby>を<ruby>養ひ親<rt>やしないおや</rt></ruby>に<ruby>育<rt>そだ</rt></ruby>てられ、<ruby>子<rt>こ</rt></ruby>で<ruby>子<rt>こ</rt></ruby>にならず<ruby>振<rt>ふ</rt></ruby>り<ruby>捨<rt>す</rt></ruby>てゝ、<ruby>死<rt>し</rt></ruby>にゝ<ruby>行<rt>ゆ</rt></ruby>く<ruby>身<rt>み</rt></ruby>は<ruby>人<rt>ひと</rt></ruby>ならぬ、<ruby>死出<rt>しで</rt></ruby>の<ruby>田長<rt>たおさ</rt></ruby>か<ruby>時鳥<rt>ほととぎす</rt></ruby>。", "Japanese_Plain": "名残も夏の薄衣、鶯の巣に育てられ、子で子にならぬ時鳥、我も二八の年月を養ひ親に育てられ、子で子にならず振り捨てゝ、死にゝ行く身は人ならぬ、死出の田長か時鳥。", "English": "The lingering traces of summer are like thin garments. Just as the cuckoo is raised in a warbler's nest yet remains no true child of the nest, so too was I fostered sixteen years by adoptive parents, never truly their own flesh and blood, now casting all aside on the road to death—no longer a man of this world, but a cuckoo singing toward the underworld.", "Notes": "Poetic imagery comparing the adopted Hanbei to a cuckoo raised in another bird's nest (brood parasitism)."}, {"Scene_ID": "morning_michiyuki", "Scene_Title": "心中宵庚申：道行思ひの短夜 (Michiyuki)", "Line_No": 17, "Speaker": "太夫 (Narrator)", "Japanese_Ruby": "<ruby>卯月<rt>うづき</rt></ruby><ruby>五日<rt>いつか</rt></ruby>の<ruby>宵庚申<rt>よいこうしん</rt></ruby>、<ruby>死<rt>し</rt></ruby>なば<ruby>一所<rt>ひとところ</rt></ruby>と<ruby>契<rt>ちぎ</rt></ruby>りたる、その<ruby>一言<rt>ひとこと</rt></ruby>は<ruby>庚申<rt>こうしん</rt></ruby>、<ruby>参<rt>まい</rt></ruby>りの<ruby>人<rt>ひと</rt></ruby>に<ruby>打<rt>う</rt></ruby>ち<ruby>紛<rt>まぎ</rt></ruby>れ<ruby>忍<rt>しの</rt></ruby>び、<ruby>出<rt>い</rt></ruby>づるも<ruby>哀<rt>あわ</rt></ruby>れなり。", "Japanese_Plain": "卯月五日の宵庚申、死なば一所と契りたる、その一言は庚申、参りの人に打ち紛れ忍び、出づるも哀れなり。", "English": "On this fifth night of the fourth month, the eve of the Kōshin vigil, they pledged: 'If we must die, let us die together in one place.' Clinging to that single vow, they slip silently into the crowd of temple pilgrims, a sorrowful sight beyond words.", "Notes": "The Kōshin vigil forbids sleeping, providing a bustling crowd for the lovers to slip away unseen."}, {"Scene_ID": "morning_michiyuki", "Scene_Title": "心中宵庚申：道行思ひの短夜 (Michiyuki)", "Line_No": 18, "Speaker": "半兵衛 (Hanbei)", "Japanese_Ruby": "「ナウお<ruby>千代<rt>ちよ</rt></ruby>、<ruby>心<rt>こころ</rt></ruby>は<ruby>境界<rt>きょうがい</rt></ruby>に<ruby>従<rt>したが</rt></ruby>つて<ruby>転<rt>てん</rt></ruby>じ<ruby>変<rt>か</rt></ruby>はるをや。そなたも<ruby>千代<rt>ちよ</rt></ruby>といふ<ruby>名<rt>な</rt></ruby>を<ruby>風覚良訓信女<rt>ふうかくりょうくんしんにょ</rt></ruby>と<ruby>改<rt>あらた</rt></ruby>め、<ruby>我<rt>われ</rt></ruby>も<ruby>八百屋半兵衛<rt>やおやはんべえ</rt></ruby>を<ruby>露秋禅定門<rt>ろしゅうぜんじょうもん</rt></ruby>と<ruby>改<rt>あらた</rt></ruby>め、<ruby>息<rt>いき</rt></ruby>のあるうちよりはや<ruby>亡<rt>な</rt></ruby>き<ruby>人<rt>ひと</rt></ruby>の<ruby>数<rt>かず</rt></ruby>に<ruby>入<rt>い</rt></ruby>れば、<ruby>死後<rt>しご</rt></ruby>の<ruby>体<rt>からだ</rt></ruby>の<ruby>置<rt>お</rt></ruby>き<ruby>所<rt>どころ</rt></ruby>も<ruby>俗縁<rt>ぞくえん</rt></ruby>を<ruby>離<rt>はな</rt></ruby>れよ」", "Japanese_Plain": "「ナウお千代、心は境界に従つて転じ変はるをや。そなたも千代といふ名を風覚良訓信女と改め、我も八百屋半兵衛を露秋禅定門と改め、息のあるうちよりはや亡き人の数に入れば、死後の体の置き所も俗縁を離れよ」", "English": "\"Listen, Ochiyo. The mind transforms along with each realm of existence. Cast off your worldly name 'Chiyo' and take the posthumous name Fūkaku Ryōkun Shinnyo; I too cast aside 'Yaoya Hanbei' and become Roshū Zenjōmon. While breath still lingers, let us already count ourselves among the dead, freeing our mortal bodies from worldly ties.\"", "Notes": "Assigning themselves Buddhist posthumous names (kaimyō) before dying, signaling total spiritual detachment."}, {"Scene_ID": "morning_michiyuki", "Scene_Title": "心中宵庚申：道行思ひの短夜 (Michiyuki)", "Line_No": 19, "Speaker": "お千代 (Ochiyo)", "Japanese_Ruby": "「ナウ<ruby>死<rt>し</rt></ruby>ぬる<ruby>身<rt>み</rt></ruby>に<ruby>何<rt>なに</rt></ruby>の<ruby>望<rt>のぞ</rt></ruby>み。<ruby>水<rt>みず</rt></ruby>の<ruby>中<rt>なか</rt></ruby><ruby>火<rt>ひ</rt></ruby>の<ruby>中<rt>なか</rt></ruby>でも<ruby>先<rt>さき</rt></ruby>の<ruby>世<rt>よ</rt></ruby>までもこな<ruby>様<rt>さま</rt></ruby>と、<ruby>女夫<rt>めおと</rt></ruby>になつてゐるところを<ruby>見立<rt>みた</rt></ruby>て、<ruby>死<rt>し</rt></ruby>んでくださんせ」", "Japanese_Plain": "「ナウ死ぬる身に何の望み。水の中火の中でも先の世までもこな様と、女夫になつてゐるところを見立て、死んでくださんせ」", "English": "\"What desires could one about to die possess? Through fire or through water, into all worlds to come, I ask only to remain your wife—let us die together as true husband and wife!\"", "Notes": "Ochiyo's pure, unwavering devotion."}, {"Scene_ID": "morning_michiyuki", "Scene_Title": "心中宵庚申：道行思ひの短夜 (Michiyuki)", "Line_No": 20, "Speaker": "太夫 (Narrator)", "Japanese_Ruby": "<ruby>去<rt>さ</rt></ruby>らぬといふも<ruby>因果<rt>いんが</rt></ruby>の<ruby>去<rt>さ</rt></ruby>る、<ruby>六道<rt>ろくどう</rt></ruby><ruby>輪廻<rt>りんね</rt></ruby>を<ruby>去<rt>さ</rt></ruby>るかたは、<ruby>蓮華<rt>れんげ</rt></ruby>の<ruby>台<rt>うてな</rt></ruby>に<ruby>手<rt>て</rt></ruby>を<ruby>引<rt>ひ</rt></ruby>き<ruby>連<rt>つ</rt></ruby>れ、<ruby>南無阿弥陀仏<rt>なむあみだぶつ</rt></ruby>と<ruby>引<rt>ひ</rt></ruby>き<ruby>重<rt>かさ</rt></ruby>なり、<ruby>夫婦<rt>めおと</rt></ruby>が<ruby>死骸<rt>しがい</rt></ruby>ぞ<ruby>哀<rt>あわ</rt></ruby>れなる。", "Japanese_Plain": "去らぬといふも因果の去る、六道輪廻を去るかたは、蓮華の台に手を引き連れ、南無阿弥陀仏と引き重なり、夫婦が死骸ぞ哀れなる。", "English": "Though they vowed never to 'depart' (divorce), by karma they depart this earthly realm; departing the cycles of transmigration, hand in hand they step toward the lotus pedestal of paradise. Murmuring 'Namu Amida Butsu', their bodies fall together in death—a husband and wife united in tragic beauty.", "Notes": "Chikamatsu's sublime concluding pun on 'saru' (to divorce vs to depart/transcend this mortal world)."}, {"Scene_ID": "afternoon_sugisakaya", "Scene_Title": "妹背山婦女庭訓：杉酒屋の段 (Sugi Sakaya no Dan)", "Line_No": 21, "Speaker": "太夫 (Narrator)", "Japanese_Ruby": "<ruby>日<rt>ひ</rt></ruby>と<ruby>共<rt>とも</rt></ruby>に<ruby>営<rt>いとな</rt></ruby>む<ruby>様<rt>さま</rt></ruby>も<ruby>入相<rt>いりあい</rt></ruby>の、<ruby>四方<rt>しほう</rt></ruby>の<ruby>市庫<rt>いちぐら</rt></ruby><ruby>閉<rt>と</rt></ruby>ざし<ruby>時<rt>とき</rt></ruby>。<ruby>子太郎<rt>ねたろう</rt></ruby><ruby>跡<rt>あと</rt></ruby>を<ruby>打<rt>う</rt></ruby>ち<ruby>見<rt>み</rt></ruby>やり、<ruby>灯<rt>ひ</rt></ruby>を<ruby>上<rt>あ</rt></ruby>げ<ruby>表<rt>おもて</rt></ruby>の<ruby>戸<rt>と</rt></ruby>、<ruby>夜<rt>よる</rt></ruby>の<ruby>構<rt>かまえ</rt></ruby>へのそここと...", "Japanese_Plain": "日と共に営む様も入相の、四方の市庫閉ざし時。子太郎跡を打ち見やり、灯を上げ表の戸、夜の構へのそここと...", "English": "As the day's labors draw to a close with the sunset bell, the surrounding market warehouses shutter their doors. Netarō watches the scene, raising the lanterns and barring the front entrance for the night...", "Notes": "Opening of Act IV at the Miwa sake brewery."}, {"Scene_ID": "afternoon_sugisakaya", "Scene_Title": "妹背山婦女庭訓：杉酒屋の段 (Sugi Sakaya no Dan)", "Line_No": 22, "Speaker": "太夫 (Narrator)", "Japanese_Ruby": "<ruby>こなたの<rt></rt></ruby><ruby>道<rt>みち</rt></ruby>より<ruby>歩<rt>あゆ</rt></ruby>み<ruby>寄<rt>よ</rt></ruby>る<ruby>振<rt>ふ</rt></ruby>りの<ruby>袖<rt>そで</rt></ruby>の<ruby>香<rt>か</rt></ruby>やごとなき、<ruby>面<rt>おもて</rt></ruby>を<ruby>隠<rt>かく</rt></ruby>す<ruby>衣<rt>きぬ</rt></ruby><ruby>かづき<rt></rt></ruby><ruby>誰<rt>たれ</rt></ruby><ruby>白絹<rt>しろぎぬ</rt></ruby>の<ruby>優姿<rt>やさがた</rt></ruby>、<ruby>窺<rt>うかが</rt></ruby>ふうちに<ruby>隣<rt>となり</rt></ruby>の<ruby>軒<rt>のき</rt></ruby>。<ruby>知<rt>し</rt></ruby>らせのしはぶき、<ruby>主<rt>ぬし</rt></ruby>の<ruby>求馬<rt>もとめ</rt></ruby>。", "Japanese_Plain": "こなたの道より歩み寄る振りの袖の香やごとなき、面を隠す衣かづき誰白絹の優姿、窺ふうちに隣の軒。知らせのしはぶき、主の求馬。", "English": "Approaching down the lane comes a noble figure, an aristocratic perfume wafting from flowing sleeves, face discreetly veiled in fine white silk. As she pauses beneath the neighbor's eaves, a signal cough sounds—it is Motome!", "Notes": "Princess Tachibana arriving incognito to meet Motome (Prince Tankai)."}, {"Scene_ID": "afternoon_sugisakaya", "Scene_Title": "妹背山婦女庭訓：杉酒屋の段 (Sugi Sakaya no Dan)", "Line_No": 23, "Speaker": "求馬 (Motome)", "Japanese_Ruby": "「<ruby>今宵<rt>こよい</rt></ruby>はどうして<ruby>早<rt>はや</rt></ruby>かりし。サア<ruby>此方<rt>こちら</rt></ruby>へ」とその後は言はず語らず手を取つて、戸口立て寄せ入る跡に。", "Japanese_Plain": "「今宵はどうして早かりし。サア此方へ」とその後は言はず語らず手を取つて、戸口立て寄せ入る跡に。", "English": "\"Why so early tonight? Come, inside quickly!\" Without another word, he takes her hand and leads her across the threshold, shutting the door behind them.", "Notes": "Motome hides Tachibana from Soga no Iruka's spies."}, {"Scene_ID": "afternoon_sugisakaya", "Scene_Title": "妹背山婦女庭訓：杉酒屋の段 (Sugi Sakaya no Dan)", "Line_No": 24, "Speaker": "お三輪 (Omiwa)", "Japanese_Ruby": "「ヤ<ruby>お三輪様<rt>おみわさま</rt></ruby><ruby>戻<rt>もど</rt></ruby>らんしたか。サア<ruby>事<rt>こと</rt></ruby>ぢや<ruby>事<rt>こと</rt></ruby>ぢや<ruby>大事<rt>だいじ</rt></ruby>ぢや！ヲ、あの<ruby>人<rt>ひと</rt></ruby>わいの<ruby>何<rt>なん</rt></ruby>ぢやいの。私にびつくりさしやつたわいの！」", "Japanese_Plain": "「ヤお三輪様戻らんしたか。サア事ぢや事ぢや大事ぢや！ヲ、あの人わいの何ぢやいの。私にびつくりさしやつたわいの！」", "English": "\"Oh, Lady Omiwa, you've returned! We have a crisis, a huge crisis! Who on earth was that woman just now? It gave me such a dreadful shock!\"", "Notes": "The servant tells Omiwa that a noblewoman just entered Motome's quarters."}, {"Scene_ID": "afternoon_sugisakaya", "Scene_Title": "妹背山婦女庭訓：杉酒屋の段 (Sugi Sakaya no Dan)", "Line_No": 25, "Speaker": "お三輪 (Omiwa)", "Japanese_Ruby": "「<ruby>忠義<rt>ちゅうぎ</rt></ruby>とは<ruby>何<rt>なん</rt></ruby>のことぢやいの。<ruby>求馬様<rt>もとめさま</rt></ruby>のお<ruby>心<rt>こころ</rt></ruby>ひとつに<ruby>頼<rt>たよ</rt></ruby>る<ruby>私<rt>わたし</rt></ruby>を、まさか<ruby>捨<rt>す</rt></ruby>てておいでなさるまい...」", "Japanese_Plain": "「忠義とは何のことぢやいの。求馬様のお心ひとつに頼る私を、まさか捨てておいでなさるまい...」", "English": "\"What is all this talk of loyalty and retainers? Motome-sama is my whole world—surely he would never cast me aside...\"", "Notes": "Omiwa, the innocent sake maiden, begins her descent into suspicion and jealousy."}, {"Scene_ID": "afternoon_michiyuki", "Scene_Title": "妹背山婦女庭訓：道行恋苧環 (Michiyuki Koi no Odamaki)", "Line_No": 26, "Speaker": "太夫 (Narrator)", "Japanese_Ruby": "<ruby>恋<rt>こい</rt></ruby>の<ruby>苧環<rt>おだまき</rt></ruby>、<ruby>付<rt>つ</rt></ruby>き<ruby>纏<rt>まと</rt></ruby>はれてくる<ruby>廻<rt>めぐ</rt></ruby>るや<ruby>三<rt>み</rt></ruby>つの<ruby>小車<rt>おぐるま</rt></ruby>の、<ruby>花<rt>はな</rt></ruby>より<ruby>白<rt>しろ</rt></ruby>む<ruby>横雲<rt>よこぐも</rt></ruby>の<ruby>綱<rt>つな</rt></ruby><ruby>引<rt>ひ</rt></ruby>き<ruby>渡<rt>わた</rt></ruby>りありくと、<ruby>三笠<rt>みかさ</rt></ruby>の<ruby>山<rt>やま</rt></ruby>もほど<ruby>近<rt>ちか</rt></ruby>く。", "Japanese_Plain": "恋の苧環、付き纏はれてくる廻るや三つの小車の、花より白む横雲の綱引き渡りありくと、三笠の山もほど近く。", "English": "The spool of love unreels, spinning like three linked cartwheels in pursuit! Trailing the thread white as morning clouds beneath the peaks of Mount Mikasa...", "Notes": "The legendary 'Spool of Love' (Koi no Odamaki) travel passage: Motome follows Tachibana with white thread, while Omiwa pursues Motome with red thread."}, {"Scene_ID": "afternoon_michiyuki", "Scene_Title": "妹背山婦女庭訓：道行恋苧環 (Michiyuki Koi no Odamaki)", "Line_No": 27, "Speaker": "太夫 (Narrator)", "Japanese_Ruby": "『<ruby>帰<rt>かえ</rt></ruby>る<ruby>所<rt>ところ</rt></ruby>は<ruby>何処<rt>いづこ</rt></ruby>ぞ』と<ruby>求馬<rt>もとめ</rt></ruby>が<ruby>気転<rt>きてん</rt></ruby><ruby>振<rt>ふ</rt></ruby>り<ruby>袖<rt>そで</rt></ruby>の、<ruby>端<rt>はし</rt></ruby>に<ruby>縫<rt>ぬ</rt></ruby>ふたる<ruby>印<rt>しるし</rt></ruby>の<ruby>糸筋<rt>いとすじ</rt></ruby>、<ruby>慕<rt>した</rt></ruby>うて<ruby>男<rt>おとこ</rt></ruby>の<ruby>裾<rt>すそ</rt></ruby>に<ruby>付<rt>つ</rt></ruby>くるとも、<ruby>知<rt>し</rt></ruby>らず。", "Japanese_Plain": "『帰る所は何処ぞ』と求馬が気転振り袖の、端に縫ふたる印の糸筋、慕うて男の裾に付くるとも、知らず。", "English": "Wondering 'Where is her palace?', Motome cleverly fastens a spool's thread to Tachibana's sleeve. Unbeknownst to him, Omiwa, desperate with longing, attaches her own red thread to Motome's hem!", "Notes": "Double thread tracking motif."}, {"Scene_ID": "afternoon_michiyuki", "Scene_Title": "妹背山婦女庭訓：道行恋苧環 (Michiyuki Koi no Odamaki)", "Line_No": 28, "Speaker": "太夫 (Narrator)", "Japanese_Ruby": "<ruby>縁<rt>えん</rt></ruby>の<ruby>芋蔓<rt>いもづる</rt></ruby>いとしさの、あまりて<ruby>三輪<rt>みわ</rt></ruby>も<ruby>嫉気<rt>りんき</rt></ruby>の<ruby>針<rt>はり</rt></ruby>、<ruby>男<rt>おとこ</rt></ruby>の<ruby>裾<rt>すそ</rt></ruby>に<ruby>付<rt>つ</rt></ruby>くるのを<ruby>知<rt>し</rt></ruby>らず、<ruby>糸筋<rt>いとすじ</rt></ruby><ruby>慕<rt>した</rt></ruby>うて<ruby>追<rt>お</rt></ruby>ひゆく。", "Japanese_Plain": "縁の芋蔓いとしさの、あまりて三輪も嫉気の針、男の裾に付くるのを知らず、糸筋慕うて追ひゆく。", "English": "Bound by karmic fate and boundless yearning, Omiwa's needle of jealousy threads its way after him, trailing the unraveling spool step by frantic step.", "Notes": "Rinki (jealousy) is the fateful catalyst required to break Iruka's curse in the upcoming palace climax."}, {"Scene_ID": "afternoon_fukashichi", "Scene_Title": "妹背山婦女庭訓：鱶七使者の段 (Fukashichi Shisha no Dan)", "Line_No": 29, "Speaker": "太夫 (Narrator)", "Japanese_Ruby": "<ruby>栄<rt>さか</rt></ruby>ゆる<ruby>花<rt>はな</rt></ruby>も<ruby>時<rt>とき</rt></ruby>しあれば、すがき<ruby>嵐<rt>あらし</rt></ruby>のあるぞとは、いさしら<ruby>雲<rt>くも</rt></ruby>の<ruby>高御座<rt>たかみくら</rt></ruby>。<ruby>新<rt>あら</rt></ruby>たに<ruby>造<rt>つく</rt></ruby>る<ruby>王殿<rt>おうでん</rt></ruby>は、<ruby>唐国<rt>からくに</rt></ruby>の<ruby>阿房宮<rt>あぼうきゅう</rt></ruby>。", "Japanese_Plain": "栄ゆる花も時しあれば、すがき嵐のあるぞとは、いさしら雲の高御座。新たに造る王殿は、唐国の阿房宮。", "English": "Blossoms flourish only for their fleeting season, yet unmindful of the gathering storm, the imperial throne sits high amid the clouds. The tyrant Iruka's newly built palace rivals the fabled Epang Palace of ancient China in pomp and grandeur.", "Notes": "Depicting the tyrant Soga no Iruka's haughty, doomed court."}, {"Scene_ID": "afternoon_fukashichi", "Scene_Title": "妹背山婦女庭訓：鱶七使者の段 (Fukashichi Shisha no Dan)", "Line_No": 30, "Speaker": "太夫 (Narrator)", "Japanese_Ruby": "<ruby>玄蕃<rt>げんば</rt></ruby>、<ruby>弥藤次<rt>やとうじ</rt></ruby><ruby>頭<rt>ず</rt></ruby>を<ruby>下<rt>さ</rt></ruby>げ、「<ruby>先立<rt>さきだ</rt></ruby>つて<ruby>卿相<rt>けいしょう</rt></ruby><ruby>雲客<rt>うんかく</rt></ruby>たちより<ruby>君<rt>きみ</rt></ruby>の<ruby>寿<rt>ことぶき</rt></ruby>を<ruby>祝<rt>しゅく</rt></ruby>し<ruby>申<rt>もう</rt></ruby>されし<ruby>数<rt>かず</rt></ruby>の<ruby>島台<rt>しまだい</rt></ruby>、ソレ<ruby>女中方<rt>じょちゅうがた</rt></ruby><ruby>楼閣<rt>ろうかく</rt></ruby>に<ruby>供<rt>そな</rt></ruby>へられよ」", "Japanese_Plain": "玄蕃、弥藤次頭を下げ、「先立つて卿相雲客たちより君の寿を祝し申されし数の島台、ソレ女中方楼閣に供へられよ」", "English": "Courtiers Genba and Yatōji bow low: \"Present the ceremonial banquet trays offered by high nobles in honor of our sovereign lord's longevity! Ladies, bring them forward to the upper pavilion!\"", "Notes": "Flattery of Iruka's sycophants."}, {"Scene_ID": "afternoon_fukashichi", "Scene_Title": "妹背山婦女庭訓：鱶七使者の段 (Fukashichi Shisha no Dan)", "Line_No": 31, "Speaker": "鱶七 (Fukashichi)", "Japanese_Ruby": "「ハテ<ruby>面妖<rt>めんよう</rt></ruby>な<ruby>振舞<rt>ふるまい</rt></ruby>かな。<ruby>鎌足<rt>かまたり</rt></ruby><ruby>公<rt>こう</rt></ruby>の<ruby>使者<rt>ししゃ</rt></ruby>として<ruby>参<rt>まい</rt></ruby>りたる<ruby>鱶七<rt>ふかしち</rt></ruby>、<ruby>毒酒<rt>どくしゅ</rt></ruby>と<ruby>知<rt>し</rt></ruby>りつゝ<ruby>呑<rt>の</rt></ruby>み<ruby>干<rt>ほ</rt></ruby>すも<ruby>武士<rt>もののふ</rt></ruby>の<ruby>胆力<rt>たんりょく</rt></ruby>！」", "Japanese_Plain": "「ハテ面妖な振舞かな。鎌足公の使者として参りたる鱶七、毒酒と知りつゝ呑み干すももののふの胆力！」", "English": "\"Ha! What absurd posturing! I am Fukashichi, envoy from Lord Kamatari. Even knowing your goblet is laced with deadly poison, I drain it dry without batting an eye—such is a true warrior's grit!\"", "Notes": "Fukashichi (secretly Kanawa Gorō Imakuni) dazzles the court with his swagger."}, {"Scene_ID": "afternoon_fukashichi", "Scene_Title": "妹背山婦女庭訓：鱶七使者の段 (Fukashichi Shisha no Dan)", "Line_No": 32, "Speaker": "太夫 (Narrator)", "Japanese_Ruby": "<ruby>追<rt>お</rt></ruby>ひすがる<ruby>お三輪<rt>みわ</rt></ruby>、<ruby>御殿<rt>ごてん</rt></ruby>の<ruby>奥<rt>おく</rt></ruby>の<ruby>祝言<rt>しゅうげん</rt></ruby>の<ruby>笛<rt>ふえ</rt></ruby><ruby>太鼓<rt>たいこ</rt></ruby>に<ruby>狂乱<rt>きょうらん</rt></ruby>し、<ruby>嫉妬<rt>しっと</rt></ruby>の<ruby>毒気<rt>どっき</rt></ruby>に<ruby>身<rt>み</rt></ruby>を<ruby>悶<rt>もだ</rt></ruby>え、<ruby>鱶七<rt>ふかしち</rt></ruby>の<ruby>刃<rt>やいば</rt></ruby>に<ruby>倒<rt>たお</rt></ruby>るゝとも、<ruby>思<rt>おも</rt></ruby>ひの<ruby>人<rt>ひと</rt></ruby>の<ruby>大望<rt>たいもう</rt></ruby>を<ruby>成就<rt>じょうじゅ</rt></ruby>する<ruby>礎<rt>いしずえ</rt></ruby>と<ruby>知<rt>し</rt></ruby>り、<ruby>微笑<rt>ほほえ</rt></ruby>みて<ruby>息<rt>いき</rt></ruby><ruby>絶<rt>た</rt></ruby>えにけり。", "Japanese_Plain": "追ひすがるお三輪、御殿の奥の祝言の笛太鼓に狂乱し、嫉妬の毒気に身を悶え、鱶七の刃に倒るゝとも、思ひの人の大望を成就する礎と知り、微笑みて息絶えにけり。", "English": "Omiwa, having followed the thread to the palace, is driven mad with grief hearing wedding pipes celebrating Motome's supposed marriage. In a frenzy of jealousy she is pierced by Fukashichi's blade—yet learning her jealous blood is the sacred talisman that will allow Motome to slay the tyrant, she smiles in peace and draws her last breath.", "Notes": "The legendary climax of Imoseyama: Omiwa's selfless tragedy."}];
+
+    let activeScene = localStorage.getItem("bunraku_scene") || "morning_yaoya";
+    let activeLineIndex = parseInt(localStorage.getItem("bunraku_line_" + activeScene)) || 0;
+    let fontSizes = ["0.95rem", "1.05rem", "1.18rem"];
+    let currentFontIdx = 0;
+
+    const scriptListEl = document.getElementById("scriptList");
+    const sceneSelectEl = document.getElementById("sceneSelect");
+    const partBadgeEl = document.getElementById("partBadge");
+    const rubyToggleEl = document.getElementById("rubyToggle");
+    const fontToggleEl = document.getElementById("fontToggle");
+    const themeToggleEl = document.getElementById("themeToggle");
+    const prevBtnEl = document.getElementById("prevBtn");
+    const nextBtnEl = document.getElementById("nextBtn");
+    const followerCounterEl = document.getElementById("followerCounter");
+    const progressStatusEl = document.getElementById("progressStatus");
+
+    function getFilteredData() {
+      return RAW_DATA.filter(item => item.Scene_ID === activeScene);
+    }
+
+    function renderScene() {
+      const items = getFilteredData();
+      sceneSelectEl.value = activeScene;
+
+      // Update badge
+      if (activeScene.startsWith("morning")) {
+        partBadgeEl.textContent = "PART 1 MORNING";
+      } else {
+        partBadgeEl.textContent = "PART 2 AFTERNOON";
+      }
+
+      if (activeLineIndex >= items.length) {
+        activeLineIndex = 0;
+      }
+
+      scriptListEl.innerHTML = "";
+
+      items.forEach((item, idx) => {
+        const row = document.createElement("div");
+        row.className = "script-row" + (idx === activeLineIndex ? " active" : "");
+        row.dataset.index = idx;
+
+        const isNarrator = item.Speaker.includes("太夫") || item.Speaker.includes("Narrator");
+        const speakerClass = isNarrator ? "narrator" : "character";
+
+        let noteHtml = "";
+        if (item.Notes && item.Notes.trim().length > 0) {
+          noteHtml = `
+            <div class="footnote-pill">
+              <span class="note-icon">💡</span>
+              <span><strong>Context:</strong> ${item.Notes}</span>
+            </div>
+          `;
+        }
+
+        row.innerHTML = `
+          <div class="row-meta">
+            <span class="speaker-badge ${speakerClass}">${item.Speaker}</span>
+            <span class="line-number">#${item.Line_No}</span>
+          </div>
+          <div class="col-jp">
+            ${item.Japanese_Ruby}
+          </div>
+          <div class="col-en">
+            <div>${item.English}</div>
+            ${noteHtml}
+          </div>
+        `;
+
+        row.addEventListener("click", () => {
+          setActiveLine(idx, true);
+        });
+
+        scriptListEl.appendChild(row);
+      });
+
+      updateFollowerStatus();
+      scrollToActive(false);
+    }
+
+    function setActiveLine(idx, smooth = true) {
+      const items = getFilteredData();
+      if (idx < 0 || idx >= items.length) return;
+
+      activeLineIndex = idx;
+      localStorage.setItem("bunraku_line_" + activeScene, activeLineIndex);
+
+      const rows = scriptListEl.querySelectorAll(".script-row");
+      rows.forEach((r, i) => {
+        r.classList.toggle("active", i === activeLineIndex);
+      });
+
+      updateFollowerStatus();
+      scrollToActive(smooth);
+    }
+
+    function updateFollowerStatus() {
+      const items = getFilteredData();
+      const current = activeLineIndex + 1;
+      const total = items.length;
+      followerCounterEl.textContent = `${current} / ${total}`;
+      progressStatusEl.textContent = `Scene Line ${current} of ${total}`;
+    }
+
+    function scrollToActive(smooth = true) {
+      const activeEl = scriptListEl.querySelector(".script-row.active");
+      if (activeEl) {
+        activeEl.scrollIntoView({
+          behavior: smooth ? "smooth" : "auto",
+          block: "center"
+        });
+      }
+    }
+
+    // Keyboard Shortcuts for Theater Follower
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowDown" || (e.key === " " && !e.shiftKey)) {
+        e.preventDefault();
+        setActiveLine(activeLineIndex + 1);
+      } else if (e.key === "ArrowUp" || (e.key === " " && e.shiftKey)) {
+        e.preventDefault();
+        setActiveLine(activeLineIndex - 1);
+      }
+    });
+
+    // Control Handlers
+    nextBtnEl.addEventListener("click", () => setActiveLine(activeLineIndex + 1));
+    prevBtnEl.addEventListener("click", () => setActiveLine(activeLineIndex - 1));
+
+    sceneSelectEl.addEventListener("change", (e) => {
+      activeScene = e.target.value;
+      localStorage.setItem("bunraku_scene", activeScene);
+      activeLineIndex = parseInt(localStorage.getItem("bunraku_line_" + activeScene)) || 0;
+      renderScene();
+    });
+
+    // Ruby Furigana Toggle
+    rubyToggleEl.addEventListener("click", () => {
+      document.body.classList.toggle("hide-ruby");
+      const isHidden = document.body.classList.contains("hide-ruby");
+      rubyToggleEl.classList.toggle("active", !isHidden);
+      rubyToggleEl.innerHTML = isHidden ? "<span>振仮名</span> OFF" : "<span>振仮名</span> ON";
+    });
+
+    // Font Scale Toggle
+    fontToggleEl.addEventListener("click", () => {
+      currentFontIdx = (currentFontIdx + 1) % fontSizes.length;
+      document.documentElement.style.setProperty("--font-scale", fontSizes[currentFontIdx]);
+      fontToggleEl.innerHTML = `<span>A+</span> ${currentFontIdx + 1}`;
+    });
+
+    // Theme Toggle
+    themeToggleEl.addEventListener("click", () => {
+      document.body.classList.toggle("light-mode");
+      const isLight = document.body.classList.contains("light-mode");
+      themeToggleEl.innerHTML = isLight ? "<span>☀️</span>" : "<span>🌙</span>";
+      document.getElementById("theaterModeLabel").textContent = isLight 
+        ? "Day Mode: Standard Contrast" 
+        : "Theater Mode: Dim / Anti-Glare Active";
+    });
+
+    // Initial render
+    renderScene();
+  </script>
+</body>
+</html>
