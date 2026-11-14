@@ -1,5 +1,36 @@
 window.PERFORMANCES = [
   {
+    id: "2026-11-kabuki",
+    label: "2026年11月 歌舞伎座 (Tokyo)",
+    subtitle: "吉例顔見世大歌舞伎『通し狂言 仮名手本忠臣蔵』 · Nov 1–25, 2026 · Kabukiza",
+    genre: "kabuki",
+    dataFile: "data/2026-11-kabuki.js",
+    parts: [
+      {
+        id: "matinee",
+        label: "昼の部 Matinee 11:00 (仮名手本忠臣蔵)",
+        badge: "MATINEE 11:00",
+        scenes: [
+          { id: "nov_kabuki_daijo", title: "大序：鶴ヶ岡社頭兜改めの場 (Act I: Tsurugaoka Shrine)" },
+          { id: "nov_kabuki_sandanme", title: "三段目：門前進物の場・松の間刃傷の場 (Act III: Pine Corridor)" },
+          { id: "nov_kabuki_yondanme", title: "四段目：扇ヶ谷塩冶判官切腹・城明渡しの場 (Act IV: Seppuku)" },
+          { id: "nov_kabuki_michiyuki", title: "浄瑠璃：道行旅路の花聟 (Michiyuki: Okaru & Kanpei)" }
+        ]
+      },
+      {
+        id: "evening",
+        label: "夜の部 Evening 16:30 (仮名手本忠臣蔵)",
+        badge: "EVENING 16:30",
+        scenes: [
+          { id: "nov_kabuki_godanme", title: "五段目：山崎街道鉄砲渡し・二つ玉の場 (Act V: Yamazaki Highway)" },
+          { id: "nov_kabuki_rokudanme", title: "六段目：与市兵衛内勘平腹切の場 (Act VI: Kanpei's Seppuku)" },
+          { id: "nov_kabuki_shichidanme", title: "七段目：祇園一力茶屋の場 (Act VII: Ichiriki Teahouse)" },
+          { id: "nov_kabuki_juichidanme", title: "十一段目：高家表門討入り・炭部屋・引揚げの場 (Act XI: Night Raid)" }
+        ]
+      }
+    ]
+  },
+  {
     id: "2026-12-bunraku",
     label: "2026年12月 文楽 (Tokyo)",
     subtitle: "令和8年12月文楽公演 · Dec 6–19, 2026 · Tokyo Metropolitan Theatre",

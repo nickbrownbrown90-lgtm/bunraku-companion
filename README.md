@@ -7,6 +7,19 @@ Live bilingual companion reader designed for following along during live Japanes
 
 ## Repertoire Included
 
+### 2026年11月 吉例顔見世大歌舞伎 (November 2026 — Kabukiza, Tokyo)
+**通し狂言 仮名手本忠臣蔵 (Kanadehon Chūshingura — The Treasury of Loyal Retainers)**
+1. **昼の部 Matinee 11:00**
+   - 大序：鶴ヶ岡社頭兜改めの場 (Act I: Tsurugaoka Shrine — Helmet Inspection)
+   - 三段目：足利館門前進物の場・同 松の間刃傷の場 (Act III: The Bribe at the Gate & Drawing the Sword in the Pine Corridor)
+   - 四段目：扇ヶ谷塩冶判官切腹の場・同 表門城明渡しの場 (Act IV: Enya Hangan's Seppuku & Surrender of the Castle)
+   - 浄瑠璃：道行旅路の花聟 (Michiyuki Tabiji no Hanamuko — Journey of Okaru & Kanpei)
+2. **夜の部 Evening 16:30**
+   - 五段目：山崎街道鉄砲渡しの場・同 二つ玉の場 (Act V: Yamazaki Highway & The Two Bullets)
+   - 六段目：与市兵衛内勘平腹切の場 (Act VI: Yoichibei's Cottage — Kanpei's Seppuku)
+   - 七段目：祇園一力茶屋の場 (Act VII: Ichiriki Teahouse in Gion)
+   - 十一段目：高家表門討入りの場・同 奥庭泉水の場・同 炭部屋本懐の場・引揚げの場 (Act XI: Night Raid on Moronao's Mansion, Pond Duel, Charcoal Shed & Triumphal Retreat)
+
 ### 2026年12月 文楽公演 (December 2026 — Tokyo Metropolitan Theatre)
 1. **Part 1 Morning 11:00 (加賀見山旧錦絵 - Kagamiyama Kokyō no Nishikie)**
    - 草履打の段 (Zōri-uchi no Dan - The Sandal-Beating)

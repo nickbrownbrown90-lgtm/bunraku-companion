@@ -844,10 +844,10 @@
 
     function getSpeakerClass(speaker) {
       if (!speaker) return "character";
-      if (speaker.includes("太夫") || speaker.includes("Narrator") || speaker.includes("義太夫") || speaker.includes("長唄") || speaker.includes("清元")) {
+      if (speaker.includes("太夫") || speaker.includes("竹本") || speaker.includes("Narrator") || speaker.includes("義太夫") || speaker.includes("長唄") || speaker.includes("清元")) {
         return "narrator";
       }
-      if (speaker.includes("舞台") || speaker.includes("ト書き") || speaker.includes("下座") || speaker.includes("Stage") || speaker.includes("Music")) {
+      if (speaker.includes("舞台") || speaker.includes("口上") || speaker.includes("ト書き") || speaker.includes("下座") || speaker.includes("Stage") || speaker.includes("Music")) {
         return "stage";
       }
       return "character";
