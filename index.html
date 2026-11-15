@@ -486,6 +486,455 @@
       align-items: center;
       gap: 0.3rem;
     }
+
+    /* Info & Tickets Header Button */
+    .btn-info-hub {
+      background: rgba(212, 175, 55, 0.14);
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      border-radius: 6px;
+      padding: 0.45rem 0.75rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: all 0.2s;
+    }
+    .btn-info-hub:hover {
+      background: var(--accent);
+      color: #0b0d11;
+      box-shadow: 0 0 12px var(--accent-glow);
+    }
+
+    /* Expandable Scene Guide & Cast Card */
+    .scene-guide-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 8px;
+      margin-bottom: 1.15rem;
+      overflow: hidden;
+      transition: all 0.2s ease;
+    }
+    .scene-guide-bar {
+      padding: 0.65rem 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.65rem;
+      cursor: pointer;
+      user-select: none;
+    }
+    .scene-guide-bar:hover {
+      background: rgba(212, 175, 55, 0.05);
+    }
+    .scene-guide-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.55rem;
+      font-size: 0.8rem;
+    }
+    .play-type-pill {
+      background: rgba(212, 175, 55, 0.15);
+      color: var(--accent);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      padding: 0.18rem 0.55rem;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 0.73rem;
+      letter-spacing: 0.02em;
+    }
+    .scene-playwright {
+      color: var(--text-main);
+      font-weight: 600;
+    }
+    .scene-premiere {
+      color: var(--text-muted);
+      font-size: 0.76rem;
+    }
+    .scene-guide-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+    .btn-scene-action {
+      background: var(--bg);
+      color: var(--text-main);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.32rem 0.65rem;
+      font-size: 0.76rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition: all 0.2s;
+    }
+    .btn-scene-action:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .scene-guide-body {
+      border-top: 1px solid var(--border);
+      padding: 1rem 1.15rem;
+      display: none;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 1.25rem;
+      background: rgba(0, 0, 0, 0.15);
+    }
+    body.light-mode .scene-guide-body {
+      background: rgba(15, 23, 42, 0.02);
+    }
+    .scene-guide-card.expanded .scene-guide-body {
+      display: grid;
+    }
+    .guide-section-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--accent);
+      margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .guide-synopsis-text {
+      font-size: 0.88rem;
+      line-height: 1.65;
+      color: var(--text-english);
+      margin-bottom: 0.85rem;
+    }
+    .guide-highlight-box {
+      background: var(--note-bg);
+      color: var(--note-text);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-radius: 6px;
+      padding: 0.6rem 0.75rem;
+      font-size: 0.82rem;
+      line-height: 1.55;
+    }
+    .cast-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .cast-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.5rem 0.7rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.18rem;
+    }
+    .cast-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .cast-name-jp {
+      font-family: "Noto Serif JP", serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--text-japanese);
+    }
+    .cast-name-en {
+      font-weight: 600;
+      font-size: 0.82rem;
+      color: var(--accent);
+    }
+    .cast-kashira-badge {
+      font-size: 0.68rem;
+      padding: 0.12rem 0.45rem;
+      border-radius: 4px;
+      background: var(--badge-narrator-bg);
+      color: var(--badge-narrator-text);
+      font-weight: 600;
+    }
+    .cast-role-desc {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* Info & Tickets Modal Hub */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(5, 7, 11, 0.82);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .modal-backdrop.open {
+      display: flex;
+    }
+    .modal-container {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-active);
+      border-radius: 12px;
+      max-width: 980px;
+      width: 100%;
+      max-height: 88vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.85);
+      overflow: hidden;
+    }
+    .modal-header {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      background: var(--bg);
+    }
+    .modal-title {
+      font-family: "Noto Serif JP", serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .modal-subtitle {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+    }
+    .modal-close-btn {
+      background: var(--bg-surface);
+      color: var(--text-main);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      width: 34px;
+      height: 34px;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .modal-close-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .modal-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      padding: 0.6rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+    }
+    .modal-tab-btn {
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px solid transparent;
+      border-radius: 6px;
+      padding: 0.45rem 0.85rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .modal-tab-btn:hover {
+      color: var(--text-main);
+      border-color: var(--border);
+    }
+    .modal-tab-btn.active {
+      background: var(--bg-active);
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+    .modal-body {
+      padding: 1.25rem;
+      overflow-y: auto;
+      flex: 1;
+    }
+    .modal-tab-panel {
+      display: none;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .modal-tab-panel.active {
+      display: flex;
+    }
+    .hub-section-heading {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      margin-bottom: 0.65rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.35rem;
+    }
+    .hub-card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 0.85rem;
+    }
+    .hub-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.9rem 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 0.55rem;
+      text-decoration: none;
+      color: var(--text-main);
+      transition: all 0.2s;
+    }
+    a.hub-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 12px var(--accent-glow);
+      transform: translateY(-1px);
+    }
+    .hub-card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+    .hub-card-title {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--text-japanese);
+      line-height: 1.35;
+    }
+    .hub-badge {
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+      background: rgba(212, 175, 55, 0.16);
+      color: var(--accent);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .hub-card-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .hub-link-cta {
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+    .pricing-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.83rem;
+    }
+    .pricing-table th,
+    .pricing-table td {
+      padding: 0.55rem 0.75rem;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+    }
+    .pricing-table th {
+      color: var(--text-muted);
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .pricing-price {
+      font-weight: 700;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+    .study-section-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.15rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+    .study-heading {
+      font-family: "Noto Serif JP", serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .study-subtitle {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+    .study-summary {
+      font-size: 0.86rem;
+      line-height: 1.65;
+      color: var(--text-english);
+    }
+    .study-bullet {
+      border-left: 2px solid var(--accent);
+      padding-left: 0.75rem;
+      margin-top: 0.35rem;
+    }
+    .study-bullet-title {
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--text-japanese);
+      margin-bottom: 0.2rem;
+    }
+    .study-bullet-text {
+      font-size: 0.82rem;
+      line-height: 1.6;
+      color: var(--text-english);
+    }
+    .glossary-search-bar {
+      display: flex;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.5rem;
+    }
+    .glossary-input {
+      flex: 1;
+      min-width: 200px;
+      background: var(--bg);
+      color: var(--text-main);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.5rem 0.8rem;
+      font-size: 0.85rem;
+      outline: none;
+    }
+    .glossary-input:focus {
+      border-color: var(--accent);
+    }
+
+    @media (max-width: 768px) {
+      .scene-guide-card.expanded .scene-guide-body {
+        grid-template-columns: 1fr;
+      }
+      .modal-backdrop {
+        padding: 0.4rem;
+      }
+      .modal-container {
+        max-height: 94vh;
+      }
+    }
   </style>
 </head>
 <body>
@@ -507,6 +956,11 @@
       <!-- Scene Selector -->
       <select id="sceneSelect" class="scene-select" title="Select Scene">
       </select>
+
+      <!-- Info, Tickets & Reference Hub Button -->
+      <button id="infoHubBtn" class="btn-info-hub" title="Open Tickets, Venue Info, Reference Sources & Study Guide">
+        <span>🎟️</span> Info & Tickets
+      </button>
 
       <!-- Furigana Toggle -->
       <button id="rubyToggle" class="btn-toggle active" title="Toggle Furigana Readings">
@@ -544,6 +998,37 @@
 
   <!-- Main Dual-Column Content -->
   <main>
+    <!-- Expandable Scene Guide & Cast Card -->
+    <section class="scene-guide-card" id="sceneGuideCard">
+      <div class="scene-guide-bar" id="sceneGuideToggleBar" title="Click to toggle Scene Synopsis, Stage Highlights & Cast">
+        <div class="scene-guide-meta">
+          <span class="play-type-pill" id="scenePlayType">世話物 (Sewamono)</span>
+          <span class="scene-playwright" id="scenePlaywright">近松門左衛門</span>
+          <span class="scene-premiere" id="scenePremiere">1722</span>
+        </div>
+        <div class="scene-guide-actions">
+          <button type="button" class="btn-scene-action" id="sceneGuideToggleBtn">
+            📖 <span id="sceneGuideToggleLabel">Scene Guide & Cast ▾</span>
+          </button>
+          <button type="button" class="btn-scene-action" id="sceneTicketsQuickBtn" title="Open Tickets, Venue & Study Resources">
+            🎟️ Tickets & Sources
+          </button>
+        </div>
+      </div>
+      <div class="scene-guide-body" id="sceneGuideBody">
+        <div>
+          <div class="guide-section-title">📜 Scene Synopsis & Context</div>
+          <p class="guide-synopsis-text" id="sceneSynopsisText"></p>
+          <div class="guide-section-title">✨ What to Watch For (Stage & Musical Highlights)</div>
+          <div class="guide-highlight-box" id="sceneHighlightsText"></div>
+        </div>
+        <div>
+          <div class="guide-section-title">🎭 Key Characters in This Scene</div>
+          <div class="cast-grid" id="sceneCastGrid"></div>
+        </div>
+      </div>
+    </section>
+
     <div class="column-header-grid">
       <div id="colJpHeader">日本語 (Jōruri Chanting & Dialogue)</div>
       <div>English Translation & Context</div>
@@ -553,6 +1038,36 @@
       <!-- Rendered dynamically via JS -->
     </div>
   </main>
+
+  <!-- Info, Tickets, Reference & Study Guide Modal Hub -->
+  <div class="modal-backdrop" id="infoModalBackdrop" role="dialog" aria-modal="true" aria-labelledby="infoModalTitle">
+    <div class="modal-container">
+      <div class="modal-header">
+        <div>
+          <div class="modal-title" id="infoModalTitle">Performance Guide, Ticketing & Reference Hub</div>
+          <div class="modal-subtitle" id="infoModalSubtitle"></div>
+        </div>
+        <button class="modal-close-btn" id="infoModalCloseBtn" title="Close (Esc)">✕</button>
+      </div>
+      <div class="modal-tabs" role="tablist">
+        <button class="modal-tab-btn active" data-tab="tickets" role="tab">🎟️ Tickets & Venue</button>
+        <button class="modal-tab-btn" data-tab="resources" role="tab">📚 Reference & Drive</button>
+        <button class="modal-tab-btn" data-tab="study" role="tab">📜 Program Study Guide</button>
+        <button class="modal-tab-btn" data-tab="glossary" role="tab">🎭 Theater Glossary</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-tab-panel active" id="tabPanel_tickets"></div>
+        <div class="modal-tab-panel" id="tabPanel_resources"></div>
+        <div class="modal-tab-panel" id="tabPanel_study"></div>
+        <div class="modal-tab-panel" id="tabPanel_glossary">
+          <div class="glossary-search-bar">
+            <input type="text" id="glossarySearchInput" class="glossary-input" placeholder="Search Bunraku & Kabuki terms (e.g. Tayū, Kashira, Mie, Michiyuki, Giri)...">
+          </div>
+          <div class="hub-card-grid" id="glossaryGrid"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Floating One-Handed Follower Controls -->
   <div class="floating-follower">
@@ -604,6 +1119,291 @@
     const playPauseBtnEl = document.getElementById("playPauseBtn");
     const prevBtnEl = document.getElementById("prevBtn");
     const nextBtnEl = document.getElementById("nextBtn");
+
+    // Scene Guide & Modal Hub Elements
+    const sceneGuideCardEl = document.getElementById("sceneGuideCard");
+    const sceneGuideToggleBarEl = document.getElementById("sceneGuideToggleBar");
+    const sceneGuideToggleBtnEl = document.getElementById("sceneGuideToggleBtn");
+    const sceneGuideToggleLabelEl = document.getElementById("sceneGuideToggleLabel");
+    const sceneTicketsQuickBtnEl = document.getElementById("sceneTicketsQuickBtn");
+    const scenePlayTypeEl = document.getElementById("scenePlayType");
+    const scenePlaywrightEl = document.getElementById("scenePlaywright");
+    const scenePremiereEl = document.getElementById("scenePremiere");
+    const sceneSynopsisTextEl = document.getElementById("sceneSynopsisText");
+    const sceneHighlightsTextEl = document.getElementById("sceneHighlightsText");
+    const sceneCastGridEl = document.getElementById("sceneCastGrid");
+
+    const infoHubBtnEl = document.getElementById("infoHubBtn");
+    const infoModalBackdropEl = document.getElementById("infoModalBackdrop");
+    const infoModalCloseBtnEl = document.getElementById("infoModalCloseBtn");
+    const infoModalTitleEl = document.getElementById("infoModalTitle");
+    const infoModalSubtitleEl = document.getElementById("infoModalSubtitle");
+    const tabPanelTicketsEl = document.getElementById("tabPanel_tickets");
+    const tabPanelResourcesEl = document.getElementById("tabPanel_resources");
+    const tabPanelStudyEl = document.getElementById("tabPanel_study");
+    const glossarySearchInputEl = document.getElementById("glossarySearchInput");
+    const glossaryGridEl = document.getElementById("glossaryGrid");
+
+    let isSceneGuideExpanded = localStorage.getItem("bunraku_guide_expanded") === "true";
+
+    function updateSceneGuideExpansionUI() {
+      if (!sceneGuideCardEl) return;
+      sceneGuideCardEl.classList.toggle("expanded", isSceneGuideExpanded);
+      if (sceneGuideToggleLabelEl) {
+        sceneGuideToggleLabelEl.textContent = isSceneGuideExpanded
+          ? "Hide Scene Guide ▴"
+          : "Scene Guide & Cast ▾";
+      }
+    }
+
+    function renderSceneGuide(sceneMeta) {
+      if (!sceneMeta || !sceneGuideCardEl) return;
+      scenePlayTypeEl.textContent = sceneMeta.playType || "古典演劇 (Classical Drama)";
+      scenePlaywrightEl.textContent = sceneMeta.playwright ? `✍️ ${sceneMeta.playwright}` : "";
+      scenePremiereEl.textContent = sceneMeta.premiere ? `· 🏛️ ${sceneMeta.premiere}` : "";
+      sceneSynopsisTextEl.textContent = sceneMeta.synopsis || "";
+      sceneHighlightsTextEl.textContent = sceneMeta.highlights || "";
+
+      sceneCastGridEl.innerHTML = "";
+      (sceneMeta.cast || []).forEach(c => {
+        const card = document.createElement("div");
+        card.className = "cast-card";
+        card.innerHTML = `
+          <div class="cast-card-top">
+            <div>
+              <span class="cast-name-jp">${c.nameJp}</span>
+              <span class="cast-name-en"> · ${c.nameEn}</span>
+            </div>
+            <span class="cast-kashira-badge">${c.headOrStyle || ""}</span>
+          </div>
+          <div class="cast-role-desc">${c.role || ""}</div>
+        `;
+        sceneCastGridEl.appendChild(card);
+      });
+      updateSceneGuideExpansionUI();
+    }
+
+    function renderInfoModalContent() {
+      const perf = getActivePerformance();
+      if (!perf) return;
+
+      infoModalTitleEl.textContent = `${perf.label} — Tickets, Venue & Study Hub`;
+      infoModalSubtitleEl.textContent = perf.subtitle || "";
+
+      // 1. Tickets & Venue Tab
+      const v = perf.venue || {};
+      const t = perf.ticketing || {};
+      const linksHtml = (t.officialLinks || []).map(l => `
+        <a class="hub-card" href="${l.url}" target="_blank" rel="noopener noreferrer">
+          <div>
+            <div class="hub-card-header">
+              <div class="hub-card-title">${l.label}</div>
+              <span class="hub-badge">${l.badge || l.lang}</span>
+            </div>
+            <div class="hub-card-desc" style="margin-top:0.4rem;">${l.description || ""}</div>
+          </div>
+          <div class="hub-link-cta">Open Official Portal (${l.lang}) ↗</div>
+        </a>
+      `).join("");
+
+      const tiersHtml = (t.pricingTiers || []).map(p => `
+        <tr>
+          <td><strong>${p.tier}</strong></td>
+          <td class="pricing-price">${p.price}</td>
+          <td style="color:var(--text-muted);">${p.note || ""}</td>
+        </tr>
+      `).join("");
+
+      const amenitiesHtml = (t.lobbyAmenities || []).map(a => `
+        <div class="hub-card">
+          <div>
+            <div class="hub-card-header">
+              <div class="hub-card-title">${a.item}</div>
+              <span class="hub-badge">${a.price}</span>
+            </div>
+            <div class="hub-card-desc" style="margin-top:0.4rem;">${a.description}</div>
+          </div>
+        </div>
+      `).join("");
+
+      tabPanelTicketsEl.innerHTML = `
+        <div>
+          <div class="hub-section-heading">🎟️ Official Online Box Offices & Reservations</div>
+          <div class="hub-card-grid">${linksHtml}</div>
+        </div>
+        <div>
+          <div class="hub-section-heading">💴 Seating Tiers & Single-Act (Hitomakumi-seki) Pricing</div>
+          <div class="study-section-card" style="padding:0.5rem 0.75rem;">
+            <table class="pricing-table">
+              <thead>
+                <tr><th>Seating Tier</th><th>Price</th><th>Details & Sightlines</th></tr>
+              </thead>
+              <tbody>${tiersHtml}</tbody>
+            </table>
+            ${t.sameDayInfo ? `<div class="guide-highlight-box" style="margin:0.65rem 0.25rem 0.35rem;"><strong>💡 Same-Day & Single-Act Guide:</strong> ${t.sameDayInfo}</div>` : ""}
+          </div>
+        </div>
+        <div>
+          <div class="hub-section-heading">🏛️ Theatre Venue, Subway Access & Schedule</div>
+          <div class="study-section-card">
+            <div class="hub-card-header">
+              <div>
+                <div class="study-heading">${v.nameJp || ""} · ${v.name || ""}</div>
+                <div class="study-subtitle" style="margin-top:0.2rem;">📍 ${v.address || ""}</div>
+              </div>
+              ${v.mapUrl ? `<a class="btn-info-hub" href="${v.mapUrl}" target="_blank" rel="noopener noreferrer" style="text-decoration:none;">🗺️ Open Google Maps ↗</a>` : ""}
+            </div>
+            <div class="study-summary"><strong>🚇 Station Access:</strong> ${v.access || ""}</div>
+            <div class="study-summary"><strong>🗓️ Performance Schedule:</strong> ${v.scheduleNote || ""}</div>
+          </div>
+        </div>
+        <div>
+          <div class="hub-section-heading">🎧 Lobby Amenities, Earphone Guides & Yukahon Programs</div>
+          <div class="hub-card-grid">${amenitiesHtml}</div>
+        </div>
+      `;
+
+      // 2. Reference & Google Drive Tab
+      const r = perf.resources || {};
+      const driveHtml = (r.driveMaterials || []).map(d => `
+        <a class="hub-card" href="${d.url}" target="_blank" rel="noopener noreferrer">
+          <div>
+            <div class="hub-card-header">
+              <div class="hub-card-title">${d.title}</div>
+              <span class="hub-badge">${d.type}</span>
+            </div>
+            <div class="hub-card-desc" style="margin-top:0.4rem;">${d.description}</div>
+          </div>
+          <div class="hub-link-cta">Open in Google Drive ↗</div>
+        </a>
+      `).join("");
+
+      const portalsHtml = (r.digitalPortals || []).map(p => `
+        <a class="hub-card" href="${p.url}" target="_blank" rel="noopener noreferrer">
+          <div>
+            <div class="hub-card-header">
+              <div class="hub-card-title">${p.title}</div>
+              <span class="hub-badge">${p.badge}</span>
+            </div>
+            <div class="hub-card-desc" style="margin-top:0.4rem;">${p.description}</div>
+          </div>
+          <div class="hub-link-cta">Visit Digital Archive ↗</div>
+        </a>
+      `).join("");
+
+      const enBooksHtml = (r.englishSources || []).map(b => `
+        <div class="hub-card">
+          <div>
+            <div class="hub-card-header">
+              <div class="hub-card-title">${b.title}</div>
+              <span class="hub-badge">English Book</span>
+            </div>
+            <div style="font-size:0.78rem; color:var(--accent); font-weight:600; margin-top:0.2rem;">${b.author} · ${b.publisher}</div>
+            <div class="hub-card-desc" style="margin-top:0.35rem;">${b.note}</div>
+          </div>
+        </div>
+      `).join("");
+
+      const jpBooksHtml = (r.japaneseSources || []).map(b => `
+        <div class="hub-card">
+          <div>
+            <div class="hub-card-header">
+              <div class="hub-card-title">${b.title}</div>
+              <span class="hub-badge">日本語文献</span>
+            </div>
+            <div style="font-size:0.78rem; color:var(--accent); font-weight:600; margin-top:0.2rem;">${b.publisher}</div>
+            <div class="hub-card-desc" style="margin-top:0.35rem;">${b.note}</div>
+          </div>
+        </div>
+      `).join("");
+
+      tabPanelResourcesEl.innerHTML = `
+        <div>
+          <div class="hub-section-heading">📂 Project Google Drive Study Materials & Scanned Playbills</div>
+          <div class="hub-card-grid">${driveHtml}</div>
+        </div>
+        <div>
+          <div class="hub-section-heading">🌐 Official Digital Portals & Archives</div>
+          <div class="hub-card-grid">${portalsHtml}</div>
+        </div>
+        <div>
+          <div class="hub-section-heading">📖 Recommended English Translations & Scholarship</div>
+          <div class="hub-card-grid">${enBooksHtml}</div>
+        </div>
+        <div>
+          <div class="hub-section-heading">📜 Classical Japanese Librettos & Yukahon Editions (日本語の基本文献・解説)</div>
+          <div class="hub-card-grid">${jpBooksHtml}</div>
+        </div>
+      `;
+
+      // 3. Program Study Guide Tab
+      const sg = perf.studyGuide || [];
+      tabPanelStudyEl.innerHTML = sg.map(sec => `
+        <div class="study-section-card">
+          <div>
+            <div class="study-heading">${sec.heading}</div>
+            <div class="study-subtitle">${sec.subtitle || ""}</div>
+          </div>
+          <div class="study-summary">${sec.summary || ""}</div>
+          ${(sec.bullets || []).map(b => `
+            <div class="study-bullet">
+              <div class="study-bullet-title">${b.title}</div>
+              <div class="study-bullet-text">${b.text}</div>
+            </div>
+          `).join("")}
+        </div>
+      `).join("");
+    }
+
+    function renderGlossary(filterText = "") {
+      if (!glossaryGridEl) return;
+      const terms = window.THEATER_GLOSSARY || [];
+      const q = filterText.trim().toLowerCase();
+      const filtered = q
+        ? terms.filter(t =>
+            t.termJp.toLowerCase().includes(q) ||
+            t.reading.toLowerCase().includes(q) ||
+            t.termEn.toLowerCase().includes(q) ||
+            t.category.toLowerCase().includes(q) ||
+            t.definition.toLowerCase().includes(q)
+          )
+        : terms;
+
+      glossaryGridEl.innerHTML = filtered.map(t => `
+        <div class="hub-card">
+          <div>
+            <div class="hub-card-header">
+              <div class="hub-card-title" style="font-family:'Noto Serif JP',serif;font-size:1rem;">${t.termJp} <span style="font-size:0.78rem;color:var(--accent);font-weight:500;">${t.reading}</span></div>
+              <span class="hub-badge">${t.category}</span>
+            </div>
+            <div style="font-size:0.83rem;font-weight:700;color:var(--text-main);margin-top:0.25rem;">${t.termEn}</div>
+            <div class="hub-card-desc" style="margin-top:0.35rem;">${t.definition}</div>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function openInfoModal(tabName = "tickets") {
+      renderInfoModalContent();
+      renderGlossary(glossarySearchInputEl ? glossarySearchInputEl.value : "");
+      setActiveModalTab(tabName);
+      infoModalBackdropEl.classList.add("open");
+    }
+
+    function closeInfoModal() {
+      infoModalBackdropEl.classList.remove("open");
+    }
+
+    function setActiveModalTab(tabName) {
+      const tabBtns = infoModalBackdropEl.querySelectorAll(".modal-tab-btn");
+      tabBtns.forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.tab === tabName);
+      });
+      ["tickets", "resources", "study", "glossary"].forEach(name => {
+        const panel = document.getElementById("tabPanel_" + name);
+        if (panel) panel.classList.toggle("active", name === tabName);
+      });
+    }
 
     function getActivePerformance() {
       return performances.find(p => p.id === activePerformanceId) || performances[0];
@@ -864,6 +1664,8 @@
         partBadgeEl.textContent = sceneMeta.partBadge;
       }
 
+      renderSceneGuide(sceneMeta);
+
       if (activeLineIndex >= items.length) {
         activeLineIndex = 0;
       }
@@ -959,9 +1761,53 @@
       }
     }
 
+    // Scene Guide & Info Modal Event Listeners
+    sceneGuideToggleBarEl.addEventListener("click", (e) => {
+      if (e.target.closest("#sceneTicketsQuickBtn")) return;
+      isSceneGuideExpanded = !isSceneGuideExpanded;
+      localStorage.setItem("bunraku_guide_expanded", isSceneGuideExpanded ? "true" : "false");
+      updateSceneGuideExpansionUI();
+    });
+
+    sceneTicketsQuickBtnEl.addEventListener("click", (e) => {
+      e.stopPropagation();
+      openInfoModal("tickets");
+    });
+
+    infoHubBtnEl.addEventListener("click", () => {
+      openInfoModal("tickets");
+    });
+
+    infoModalCloseBtnEl.addEventListener("click", () => {
+      closeInfoModal();
+    });
+
+    infoModalBackdropEl.addEventListener("click", (e) => {
+      if (e.target === infoModalBackdropEl) {
+        closeInfoModal();
+      }
+    });
+
+    infoModalBackdropEl.querySelectorAll(".modal-tab-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        setActiveModalTab(btn.dataset.tab);
+      });
+    });
+
+    if (glossarySearchInputEl) {
+      glossarySearchInputEl.addEventListener("input", (e) => {
+        renderGlossary(e.target.value);
+      });
+    }
+
     // Keyboard Shortcuts for Theater Follower & Audio
     window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && infoModalBackdropEl.classList.contains("open")) {
+        closeInfoModal();
+        return;
+      }
       if (e.target.tagName === "INPUT" || e.target.tagName === "SELECT" || e.target.tagName === "TEXTAREA") return;
+      if (infoModalBackdropEl.classList.contains("open")) return;
       if (e.key === "p" || e.key === "P" || e.key === "k" || e.key === "K") {
         e.preventDefault();
         toggleContinuousPlay();
@@ -1027,6 +1873,9 @@
       localStorage.setItem("bunraku_performance", activePerformanceId);
       updateGenreBranding();
       populateSceneSelect();
+      if (infoModalBackdropEl.classList.contains("open")) {
+        renderInfoModalContent();
+      }
       loadPerformanceData(activePerformanceId, () => {
         renderScene();
       });
