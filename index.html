@@ -168,6 +168,56 @@
       border-color: var(--accent);
     }
 
+    /* 3-Way UI Language Mode Switcher */
+    .lang-switcher {
+      display: inline-flex;
+      align-items: center;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 2px;
+      gap: 2px;
+    }
+    .lang-btn {
+      background: transparent;
+      color: var(--text-muted);
+      border: none;
+      border-radius: 4px;
+      padding: 0.32rem 0.55rem;
+      font-size: 0.74rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .lang-btn:hover {
+      color: var(--text-main);
+    }
+    .lang-btn.active {
+      background: var(--accent);
+      color: #0b0d11;
+    }
+
+    /* Single-Language UI Mode Overrides */
+    body.lang-en .col-jp,
+    body.lang-en #colJpHeader,
+    body.lang-en #rubyToggle {
+      display: none !important;
+    }
+    body.lang-jp .col-en,
+    body.lang-jp #colEnHeader,
+    body.lang-jp #speedToggle,
+    body.lang-jp #playPauseBtn,
+    body.lang-jp .theater-etiquette-note {
+      display: none !important;
+    }
+    body.lang-en .column-header-grid,
+    body.lang-en .script-row,
+    body.lang-jp .column-header-grid,
+    body.lang-jp .script-row {
+      grid-template-columns: 1fr;
+    }
+
     /* Theater Status & Quick Help Banner */
     .theater-banner {
       background: linear-gradient(90deg, #171c26 0%, #1e2533 100%);
@@ -949,6 +999,13 @@
     </div>
 
     <div class="controls-group">
+      <!-- 3-Way UI Language Mode Switcher -->
+      <div class="lang-switcher" id="langSwitcher" role="group" aria-label="UI Language Mode">
+        <button type="button" class="lang-btn" data-lang="en" title="English-only UI (for non-Japanese speakers)">EN</button>
+        <button type="button" class="lang-btn active" data-lang="bilingual" title="Bilingual Japanese + English UI">JP+EN</button>
+        <button type="button" class="lang-btn" data-lang="jp" title="日本語のみ（英語表示なし）">日本語</button>
+      </div>
+
       <!-- Performance / Date Selector -->
       <select id="performanceSelect" class="scene-select" title="Select Performance Date / Program">
       </select>
@@ -959,7 +1016,7 @@
 
       <!-- Info, Tickets & Reference Hub Button -->
       <button id="infoHubBtn" class="btn-info-hub" title="Open Tickets, Venue Info, Reference Sources & Study Guide">
-        <span>🎟️</span> Info & Tickets
+        <span>🎟️</span> <span id="infoHubBtnLabel">Info & Tickets</span>
       </button>
 
       <!-- Furigana Toggle -->
@@ -991,7 +1048,7 @@
       <span id="theaterModeLabel">Theater Mode: Dim / Anti-Glare Active</span>
     </div>
     <div class="theater-etiquette-note" title="Please wear earphones when listening to audio in theater">
-      <span>🎧</span> Earphones recommended
+      <span>🎧</span> <span id="etiquetteLabel">Earphones recommended</span>
     </div>
     <div id="progressStatus">Line 1 of 15</div>
   </div>
@@ -1011,19 +1068,19 @@
             📖 <span id="sceneGuideToggleLabel">Scene Guide & Cast ▾</span>
           </button>
           <button type="button" class="btn-scene-action" id="sceneTicketsQuickBtn" title="Open Tickets, Venue & Study Resources">
-            🎟️ Tickets & Sources
+            🎟️ <span id="sceneTicketsQuickLabel">Tickets & Sources</span>
           </button>
         </div>
       </div>
       <div class="scene-guide-body" id="sceneGuideBody">
         <div>
-          <div class="guide-section-title">📜 Scene Synopsis & Context</div>
+          <div class="guide-section-title" id="guideSynopsisHeading">📜 Scene Synopsis & Context</div>
           <p class="guide-synopsis-text" id="sceneSynopsisText"></p>
-          <div class="guide-section-title">✨ What to Watch For (Stage & Musical Highlights)</div>
+          <div class="guide-section-title" id="guideHighlightsHeading">✨ What to Watch For (Stage & Musical Highlights)</div>
           <div class="guide-highlight-box" id="sceneHighlightsText"></div>
         </div>
         <div>
-          <div class="guide-section-title">🎭 Key Characters in This Scene</div>
+          <div class="guide-section-title" id="guideCastHeading">🎭 Key Characters in This Scene</div>
           <div class="cast-grid" id="sceneCastGrid"></div>
         </div>
       </div>
@@ -1031,7 +1088,7 @@
 
     <div class="column-header-grid">
       <div id="colJpHeader">日本語 (Jōruri Chanting & Dialogue)</div>
-      <div>English Translation & Context</div>
+      <div id="colEnHeader">English Translation & Context</div>
     </div>
 
     <div class="script-list" id="scriptList">
@@ -1050,10 +1107,10 @@
         <button class="modal-close-btn" id="infoModalCloseBtn" title="Close (Esc)">✕</button>
       </div>
       <div class="modal-tabs" role="tablist">
-        <button class="modal-tab-btn active" data-tab="tickets" role="tab">🎟️ Tickets & Venue</button>
-        <button class="modal-tab-btn" data-tab="resources" role="tab">📚 Reference & Drive</button>
-        <button class="modal-tab-btn" data-tab="study" role="tab">📜 Program Study Guide</button>
-        <button class="modal-tab-btn" data-tab="glossary" role="tab">🎭 Theater Glossary</button>
+        <button class="modal-tab-btn active" id="tabBtn_tickets" data-tab="tickets" role="tab">🎟️ Tickets & Venue</button>
+        <button class="modal-tab-btn" id="tabBtn_resources" data-tab="resources" role="tab">📚 Reference & Drive</button>
+        <button class="modal-tab-btn" id="tabBtn_study" data-tab="study" role="tab">📜 Program Study Guide</button>
+        <button class="modal-tab-btn" id="tabBtn_glossary" data-tab="glossary" role="tab">🎭 Theater Glossary</button>
       </div>
       <div class="modal-body">
         <div class="modal-tab-panel active" id="tabPanel_tickets"></div>
@@ -1145,21 +1202,205 @@
     const glossaryGridEl = document.getElementById("glossaryGrid");
 
     let isSceneGuideExpanded = localStorage.getItem("bunraku_guide_expanded") === "true";
+    let uiLang = localStorage.getItem("bunraku_ui_lang") || "bilingual";
+    if (!["en", "bilingual", "jp"].includes(uiLang)) uiLang = "bilingual";
+
+    const UI_STRINGS = {
+      bilingual: {
+        pageTitle: "文楽 同伴リーダー | Bunraku Bilingual Companion",
+        infoHubBtn: "Info & Tickets",
+        theaterModeDark: "Theater Mode: Dim / Anti-Glare Active",
+        theaterModeLight: "Day Mode: Standard Contrast",
+        etiquette: "Earphones recommended",
+        guideOpen: "Hide Scene Guide ▴",
+        guideClosed: "Scene Guide & Cast ▾",
+        ticketsQuick: "Tickets & Sources",
+        synopsisHeading: "📜 Scene Synopsis & Context",
+        highlightsHeading: "✨ What to Watch For (Stage & Musical Highlights)",
+        castHeading: "🎭 Key Characters in This Scene",
+        colEnHeader: "English Translation & Context",
+        lineEnLabel: "English Translation",
+        readBtn: "Read",
+        contextLabel: "Context:",
+        tabTickets: "🎟️ Tickets & Venue",
+        tabResources: "📚 Reference & Drive",
+        tabStudy: "📜 Program Study Guide",
+        tabGlossary: "🎭 Theater Glossary",
+        glossaryPlaceholder: "Search Bunraku & Kabuki terms (e.g. Tayū, Kashira, Mie, Michiyuki, Giri)...",
+        modalSuffix: "Tickets, Venue & Study Hub",
+        progress: (c, t) => `Scene Line ${c} of ${t}`,
+        secBoxOffice: "🎟️ Official Online Box Offices & Reservations",
+        secPricing: "💴 Seating Tiers & Single-Act (Hitomakumi-seki) Pricing",
+        thTier: "Seating Tier",
+        thPrice: "Price",
+        thDetails: "Details & Sightlines",
+        sameDayLabel: "💡 Same-Day & Single-Act Guide:",
+        secVenue: "🏛️ Theatre Venue, Subway Access & Schedule",
+        openMaps: "🗺️ Open Google Maps ↗",
+        stationAccess: "🚇 Station Access:",
+        perfSchedule: "🗓️ Performance Schedule:",
+        secAmenities: "🎧 Lobby Amenities, Earphone Guides & Yukahon Programs",
+        openPortal: (lang) => `Open Official Portal (${lang}) ↗`,
+        secDrive: "📂 Project Google Drive Study Materials & Scanned Playbills",
+        openDrive: "Open in Google Drive ↗",
+        secPortals: "🌐 Official Digital Portals & Archives",
+        visitArchive: "Visit Digital Archive ↗",
+        secEnBooks: "📖 Recommended English Translations & Scholarship",
+        secJpBooks: "📜 Classical Japanese Librettos & Yukahon Editions (日本語の基本文献・解説)"
+      },
+      en: {
+        pageTitle: "Bunraku & Kabuki Theater Companion",
+        infoHubBtn: "Info & Tickets",
+        theaterModeDark: "Theater Mode: Dim / Anti-Glare Active",
+        theaterModeLight: "Day Mode: Standard Contrast",
+        etiquette: "Earphones recommended",
+        guideOpen: "Hide Scene Guide ▴",
+        guideClosed: "Scene Guide & Cast ▾",
+        ticketsQuick: "Tickets & Sources",
+        synopsisHeading: "📜 Scene Synopsis & Context",
+        highlightsHeading: "✨ What to Watch For (Stage & Musical Highlights)",
+        castHeading: "🎭 Key Characters in This Scene",
+        colEnHeader: "English Script & Context",
+        lineEnLabel: "Script",
+        readBtn: "Read",
+        contextLabel: "Note:",
+        tabTickets: "🎟️ Tickets & Venue",
+        tabResources: "📚 Reference & Drive",
+        tabStudy: "📜 Program Study Guide",
+        tabGlossary: "🎭 Theater Glossary",
+        glossaryPlaceholder: "Search Bunraku & Kabuki terms (e.g. Tayū, Kashira, Mie, Michiyuki, Giri)...",
+        modalSuffix: "Tickets, Venue & Study Hub",
+        progress: (c, t) => `Line ${c} of ${t}`,
+        secBoxOffice: "🎟️ Official Online Box Offices & Reservations",
+        secPricing: "💴 Seating Tiers & Single-Act (Hitomakumi-seki) Pricing",
+        thTier: "Seating Tier",
+        thPrice: "Price",
+        thDetails: "Details & Sightlines",
+        sameDayLabel: "💡 Same-Day & Single-Act Guide:",
+        secVenue: "🏛️ Theatre Venue, Subway Access & Schedule",
+        openMaps: "🗺️ Open Google Maps ↗",
+        stationAccess: "🚇 Station Access:",
+        perfSchedule: "🗓️ Performance Schedule:",
+        secAmenities: "🎧 Lobby Amenities, Earphone Guides & Program Booklets",
+        openPortal: (lang) => `Open Official Portal (${lang}) ↗`,
+        secDrive: "📂 Project Google Drive Study Materials & Scanned Playbills",
+        openDrive: "Open in Google Drive ↗",
+        secPortals: "🌐 Official Digital Portals & Archives",
+        visitArchive: "Visit Digital Archive ↗",
+        secEnBooks: "📖 Recommended English Translations & Scholarship",
+        secJpBooks: "📜 Classical Japanese Librettos & Editions"
+      },
+      jp: {
+        pageTitle: "文楽・歌舞伎 同伴リーダー",
+        infoHubBtn: "公演情報・チケット",
+        theaterModeDark: "劇場モード：暗転・低輝度表示",
+        theaterModeLight: "通常モード：標準コントラスト",
+        etiquette: "イヤホンのご使用をおすすめします",
+        guideOpen: "閉じる ▴",
+        guideClosed: "あらすじ・登場人物 ▾",
+        ticketsQuick: "チケット・資料",
+        synopsisHeading: "📜 あらすじ・解説",
+        highlightsHeading: "✨ みどころ（演出・音楽）",
+        castHeading: "🎭 主な登場人物",
+        colEnHeader: "解説",
+        lineEnLabel: "台詞",
+        readBtn: "再生",
+        contextLabel: "注：",
+        tabTickets: "🎟️ チケット・劇場案内",
+        tabResources: "📚 参考資料・ドライブ",
+        tabStudy: "📜 演目解説（オフライン）",
+        tabGlossary: "🎭 用語集",
+        glossaryPlaceholder: "文楽・歌舞伎の用語を検索（例：太夫、かしら、見得、道行、義理）...",
+        modalSuffix: "チケット・劇場案内・資料ハブ",
+        progress: (c, t) => `場面 ${c} / ${t} 行目`,
+        secBoxOffice: "🎟️ 公式オンラインチケット予約",
+        secPricing: "💴 席種・料金・一幕見席（当日券）案内",
+        thTier: "席種",
+        thPrice: "料金",
+        thDetails: "詳細・見切れ等",
+        sameDayLabel: "💡 当日券・一幕見席ガイド：",
+        secVenue: "🏛️ 劇場アクセス・公演日程",
+        openMaps: "🗺️ Google マップで開く ↗",
+        stationAccess: "🚇 最寄駅・アクセス：",
+        perfSchedule: "🗓️ 公演日程：",
+        secAmenities: "🎧 ロビーサービス（イヤホンガイド・床本・筋書）",
+        openPortal: (lang) => `公式サイトを開く (${lang}) ↗`,
+        secDrive: "📂 プロジェクト資料（Google ドライブ・スキャン資料）",
+        openDrive: "Google ドライブで開く ↗",
+        secPortals: "🌐 公式デジタルアーカイブ・ポータル",
+        visitArchive: "アーカイブを開く ↗",
+        secEnBooks: "📖 英語翻訳・研究文献",
+        secJpBooks: "📜 日本語の基本文献・正本・床本"
+      }
+    };
+
+    function tUI(key) {
+      return (UI_STRINGS[uiLang] && UI_STRINGS[uiLang][key]) || UI_STRINGS.bilingual[key] || "";
+    }
+
+    // Extracts JP or EN portion from combined strings like "上田村の段 (Uedamura no Dan)" or "太夫 (Narrator)"
+    function localizeMixedText(text) {
+      if (!text || uiLang === "bilingual") return text || "";
+      const m = text.match(/^(.*?)\s*\(([^()]+)\)\s*$/);
+      if (m) {
+        const left = m[1].trim();
+        const right = m[2].trim();
+        const leftHasJp = /[\u3040-\u30ff\u4e00-\u9faf]/.test(left);
+        const rightHasJp = /[\u3040-\u30ff\u4e00-\u9faf]/.test(right);
+        if (uiLang === "en") {
+          if (leftHasJp && !rightHasJp) return right;
+          if (!leftHasJp && rightHasJp) return left;
+        } else if (uiLang === "jp") {
+          if (leftHasJp && !rightHasJp) return left;
+          if (!leftHasJp && rightHasJp) return right;
+        }
+      }
+      return text;
+    }
+
+    const PERF_LABEL_EN = {
+      "2026-11-kabuki": "Nov 2026 · Kabukiza (Tokyo)",
+      "2026-12-bunraku": "Dec 2026 · Bunraku (Tokyo)",
+      "2026-11-bunraku": "Nov 2026 · Bunraku (Osaka)"
+    };
+    const PERF_LABEL_JP = {
+      "2026-11-kabuki": "2026年11月 歌舞伎座（東京）",
+      "2026-12-bunraku": "2026年12月 文楽公演（東京）",
+      "2026-11-bunraku": "2026年11月 文楽公演（大阪）"
+    };
+    function getPerfLabel(perf) {
+      if (!perf) return "";
+      if (uiLang === "en" && PERF_LABEL_EN[perf.id]) return PERF_LABEL_EN[perf.id];
+      if (uiLang === "jp" && PERF_LABEL_JP[perf.id]) return PERF_LABEL_JP[perf.id];
+      return perf.label;
+    }
+
+    const PART_BADGE_JP = {
+      "MATINEE 11:00": "昼の部 11:00",
+      "EVENING 16:30": "夜の部 16:30",
+      "PART 1 MORNING": "第1部 午前",
+      "PART 2 AFTERNOON": "第2部 午後",
+      "PART 3 EVENING": "第3部 夜間"
+    };
+    function getPartBadgeLabel(badge) {
+      if (uiLang === "jp" && PART_BADGE_JP[badge]) return PART_BADGE_JP[badge];
+      return badge;
+    }
 
     function updateSceneGuideExpansionUI() {
       if (!sceneGuideCardEl) return;
       sceneGuideCardEl.classList.toggle("expanded", isSceneGuideExpanded);
       if (sceneGuideToggleLabelEl) {
         sceneGuideToggleLabelEl.textContent = isSceneGuideExpanded
-          ? "Hide Scene Guide ▴"
-          : "Scene Guide & Cast ▾";
+          ? tUI("guideOpen")
+          : tUI("guideClosed");
       }
     }
 
     function renderSceneGuide(sceneMeta) {
       if (!sceneMeta || !sceneGuideCardEl) return;
-      scenePlayTypeEl.textContent = sceneMeta.playType || "古典演劇 (Classical Drama)";
-      scenePlaywrightEl.textContent = sceneMeta.playwright ? `✍️ ${sceneMeta.playwright}` : "";
+      scenePlayTypeEl.textContent = localizeMixedText(sceneMeta.playType || "古典演劇 (Classical Drama)");
+      scenePlaywrightEl.textContent = sceneMeta.playwright ? `✍️ ${localizeMixedText(sceneMeta.playwright)}` : "";
       scenePremiereEl.textContent = sceneMeta.premiere ? `· 🏛️ ${sceneMeta.premiere}` : "";
       sceneSynopsisTextEl.textContent = sceneMeta.synopsis || "";
       sceneHighlightsTextEl.textContent = sceneMeta.highlights || "";
@@ -1168,13 +1409,18 @@
       (sceneMeta.cast || []).forEach(c => {
         const card = document.createElement("div");
         card.className = "cast-card";
+        let nameHtml = "";
+        if (uiLang === "en") {
+          nameHtml = `<span class="cast-name-en">${c.nameEn}</span>`;
+        } else if (uiLang === "jp") {
+          nameHtml = `<span class="cast-name-jp">${c.nameJp}</span>`;
+        } else {
+          nameHtml = `<span class="cast-name-jp">${c.nameJp}</span><span class="cast-name-en"> · ${c.nameEn}</span>`;
+        }
         card.innerHTML = `
           <div class="cast-card-top">
-            <div>
-              <span class="cast-name-jp">${c.nameJp}</span>
-              <span class="cast-name-en"> · ${c.nameEn}</span>
-            </div>
-            <span class="cast-kashira-badge">${c.headOrStyle || ""}</span>
+            <div>${nameHtml}</div>
+            <span class="cast-kashira-badge">${localizeMixedText(c.headOrStyle || "")}</span>
           </div>
           <div class="cast-role-desc">${c.role || ""}</div>
         `;
@@ -1187,7 +1433,7 @@
       const perf = getActivePerformance();
       if (!perf) return;
 
-      infoModalTitleEl.textContent = `${perf.label} — Tickets, Venue & Study Hub`;
+      infoModalTitleEl.textContent = `${getPerfLabel(perf)} — ${tUI("modalSuffix")}`;
       infoModalSubtitleEl.textContent = perf.subtitle || "";
 
       // 1. Tickets & Venue Tab
@@ -1202,7 +1448,7 @@
             </div>
             <div class="hub-card-desc" style="margin-top:0.4rem;">${l.description || ""}</div>
           </div>
-          <div class="hub-link-cta">Open Official Portal (${l.lang}) ↗</div>
+          <div class="hub-link-cta">${tUI("openPortal")(l.lang)}</div>
         </a>
       `).join("");
 
@@ -1226,39 +1472,41 @@
         </div>
       `).join("");
 
+      const venueHeadingName = uiLang === "jp" ? (v.nameJp || v.name || "") : (uiLang === "en" ? (v.name || v.nameJp || "") : `${v.nameJp || ""} · ${v.name || ""}`);
+
       tabPanelTicketsEl.innerHTML = `
         <div>
-          <div class="hub-section-heading">🎟️ Official Online Box Offices & Reservations</div>
+          <div class="hub-section-heading">${tUI("secBoxOffice")}</div>
           <div class="hub-card-grid">${linksHtml}</div>
         </div>
         <div>
-          <div class="hub-section-heading">💴 Seating Tiers & Single-Act (Hitomakumi-seki) Pricing</div>
+          <div class="hub-section-heading">${tUI("secPricing")}</div>
           <div class="study-section-card" style="padding:0.5rem 0.75rem;">
             <table class="pricing-table">
               <thead>
-                <tr><th>Seating Tier</th><th>Price</th><th>Details & Sightlines</th></tr>
+                <tr><th>${tUI("thTier")}</th><th>${tUI("thPrice")}</th><th>${tUI("thDetails")}</th></tr>
               </thead>
               <tbody>${tiersHtml}</tbody>
             </table>
-            ${t.sameDayInfo ? `<div class="guide-highlight-box" style="margin:0.65rem 0.25rem 0.35rem;"><strong>💡 Same-Day & Single-Act Guide:</strong> ${t.sameDayInfo}</div>` : ""}
+            ${t.sameDayInfo ? `<div class="guide-highlight-box" style="margin:0.65rem 0.25rem 0.35rem;"><strong>${tUI("sameDayLabel")}</strong> ${t.sameDayInfo}</div>` : ""}
           </div>
         </div>
         <div>
-          <div class="hub-section-heading">🏛️ Theatre Venue, Subway Access & Schedule</div>
+          <div class="hub-section-heading">${tUI("secVenue")}</div>
           <div class="study-section-card">
             <div class="hub-card-header">
               <div>
-                <div class="study-heading">${v.nameJp || ""} · ${v.name || ""}</div>
+                <div class="study-heading">${venueHeadingName}</div>
                 <div class="study-subtitle" style="margin-top:0.2rem;">📍 ${v.address || ""}</div>
               </div>
-              ${v.mapUrl ? `<a class="btn-info-hub" href="${v.mapUrl}" target="_blank" rel="noopener noreferrer" style="text-decoration:none;">🗺️ Open Google Maps ↗</a>` : ""}
+              ${v.mapUrl ? `<a class="btn-info-hub" href="${v.mapUrl}" target="_blank" rel="noopener noreferrer" style="text-decoration:none;">${tUI("openMaps")}</a>` : ""}
             </div>
-            <div class="study-summary"><strong>🚇 Station Access:</strong> ${v.access || ""}</div>
-            <div class="study-summary"><strong>🗓️ Performance Schedule:</strong> ${v.scheduleNote || ""}</div>
+            <div class="study-summary"><strong>${tUI("stationAccess")}</strong> ${v.access || ""}</div>
+            <div class="study-summary"><strong>${tUI("perfSchedule")}</strong> ${v.scheduleNote || ""}</div>
           </div>
         </div>
         <div>
-          <div class="hub-section-heading">🎧 Lobby Amenities, Earphone Guides & Yukahon Programs</div>
+          <div class="hub-section-heading">${tUI("secAmenities")}</div>
           <div class="hub-card-grid">${amenitiesHtml}</div>
         </div>
       `;
@@ -1274,7 +1522,7 @@
             </div>
             <div class="hub-card-desc" style="margin-top:0.4rem;">${d.description}</div>
           </div>
-          <div class="hub-link-cta">Open in Google Drive ↗</div>
+          <div class="hub-link-cta">${tUI("openDrive")}</div>
         </a>
       `).join("");
 
@@ -1287,7 +1535,7 @@
             </div>
             <div class="hub-card-desc" style="margin-top:0.4rem;">${p.description}</div>
           </div>
-          <div class="hub-link-cta">Visit Digital Archive ↗</div>
+          <div class="hub-link-cta">${tUI("visitArchive")}</div>
         </a>
       `).join("");
 
@@ -1317,24 +1565,14 @@
         </div>
       `).join("");
 
-      tabPanelResourcesEl.innerHTML = `
-        <div>
-          <div class="hub-section-heading">📂 Project Google Drive Study Materials & Scanned Playbills</div>
-          <div class="hub-card-grid">${driveHtml}</div>
-        </div>
-        <div>
-          <div class="hub-section-heading">🌐 Official Digital Portals & Archives</div>
-          <div class="hub-card-grid">${portalsHtml}</div>
-        </div>
-        <div>
-          <div class="hub-section-heading">📖 Recommended English Translations & Scholarship</div>
-          <div class="hub-card-grid">${enBooksHtml}</div>
-        </div>
-        <div>
-          <div class="hub-section-heading">📜 Classical Japanese Librettos & Yukahon Editions (日本語の基本文献・解説)</div>
-          <div class="hub-card-grid">${jpBooksHtml}</div>
-        </div>
-      `;
+      const jpBooksSec = `<div><div class="hub-section-heading">${tUI("secJpBooks")}</div><div class="hub-card-grid">${jpBooksHtml}</div></div>`;
+      const enBooksSec = `<div><div class="hub-section-heading">${tUI("secEnBooks")}</div><div class="hub-card-grid">${enBooksHtml}</div></div>`;
+      const portalsSec = `<div><div class="hub-section-heading">${tUI("secPortals")}</div><div class="hub-card-grid">${portalsHtml}</div></div>`;
+      const driveSec = `<div><div class="hub-section-heading">${tUI("secDrive")}</div><div class="hub-card-grid">${driveHtml}</div></div>`;
+
+      tabPanelResourcesEl.innerHTML = uiLang === "jp"
+        ? `${jpBooksSec}${portalsSec}${driveSec}`
+        : `${driveSec}${portalsSec}${enBooksSec}${uiLang === "bilingual" ? jpBooksSec : ""}`;
 
       // 3. Program Study Guide Tab
       const sg = perf.studyGuide || [];
@@ -1369,18 +1607,28 @@
           )
         : terms;
 
-      glossaryGridEl.innerHTML = filtered.map(t => `
-        <div class="hub-card">
-          <div>
-            <div class="hub-card-header">
-              <div class="hub-card-title" style="font-family:'Noto Serif JP',serif;font-size:1rem;">${t.termJp} <span style="font-size:0.78rem;color:var(--accent);font-weight:500;">${t.reading}</span></div>
-              <span class="hub-badge">${t.category}</span>
+      glossaryGridEl.innerHTML = filtered.map(t => {
+        const titleHtml = uiLang === "en"
+          ? `${t.termEn} <span style="font-size:0.78rem;color:var(--accent);font-weight:500;">(${t.reading})</span>`
+          : (uiLang === "jp"
+            ? `${t.termJp} <span style="font-size:0.78rem;color:var(--accent);font-weight:500;">（${t.reading}）</span>`
+            : `${t.termJp} <span style="font-size:0.78rem;color:var(--accent);font-weight:500;">${t.reading}</span>`);
+        const subTitleHtml = uiLang === "bilingual"
+          ? `<div style="font-size:0.83rem;font-weight:700;color:var(--text-main);margin-top:0.25rem;">${t.termEn}</div>`
+          : "";
+        return `
+          <div class="hub-card">
+            <div>
+              <div class="hub-card-header">
+                <div class="hub-card-title" style="font-family:'Noto Serif JP',serif;font-size:1rem;">${titleHtml}</div>
+                <span class="hub-badge">${t.category}</span>
+              </div>
+              ${subTitleHtml}
+              <div class="hub-card-desc" style="margin-top:0.35rem;">${t.definition}</div>
             </div>
-            <div style="font-size:0.83rem;font-weight:700;color:var(--text-main);margin-top:0.25rem;">${t.termEn}</div>
-            <div class="hub-card-desc" style="margin-top:0.35rem;">${t.definition}</div>
           </div>
-        </div>
-      `).join("");
+        `;
+      }).join("");
     }
 
     function openInfoModal(tabName = "tickets") {
@@ -1419,7 +1667,7 @@
       performances.forEach(perf => {
         const opt = document.createElement("option");
         opt.value = perf.id;
-        opt.textContent = perf.label;
+        opt.textContent = getPerfLabel(perf);
         performanceSelectEl.appendChild(opt);
       });
       performanceSelectEl.value = activePerformanceId;
@@ -1432,11 +1680,11 @@
 
       perf.parts.forEach(part => {
         const group = document.createElement("optgroup");
-        group.label = part.label;
+        group.label = localizeMixedText(part.label);
         part.scenes.forEach(scene => {
           const opt = document.createElement("option");
           opt.value = scene.id;
-          opt.textContent = scene.title;
+          opt.textContent = localizeMixedText(scene.title);
           group.appendChild(opt);
         });
         sceneSelectEl.appendChild(group);
@@ -1457,11 +1705,27 @@
       const perf = getActivePerformance();
       if (!perf) return;
       if (perf.genre === "kabuki") {
-        brandLogoEl.innerHTML = "<span>歌舞伎</span> KABUKI";
-        colJpHeaderEl.textContent = "日本語 (Dialogue & Gidayū / Nagauta)";
+        if (uiLang === "en") {
+          brandLogoEl.innerHTML = "KABUKI";
+        } else if (uiLang === "jp") {
+          brandLogoEl.innerHTML = "<span>歌舞伎</span>";
+        } else {
+          brandLogoEl.innerHTML = "<span>歌舞伎</span> KABUKI";
+        }
+        colJpHeaderEl.textContent = uiLang === "jp"
+          ? "本文（台詞・義太夫・長唄）"
+          : "日本語 (Dialogue & Gidayū / Nagauta)";
       } else {
-        brandLogoEl.innerHTML = "<span>文楽</span> BUNRAKU";
-        colJpHeaderEl.textContent = "日本語 (Jōruri Chanting & Dialogue)";
+        if (uiLang === "en") {
+          brandLogoEl.innerHTML = "BUNRAKU";
+        } else if (uiLang === "jp") {
+          brandLogoEl.innerHTML = "<span>文楽</span>";
+        } else {
+          brandLogoEl.innerHTML = "<span>文楽</span> BUNRAKU";
+        }
+        colJpHeaderEl.textContent = uiLang === "jp"
+          ? "本文（浄瑠璃・台詞）"
+          : "日本語 (Jōruri Chanting & Dialogue)";
       }
     }
 
@@ -1661,7 +1925,7 @@
       sceneSelectEl.value = activeScene;
 
       if (sceneMeta && sceneMeta.partBadge) {
-        partBadgeEl.textContent = sceneMeta.partBadge;
+        partBadgeEl.textContent = getPartBadgeLabel(sceneMeta.partBadge);
       }
 
       renderSceneGuide(sceneMeta);
@@ -1678,20 +1942,21 @@
         row.dataset.index = idx;
 
         const speakerClass = getSpeakerClass(item.Speaker);
+        const speakerLabel = localizeMixedText(item.Speaker);
 
         let noteHtml = "";
         if (item.Notes && item.Notes.trim().length > 0) {
           noteHtml = `
             <div class="footnote-pill">
               <span class="note-icon">💡</span>
-              <span><strong>Context:</strong> ${item.Notes}</span>
+              <span><strong>${tUI("contextLabel")}</strong> ${item.Notes}</span>
             </div>
           `;
         }
 
         row.innerHTML = `
           <div class="row-meta">
-            <span class="speaker-badge ${speakerClass}">${item.Speaker}</span>
+            <span class="speaker-badge ${speakerClass}">${speakerLabel}</span>
             <span class="line-number">#${item.Line_No}</span>
           </div>
           <div class="col-jp">
@@ -1699,9 +1964,9 @@
           </div>
           <div class="col-en">
             <div class="col-en-header">
-              <span style="font-size:0.72rem; color:var(--text-muted); font-weight:600; text-transform:uppercase; letter-spacing:0.06em;">English Translation</span>
+              <span style="font-size:0.72rem; color:var(--text-muted); font-weight:600; text-transform:uppercase; letter-spacing:0.06em;">${tUI("lineEnLabel")}</span>
               <button class="line-audio-btn" data-index="${idx}" title="Listen to line in English">
-                <span class="audio-icon">🔈</span> Read
+                <span class="audio-icon">🔈</span> ${tUI("readBtn")}
               </button>
             </div>
             <div>${item.English}</div>
@@ -1748,7 +2013,7 @@
       const current = items.length > 0 ? activeLineIndex + 1 : 0;
       const total = items.length;
       followerCounterEl.textContent = `${current} / ${total}`;
-      progressStatusEl.textContent = `Scene Line ${current} of ${total}`;
+      progressStatusEl.textContent = tUI("progress")(current, total);
     }
 
     function scrollToActive(smooth = true) {
@@ -1909,15 +2174,69 @@
       document.body.classList.toggle("light-mode");
       const isLight = document.body.classList.contains("light-mode");
       themeToggleEl.innerHTML = isLight ? "<span>☀️</span>" : "<span>🌙</span>";
-      document.getElementById("theaterModeLabel").textContent = isLight 
-        ? "Day Mode: Standard Contrast" 
-        : "Theater Mode: Dim / Anti-Glare Active";
+      document.getElementById("theaterModeLabel").textContent = isLight
+        ? tUI("theaterModeLight")
+        : tUI("theaterModeDark");
+    });
+
+    function applyUiLanguage(lang, shouldRender = true) {
+      if (!["en", "bilingual", "jp"].includes(lang)) lang = "bilingual";
+      uiLang = lang;
+      localStorage.setItem("bunraku_ui_lang", uiLang);
+
+      if (uiLang === "jp") {
+        stopAudio();
+      }
+
+      document.body.classList.remove("lang-en", "lang-bilingual", "lang-jp");
+      document.body.classList.add("lang-" + uiLang);
+      document.documentElement.lang = uiLang === "en" ? "en" : "ja";
+      document.title = tUI("pageTitle");
+
+      document.querySelectorAll("#langSwitcher .lang-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.lang === uiLang);
+      });
+
+      const isLight = document.body.classList.contains("light-mode");
+      document.getElementById("theaterModeLabel").textContent = isLight
+        ? tUI("theaterModeLight")
+        : tUI("theaterModeDark");
+      document.getElementById("infoHubBtnLabel").textContent = tUI("infoHubBtn");
+      document.getElementById("etiquetteLabel").textContent = tUI("etiquette");
+      document.getElementById("sceneTicketsQuickLabel").textContent = tUI("ticketsQuick");
+      document.getElementById("guideSynopsisHeading").textContent = tUI("synopsisHeading");
+      document.getElementById("guideHighlightsHeading").textContent = tUI("highlightsHeading");
+      document.getElementById("guideCastHeading").textContent = tUI("castHeading");
+      document.getElementById("colEnHeader").textContent = tUI("colEnHeader");
+      document.getElementById("tabBtn_tickets").textContent = tUI("tabTickets");
+      document.getElementById("tabBtn_resources").textContent = tUI("tabResources");
+      document.getElementById("tabBtn_study").textContent = tUI("tabStudy");
+      document.getElementById("tabBtn_glossary").textContent = tUI("tabGlossary");
+      if (glossarySearchInputEl) {
+        glossarySearchInputEl.placeholder = tUI("glossaryPlaceholder");
+      }
+
+      populatePerformanceSelect();
+      updateGenreBranding();
+      populateSceneSelect();
+
+      if (shouldRender) {
+        renderScene();
+        if (infoModalBackdropEl.classList.contains("open")) {
+          renderInfoModalContent();
+          renderGlossary(glossarySearchInputEl ? glossarySearchInputEl.value : "");
+        }
+      }
+    }
+
+    document.querySelectorAll("#langSwitcher .lang-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        applyUiLanguage(btn.dataset.lang, true);
+      });
     });
 
     // Initial boot
-    populatePerformanceSelect();
-    updateGenreBranding();
-    populateSceneSelect();
+    applyUiLanguage(uiLang, false);
     loadPerformanceData(activePerformanceId, () => {
       renderScene();
     });
