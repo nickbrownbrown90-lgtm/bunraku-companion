@@ -5,6 +5,17 @@ window.PERFORMANCES = [
     subtitle: "吉例顔見世大歌舞伎『通し狂言 仮名手本忠臣蔵』 · Nov 1–25, 2026 · Kabukiza",
     genre: "kabuki",
     dataFile: "data/2026-11-kabuki.js",
+    // Full-text acts are merged over the highlights by data/kabuki-full/merge.js (must stay last).
+    dataFiles: [
+      "data/2026-11-kabuki.js",
+      "data/kabuki-full/nov_kabuki_daijo.js",
+      "data/kabuki-full/nov_kabuki_michiyuki.js",
+      "data/kabuki-full/nov_kabuki_godanme.js",
+      "data/kabuki-full/nov_kabuki_rokudanme.js",
+      "data/kabuki-full/nov_kabuki_shichidanme.js",
+      "data/kabuki-full/nov_kabuki_juichidanme.js",
+      "data/kabuki-full/merge.js"
+    ],
     venue: {
       name: "Kabukiza Theatre (Ginza, Tokyo)",
       nameJp: "歌舞伎座（東京・東銀座）",

@@ -1101,6 +1101,9 @@
         max-height: 94vh;
       }
     }
+    .script-row.joruri-only { opacity: 0.55; }
+    .script-row.joruri-only.active { opacity: 1; }
+    .staging-tag { font-size: 0.68rem; padding: 0.1rem 0.45rem; border-radius: 999px; border: 1px dashed var(--text-muted); color: var(--text-muted); margin-left: auto; margin-right: 0.5rem; white-space: nowrap; }
   </style>
 </head>
 <body>
@@ -2024,6 +2027,7 @@
         script.src = src;
         script.onload = () => loadNext();
         script.onerror = () => {
+          if (idx > 1) { console.warn("Optional data file failed:", src); loadNext(); return; }
           scriptListEl.innerHTML = `<div style="padding:2rem;text-align:center;color:#ef4444;">Failed to load script data (${src}).</div>`;
         };
         document.body.appendChild(script);
@@ -2223,7 +2227,7 @@
 
       items.forEach((item, idx) => {
         const row = document.createElement("div");
-        row.className = "script-row" + (idx === activeLineIndex ? " active" : "");
+        row.className = "script-row" + (idx === activeLineIndex ? " active" : "") + (item.Staging === "joruri-only" ? " joruri-only" : "");
         row.dataset.index = idx;
 
         const speakerClass = getSpeakerClass(item.Speaker);
@@ -2242,6 +2246,7 @@
         row.innerHTML = `
           <div class="row-meta">
             <span class="speaker-badge ${speakerClass}">${speakerLabel}</span>
+            ${item.Staging === "joruri-only" ? `<span class="staging-tag" title="Original jōruri text, usually cut in the kabuki staging">${uiLang === "jp" ? "歌舞伎では通常カット" : "Usually cut in kabuki"}</span>` : ""}
             <span class="line-number">#${item.Line_No}</span>
           </div>
           <div class="col-jp">
