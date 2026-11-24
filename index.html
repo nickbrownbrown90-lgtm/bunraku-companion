@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>文楽 同伴リーダー | Bunraku Bilingual Companion</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#0f1117">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Noto+Serif+JP:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -223,8 +227,10 @@
       background: linear-gradient(90deg, #171c26 0%, #1e2533 100%);
       padding: 0.5rem 1rem;
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
+      gap: 0.45rem 0.75rem;
       border-bottom: 1px solid var(--border);
       font-size: 0.8rem;
       color: var(--text-muted);
@@ -241,6 +247,55 @@
       border-radius: 50%;
       background: #10b981;
       box-shadow: 0 0 8px #10b981;
+    }
+    .theater-banner-right {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .offline-pill {
+      display: none;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.14rem 0.5rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(15, 17, 23, 0.55);
+      color: var(--text-muted);
+      white-space: nowrap;
+      letter-spacing: 0.01em;
+    }
+    .offline-pill.visible {
+      display: inline-flex;
+    }
+    .offline-pill .offline-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+      flex-shrink: 0;
+    }
+    .offline-pill.ready {
+      color: #6ee7b7;
+      border-color: rgba(16, 185, 129, 0.35);
+      background: rgba(16, 185, 129, 0.12);
+    }
+    .offline-pill.offline {
+      color: #fbbf24;
+      border-color: rgba(245, 158, 11, 0.45);
+      background: rgba(245, 158, 11, 0.14);
+    }
+    body.light-mode .offline-pill.ready {
+      color: #065f46;
+      border-color: rgba(16, 185, 129, 0.45);
+      background: #d1fae5;
+    }
+    body.light-mode .offline-pill.offline {
+      color: #92400e;
+      border-color: rgba(245, 158, 11, 0.5);
+      background: #fef3c7;
     }
 
     /* Main Dual-Column Container */
@@ -1169,7 +1224,13 @@
     <div class="theater-etiquette-note" title="Please wear earphones when listening to audio in theater">
       <span>🎧</span> <span id="etiquetteLabel">Earphones recommended</span>
     </div>
-    <div id="progressStatus">Line 1 of 15</div>
+    <div class="theater-banner-right">
+      <span class="offline-pill" id="offlineStatusPill" aria-live="polite">
+        <span class="offline-dot"></span>
+        <span id="offlineStatusLabel"></span>
+      </span>
+      <div id="progressStatus">Line 1 of 15</div>
+    </div>
   </div>
 
   <!-- Main Dual-Column Content -->
@@ -1429,7 +1490,9 @@
         secPortals: "🌐 Official Digital Portals & Archives",
         visitArchive: "Visit Digital Archive ↗",
         secEnBooks: "📖 Recommended English Translations & Scholarship",
-        secJpBooks: "📜 Classical Japanese Librettos & Yukahon Editions (日本語の基本文献・解説)"
+        secJpBooks: "📜 Classical Japanese Librettos & Yukahon Editions (日本語の基本文献・解説)",
+        offlineReady: "Offline ready",
+        offlineMode: "Offline"
       },
       en: {
         pageTitle: "Bunraku & Kabuki Theater Companion",
@@ -1479,7 +1542,9 @@
         secPortals: "🌐 Official Digital Portals & Archives",
         visitArchive: "Visit Digital Archive ↗",
         secEnBooks: "📖 Recommended English Translations & Scholarship",
-        secJpBooks: "📜 Classical Japanese Librettos & Editions"
+        secJpBooks: "📜 Classical Japanese Librettos & Editions",
+        offlineReady: "Offline ready",
+        offlineMode: "Offline"
       },
       jp: {
         pageTitle: "文楽・歌舞伎 同伴リーダー",
@@ -1529,7 +1594,9 @@
         secPortals: "🌐 公式デジタルアーカイブ・ポータル",
         visitArchive: "アーカイブを開く ↗",
         secEnBooks: "📖 英語翻訳・研究文献",
-        secJpBooks: "📜 日本語の基本文献・正本・床本"
+        secJpBooks: "📜 日本語の基本文献・正本・床本",
+        offlineReady: "オフライン利用可",
+        offlineMode: "オフライン"
       }
     };
 
@@ -2527,6 +2594,7 @@
       populatePerformanceSelect();
       updateGenreBranding();
       populateSceneSelect();
+      updateOfflineStatusPill();
 
       if (shouldRender) {
         renderScene();
@@ -2535,6 +2603,56 @@
           renderGlossary(glossarySearchInputEl ? glossarySearchInputEl.value : "");
         }
       }
+    }
+
+    const offlineStatusPillEl = document.getElementById("offlineStatusPill");
+    const offlineStatusLabelEl = document.getElementById("offlineStatusLabel");
+    let isSwReady = false;
+
+    function updateOfflineStatusPill() {
+      if (!offlineStatusPillEl || !offlineStatusLabelEl) return;
+      const isOffline = typeof navigator !== "undefined" && navigator.onLine === false;
+      if (isOffline) {
+        offlineStatusLabelEl.textContent = tUI("offlineMode");
+        offlineStatusPillEl.classList.remove("ready");
+        offlineStatusPillEl.classList.add("visible", "offline");
+      } else if (isSwReady) {
+        offlineStatusLabelEl.textContent = tUI("offlineReady");
+        offlineStatusPillEl.classList.remove("offline");
+        offlineStatusPillEl.classList.add("visible", "ready");
+      } else {
+        offlineStatusPillEl.classList.remove("visible", "ready", "offline");
+      }
+    }
+
+    window.addEventListener("online", updateOfflineStatusPill);
+    window.addEventListener("offline", updateOfflineStatusPill);
+
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./sw.js").then((reg) => {
+          if (reg.active || navigator.serviceWorker.controller) {
+            isSwReady = true;
+            updateOfflineStatusPill();
+          }
+          navigator.serviceWorker.ready.then(() => {
+            isSwReady = true;
+            updateOfflineStatusPill();
+          });
+          reg.addEventListener("updatefound", () => {
+            const newWorker = reg.installing;
+            if (!newWorker) return;
+            newWorker.addEventListener("statechange", () => {
+              if (newWorker.state === "activated") {
+                isSwReady = true;
+                updateOfflineStatusPill();
+              }
+            });
+          });
+        }).catch((err) => {
+          console.warn("Service worker registration failed:", err);
+        });
+      });
     }
 
     document.querySelectorAll("#langSwitcher .lang-btn").forEach(btn => {
