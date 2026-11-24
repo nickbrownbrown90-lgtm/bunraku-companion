@@ -9,6 +9,7 @@ window.PERFORMANCES = [
     dataFiles: [
       "data/2026-11-kabuki.js",
       "data/kabuki-full/nov_kabuki_daijo.js",
+      "data/kabuki-full/nov_kabuki_yondanme.js",
       "data/kabuki-full/nov_kabuki_michiyuki.js",
       "data/kabuki-full/nov_kabuki_godanme.js",
       "data/kabuki-full/nov_kabuki_rokudanme.js",
