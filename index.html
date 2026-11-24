@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>文楽 同伴リーダー | Bunraku Bilingual Companion</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -715,6 +715,122 @@
       line-height: 1.4;
     }
 
+    /* Scene Coverage Badge, Timing Pill & Program A/B Cast Toggle */
+    .coverage-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.16rem 0.5rem;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+    .coverage-badge.highlights {
+      background: rgba(245, 158, 11, 0.14);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+    }
+    body.light-mode .coverage-badge.highlights {
+      background: #fef3c7;
+      color: #92400e;
+      border-color: #f59e0b;
+    }
+    .coverage-badge.full {
+      background: rgba(16, 185, 129, 0.16);
+      color: #6ee7b7;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+    body.light-mode .coverage-badge.full {
+      background: #d1fae5;
+      color: #065f46;
+      border-color: #10b981;
+    }
+    .scene-time-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: rgba(212, 175, 55, 0.1);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+    }
+    .program-switcher-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 0.55rem;
+    }
+    .program-toggle-group {
+      display: inline-flex;
+      align-items: center;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 2px;
+      gap: 2px;
+    }
+    .program-btn {
+      background: transparent;
+      color: var(--text-muted);
+      border: none;
+      border-radius: 4px;
+      padding: 0.24rem 0.55rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .program-btn:hover {
+      color: var(--text-main);
+    }
+    .program-btn.active {
+      background: var(--accent);
+      color: #0b0d11;
+    }
+    .actors-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 0.45rem;
+      margin-bottom: 0.9rem;
+    }
+    .actor-chip {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.4rem 0.6rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.12rem;
+    }
+    .actor-chip-role {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+    .actor-chip-name {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-japanese);
+    }
+    .actor-chip-name .actor-en {
+      font-weight: 600;
+      color: var(--accent);
+      font-size: 0.76rem;
+    }
+    .program-schedule-note {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-bottom: 0.45rem;
+    }
+
     /* Info & Tickets Modal Hub */
     .modal-backdrop {
       position: fixed;
@@ -1060,6 +1176,8 @@
       <div class="scene-guide-bar" id="sceneGuideToggleBar" title="Click to toggle Scene Synopsis, Stage Highlights & Cast">
         <div class="scene-guide-meta">
           <span class="play-type-pill" id="scenePlayType">世話物 (Sewamono)</span>
+          <span class="coverage-badge highlights" id="sceneCoverageBadge" style="display:none;"></span>
+          <span class="scene-time-pill" id="sceneTimePill" style="display:none;"></span>
           <span class="scene-playwright" id="scenePlaywright">近松門左衛門</span>
           <span class="scene-premiere" id="scenePremiere">1722</span>
         </div>
@@ -1080,6 +1198,17 @@
           <div class="guide-highlight-box" id="sceneHighlightsText"></div>
         </div>
         <div>
+          <div id="sceneActorsSection" style="display:none;">
+            <div class="program-switcher-row">
+              <div class="guide-section-title" id="guideActorsHeading" style="margin-bottom:0;">🎬 Cast (Actors)</div>
+              <div class="program-toggle-group" id="programToggleGroup" role="group" aria-label="Program Cast Schedule">
+                <button type="button" class="program-btn" data-program="A" id="programBtnA">Program A</button>
+                <button type="button" class="program-btn" data-program="B" id="programBtnB">Program B</button>
+              </div>
+            </div>
+            <div class="program-schedule-note" id="programScheduleNote"></div>
+            <div class="actors-grid" id="sceneActorsGrid"></div>
+          </div>
           <div class="guide-section-title" id="guideCastHeading">🎭 Key Characters in This Scene</div>
           <div class="cast-grid" id="sceneCastGrid"></div>
         </div>
@@ -1189,6 +1318,14 @@
     const sceneSynopsisTextEl = document.getElementById("sceneSynopsisText");
     const sceneHighlightsTextEl = document.getElementById("sceneHighlightsText");
     const sceneCastGridEl = document.getElementById("sceneCastGrid");
+    const sceneCoverageBadgeEl = document.getElementById("sceneCoverageBadge");
+    const sceneTimePillEl = document.getElementById("sceneTimePill");
+    const sceneActorsSectionEl = document.getElementById("sceneActorsSection");
+    const sceneActorsGridEl = document.getElementById("sceneActorsGrid");
+    const programToggleGroupEl = document.getElementById("programToggleGroup");
+    const programBtnAEl = document.getElementById("programBtnA");
+    const programBtnBEl = document.getElementById("programBtnB");
+    const programScheduleNoteEl = document.getElementById("programScheduleNote");
 
     const infoHubBtnEl = document.getElementById("infoHubBtn");
     const infoModalBackdropEl = document.getElementById("infoModalBackdrop");
@@ -1205,6 +1342,41 @@
     let uiLang = localStorage.getItem("bunraku_ui_lang") || "bilingual";
     if (!["en", "bilingual", "jp"].includes(uiLang)) uiLang = "bilingual";
 
+    function getTokyoTodayISO() {
+      try {
+        const parts = new Intl.DateTimeFormat("en-CA", {
+          timeZone: "Asia/Tokyo",
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit"
+        }).formatToParts(new Date());
+        const map = {};
+        parts.forEach(p => { map[p.type] = p.value; });
+        return `${map.year}-${map.month}-${map.day}`;
+      } catch (e) {
+        return new Date().toISOString().slice(0, 10);
+      }
+    }
+
+    function getDefaultProgramForPerformance(perf, partId) {
+      if (!perf || !perf.castSchedule) return "A";
+      const today = getTokyoTodayISO();
+      const entry = perf.castSchedule[today];
+      if (!entry) return "A";
+      const slot = partId === "evening" ? entry.evening : (partId === "matinee" ? entry.matinee : (entry.matinee || entry.evening));
+      if (slot === "A" || slot === "B") return slot;
+      if (entry.matinee === "A" || entry.evening === "A") return "A";
+      if (entry.matinee === "B" || entry.evening === "B") return "B";
+      return "A";
+    }
+
+    function getActiveProgram(perf, partId) {
+      if (!perf) return "A";
+      const stored = localStorage.getItem("bunraku_program_" + perf.id);
+      if (stored === "A" || stored === "B") return stored;
+      return getDefaultProgramForPerformance(perf, partId);
+    }
+
     const UI_STRINGS = {
       bilingual: {
         pageTitle: "文楽 同伴リーダー | Bunraku Bilingual Companion",
@@ -1218,6 +1390,14 @@
         synopsisHeading: "📜 Scene Synopsis & Context",
         highlightsHeading: "✨ What to Watch For (Stage & Musical Highlights)",
         castHeading: "🎭 Key Characters in This Scene",
+        actorsHeading: "🎬 Stage Cast",
+        programA: "Program A (Aプロ)",
+        programB: "Program B (Bプロ)",
+        coverageHighlights: "Highlights — not line-by-line",
+        coverageFull: "Full text",
+        intervalLabel: (iv) => `Interval after: ${iv}`,
+        scheduleTodayNote: (dateStr, prog) => `Today (${dateStr} JST) default: Program ${prog}`,
+        scheduleManualNote: (prog) => `Viewing Program ${prog} cast`,
         colEnHeader: "English Translation & Context",
         lineEnLabel: "English Translation",
         readBtn: "Read",
@@ -1260,6 +1440,14 @@
         synopsisHeading: "📜 Scene Synopsis & Context",
         highlightsHeading: "✨ What to Watch For (Stage & Musical Highlights)",
         castHeading: "🎭 Key Characters in This Scene",
+        actorsHeading: "🎬 Stage Cast",
+        programA: "Program A",
+        programB: "Program B",
+        coverageHighlights: "Highlights — not line-by-line",
+        coverageFull: "Full text",
+        intervalLabel: (iv) => `Interval after: ${iv}`,
+        scheduleTodayNote: (dateStr, prog) => `Today (${dateStr} JST) default: Program ${prog}`,
+        scheduleManualNote: (prog) => `Viewing Program ${prog} cast`,
         colEnHeader: "English Script & Context",
         lineEnLabel: "Script",
         readBtn: "Read",
@@ -1302,6 +1490,14 @@
         synopsisHeading: "📜 あらすじ・解説",
         highlightsHeading: "✨ みどころ（演出・音楽）",
         castHeading: "🎭 主な登場人物",
+        actorsHeading: "🎬 配役（出演俳優）",
+        programA: "Aプロ",
+        programB: "Bプロ",
+        coverageHighlights: "ハイライト抜粋（全編ではありません）",
+        coverageFull: "全編収録",
+        intervalLabel: (iv) => `幕間 ${iv}`,
+        scheduleTodayNote: (dateStr, prog) => `本日（${dateStr} JST）の標準：${prog}プロ`,
+        scheduleManualNote: (prog) => `${prog}プロの配役を表示中`,
         colEnHeader: "解説",
         lineEnLabel: "台詞",
         readBtn: "再生",
@@ -1399,11 +1595,84 @@
 
     function renderSceneGuide(sceneMeta) {
       if (!sceneMeta || !sceneGuideCardEl) return;
+      const perf = getActivePerformance();
       scenePlayTypeEl.textContent = localizeMixedText(sceneMeta.playType || "古典演劇 (Classical Drama)");
       scenePlaywrightEl.textContent = sceneMeta.playwright ? `✍️ ${localizeMixedText(sceneMeta.playwright)}` : "";
       scenePremiereEl.textContent = sceneMeta.premiere ? `· 🏛️ ${sceneMeta.premiere}` : "";
       sceneSynopsisTextEl.textContent = sceneMeta.synopsis || "";
       sceneHighlightsTextEl.textContent = sceneMeta.highlights || "";
+
+      if (sceneCoverageBadgeEl) {
+        const cov = sceneMeta.textCoverage;
+        if (cov === "full" || cov === "highlights") {
+          sceneCoverageBadgeEl.style.display = "inline-flex";
+          sceneCoverageBadgeEl.className = `coverage-badge ${cov}`;
+          sceneCoverageBadgeEl.textContent = cov === "full"
+            ? `✓ ${tUI("coverageFull")}`
+            : `◈ ${tUI("coverageHighlights")}`;
+        } else {
+          sceneCoverageBadgeEl.style.display = "none";
+        }
+      }
+
+      if (sceneTimePillEl) {
+        if (sceneMeta.time) {
+          const ivPart = sceneMeta.intervalAfter ? ` · ${tUI("intervalLabel")(sceneMeta.intervalAfter)}` : "";
+          sceneTimePillEl.style.display = "inline-flex";
+          sceneTimePillEl.textContent = `🕒 ${sceneMeta.time}${ivPart}`;
+        } else {
+          sceneTimePillEl.style.display = "none";
+        }
+      }
+
+      if (sceneActorsSectionEl && sceneActorsGridEl) {
+        if (sceneMeta.actors && (sceneMeta.actors.A || sceneMeta.actors.B)) {
+          sceneActorsSectionEl.style.display = "block";
+          const prog = getActiveProgram(perf, sceneMeta.partId);
+          if (programBtnAEl) {
+            programBtnAEl.textContent = tUI("programA");
+            programBtnAEl.classList.toggle("active", prog === "A");
+          }
+          if (programBtnBEl) {
+            programBtnBEl.textContent = tUI("programB");
+            programBtnBEl.classList.toggle("active", prog === "B");
+          }
+          if (programScheduleNoteEl) {
+            const today = getTokyoTodayISO();
+            const stored = perf ? localStorage.getItem("bunraku_program_" + perf.id) : null;
+            if (!stored && perf && perf.castSchedule && perf.castSchedule[today]) {
+              programScheduleNoteEl.textContent = tUI("scheduleTodayNote")(today, prog);
+            } else {
+              programScheduleNoteEl.textContent = tUI("scheduleManualNote")(prog);
+            }
+          }
+          const actorList = sceneMeta.actors[prog] || sceneMeta.actors.A || [];
+          sceneActorsGridEl.innerHTML = "";
+          actorList.forEach(a => {
+            const chip = document.createElement("div");
+            chip.className = "actor-chip";
+            const roleText = uiLang === "jp"
+              ? (a.roleJp || a.role)
+              : (uiLang === "en" ? a.role : `${a.roleJp || ""} · ${a.role}`);
+            let actorHtml = "";
+            if (uiLang === "en") {
+              actorHtml = `<span class="actor-en">${a.actor}</span>`;
+            } else if (uiLang === "jp") {
+              actorHtml = `<span>${a.actorJp || a.actor}</span>`;
+            } else {
+              actorHtml = `<span>${a.actorJp || ""}</span> <span class="actor-en">${a.actor}</span>`;
+            }
+            chip.innerHTML = `
+              <div class="actor-chip-role">${roleText}</div>
+              <div class="actor-chip-name">${actorHtml}</div>
+            `;
+            sceneActorsGridEl.appendChild(chip);
+          });
+        } else {
+          sceneActorsSectionEl.style.display = "none";
+          sceneActorsGridEl.innerHTML = "";
+        }
+      }
 
       sceneCastGridEl.innerHTML = "";
       (sceneMeta.cast || []).forEach(c => {
@@ -1659,7 +1928,7 @@
 
     function getAllScenesForPerformance(perf) {
       if (!perf || !perf.parts) return [];
-      return perf.parts.flatMap(part => part.scenes.map(s => ({ ...s, partBadge: part.badge })));
+      return perf.parts.flatMap(part => part.scenes.map(s => ({ ...s, partBadge: part.badge, partId: part.id })));
     }
 
     function populatePerformanceSelect() {
@@ -1736,14 +2005,30 @@
       }
       const perf = performances.find(p => p.id === perfId);
       if (!perf) return;
+      const files = Array.isArray(perf.dataFiles) && perf.dataFiles.length > 0
+        ? perf.dataFiles
+        : (perf.dataFile ? [perf.dataFile] : []);
+      if (files.length === 0) {
+        callback();
+        return;
+      }
       scriptListEl.innerHTML = `<div style="padding:2rem;text-align:center;color:var(--text-muted);">Loading ${perf.label}...</div>`;
-      const script = document.createElement("script");
-      script.src = perf.dataFile;
-      script.onload = () => callback();
-      script.onerror = () => {
-        scriptListEl.innerHTML = `<div style="padding:2rem;text-align:center;color:#ef4444;">Failed to load script data (${perf.dataFile}).</div>`;
-      };
-      document.body.appendChild(script);
+      let idx = 0;
+      function loadNext() {
+        if (idx >= files.length) {
+          callback();
+          return;
+        }
+        const src = files[idx++];
+        const script = document.createElement("script");
+        script.src = src;
+        script.onload = () => loadNext();
+        script.onerror = () => {
+          scriptListEl.innerHTML = `<div style="padding:2rem;text-align:center;color:#ef4444;">Failed to load script data (${src}).</div>`;
+        };
+        document.body.appendChild(script);
+      }
+      loadNext();
     }
 
     function initVoices() {
@@ -2179,6 +2464,22 @@
         : tUI("theaterModeDark");
     });
 
+    if (programToggleGroupEl) {
+      programToggleGroupEl.querySelectorAll(".program-btn").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const prog = btn.dataset.program;
+          const perf = getActivePerformance();
+          if (perf && (prog === "A" || prog === "B")) {
+            localStorage.setItem("bunraku_program_" + perf.id, prog);
+            const allScenes = getAllScenesForPerformance(perf);
+            const sceneMeta = allScenes.find(s => s.id === activeScene);
+            renderSceneGuide(sceneMeta);
+          }
+        });
+      });
+    }
+
     function applyUiLanguage(lang, shouldRender = true) {
       if (!["en", "bilingual", "jp"].includes(lang)) lang = "bilingual";
       uiLang = lang;
@@ -2207,6 +2508,8 @@
       document.getElementById("guideSynopsisHeading").textContent = tUI("synopsisHeading");
       document.getElementById("guideHighlightsHeading").textContent = tUI("highlightsHeading");
       document.getElementById("guideCastHeading").textContent = tUI("castHeading");
+      const actorsHeadingEl = document.getElementById("guideActorsHeading");
+      if (actorsHeadingEl) actorsHeadingEl.textContent = tUI("actorsHeading");
       document.getElementById("colEnHeader").textContent = tUI("colEnHeader");
       document.getElementById("tabBtn_tickets").textContent = tUI("tabTickets");
       document.getElementById("tabBtn_resources").textContent = tUI("tabResources");

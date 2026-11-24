@@ -11,7 +11,34 @@ window.PERFORMANCES = [
       address: "4-12-15 Ginza, Chūō-ku, Tokyo 104-0061 (〒104-0061 東京都中央区銀座4-12-15)",
       access: "Directly connected to Higashi-Ginza Station (東銀座駅, Tokyo Metro Hibiya Line / Toei Asakusa Line) via Exit 3 (地下直結・3番出口). 5-minute walk from Ginza Station (銀座駅, Exit A7).",
       mapUrl: "https://www.google.com/maps/search/?api=1&query=Kabukiza+Theatre+Ginza+Tokyo",
-      scheduleNote: "Nov 1–25, 2026 (Dark days / 休演日: Nov 9 & Nov 18). Matinee (昼の部) 11:00 AM / Evening (夜の部) 4:30 PM."
+      scheduleNote: "Nov 1–25, 2026 (Dark days / 休演日: Nov 9 & Nov 17; Private performances / 貸切: Nov 14 Matinee & Nov 22 Evening). Matinee (昼の部) 11:00 AM (kōjō ningyō cast announcement ~10:50 AM — be seated early) / Evening (夜の部) 4:30 PM. Note: Act IV (四段目) is a 通さん場 (tōsanba): latecomers are held outside the auditorium once the act begins at 13:11."
+    },
+    castSchedule: {
+      "2026-11-01": { matinee: "A", evening: "A" },
+      "2026-11-02": { matinee: "B", evening: "B" },
+      "2026-11-03": { matinee: "A", evening: "A" },
+      "2026-11-04": { matinee: "B", evening: "B" },
+      "2026-11-05": { matinee: "A", evening: "A" },
+      "2026-11-06": { matinee: "A", evening: "A" },
+      "2026-11-07": { matinee: "B", evening: "B" },
+      "2026-11-08": { matinee: "B", evening: "B" },
+      "2026-11-09": { matinee: null, evening: null, note: "Dark day (休演日)" },
+      "2026-11-10": { matinee: "A", evening: "A" },
+      "2026-11-11": { matinee: "A", evening: "A" },
+      "2026-11-12": { matinee: "B", evening: "B" },
+      "2026-11-13": { matinee: "B", evening: "B" },
+      "2026-11-14": { matinee: "private", evening: "A" },
+      "2026-11-15": { matinee: "A", evening: "A" },
+      "2026-11-16": { matinee: "B", evening: "B" },
+      "2026-11-17": { matinee: null, evening: null, note: "Dark day (休演日)" },
+      "2026-11-18": { matinee: "B", evening: "B" },
+      "2026-11-19": { matinee: "A", evening: "A" },
+      "2026-11-20": { matinee: "A", evening: "A" },
+      "2026-11-21": { matinee: "B", evening: "B" },
+      "2026-11-22": { matinee: "B", evening: "private" },
+      "2026-11-23": { matinee: "A", evening: "A" },
+      "2026-11-24": { matinee: "B", evening: "B" },
+      "2026-11-25": { matinee: "B", evening: "B" }
     },
     ticketing: {
       officialLinks: [
@@ -37,27 +64,30 @@ window.PERFORMANCES = [
           description: "Official Shochiku portal featuring cast lists, curtain times, lobby announcements, and intermission dining reservations."
         },
         {
-          label: "Single-Act Tickets (幕見席オンライン予約)",
+          label: "Single-Act Tickets (幕見席 / KABUKI WEB Guide)",
           lang: "JP / EN",
-          url: "https://www.kabuki-bito.jp/theaters/kabukiza/play/",
+          url: "https://www.kabukiweb.net/news/kabukiza/singleact_november_2026/",
           badge: "Hitomakumi-seki",
-          description: "Online reservation & day-of box office guide for 4th-floor Single-Act (Hitomakumi-seki) viewing."
+          description: "Official November 2026 schedule, per-act pricing, and booking guide for 4th-floor Single-Act (Hitomakumi-seki) tickets."
         }
       ],
       pricingTiers: [
-        { tier: "1st ClassSajiki Box (1等桟敷席)", price: "¥22,000", note: "Traditional tatami box seating on the sides of the 1st floor (includes tea service option)." },
-        { tier: "1st Class Seat (1等席)", price: "¥20,000", note: "Prime 1st floor orchestra (including seats adjacent to the Hanamichi) and front 2nd floor." },
-        { tier: "2nd Class Seat (2等席)", price: "¥15,000", note: "Rear 1st floor and mid-to-rear 2nd floor with full stage and Hanamichi visibility." },
-        { tier: "3rd Class A Seat (3階A席)", price: "¥6,500", note: "Front section of the 3rd floor balcony; high angle overview of the entire stage." },
-        { tier: "3rd Class B Seat (3階B席)", price: "¥4,500", note: "Rear section of the 3rd floor balcony; budget-friendly reserved seating." },
-        { tier: "4th Floor Single-Act (4階一幕見席)", price: "¥1,500 – ¥2,500", note: "Per-act tickets for individual scenes; reserved online from 12:00 PM the day before or same-day at 1F box office." }
+        { tier: "Special Seat (特等席)", price: "¥20,000", note: "Premier 1st floor center orchestra seats with prime stage and Hanamichi sightlines." },
+        { tier: "1st Class Box Seat (1階桟敷席)", price: "¥20,000", note: "Traditional raised tatami box seating along the sides of the 1st floor (no tea service this month)." },
+        { tier: "1st Class Seat (1等席)", price: "¥18,000", note: "Main 1st floor orchestra (including seats near the Hanamichi) and front 2nd floor." },
+        { tier: "2nd Class A Seat (2等A席)", price: "¥15,000", note: "Rear 1st floor and prime 2nd floor center/side seats with full stage visibility." },
+        { tier: "2nd Class B Seat (2等B席)", price: "¥14,000", note: "Mid-to-rear 2nd floor seating." },
+        { tier: "2nd Class C Seat (2等C席)", price: "¥9,000", note: "Side 1st floor / rear 2nd floor seating." },
+        { tier: "3rd Floor A Seat (3階A席)", price: "¥6,500", note: "Front section of the 3rd floor balcony; high-angle overview of the entire stage." },
+        { tier: "3rd Floor B Seat (3階B席)", price: "¥5,000", note: "Rear section of the 3rd floor balcony; budget-friendly reserved seating." },
+        { tier: "4th Floor Single-Act (4階一幕見席)", price: "Varies by act — see KABUKI WEB single-act page", note: "Per-act tickets for individual scenes; see https://www.kabukiweb.net/news/kabukiza/singleact_november_2026/ for exact per-act prices and availability." }
       ],
-      sameDayInfo: "Kabukiza offers 4th-floor Single-Act tickets (一幕見席 / Hitomakumi-seki) allowing you to watch a single act (e.g., Act IV Seppuku or Act VII Ichiriki Teahouse) for ¥1,500–¥2,500. Online reservations open at 12:00 PM JST the day prior to the performance; a limited number of unreserved standing/seated day-of tickets are also sold at the dedicated 1st-floor Single-Act entrance.",
+      sameDayInfo: "Kabukiza offers 4th-floor Single-Act tickets (一幕見席 / Hitomakumi-seki) allowing you to watch an individual act; prices vary by act — see https://www.kabukiweb.net/news/kabukiza/singleact_november_2026/. Captioning device ticket option: +¥1,500 (English / Simplified Chinese). Under-30 (U30) discount: same-day tickets are half price if seats remain.",
       lobbyAmenities: [
         {
-          item: "English Subtitle Tablet / Earphone Guide (字幕ガイド・イヤホンガイド)",
-          price: "¥1,000 – ¥1,500",
-          description: "Available at the 1st-floor Earphone Guide counter (inside the main entrance to the left). Provides real-time English commentary or synchronized multi-scene captioning."
+          item: "Captioning Device Ticket Option (字幕ガイド / English & Simplified Chinese)",
+          price: "+¥1,500",
+          description: "Synchronized captioning device available as a +¥1,500 ticket option (English and Simplified Chinese). Audio Earphone Guide counters are also located inside the 1st-floor lobby."
         },
         {
           item: "Official Souvenir Program / Sujigaki (筋書)",
@@ -178,7 +208,7 @@ window.PERFORMANCES = [
       {
         heading: "Overview: The November Kaomise Full-Length Production (吉例顔見世大歌舞伎『通し狂言 仮名手本忠臣蔵』)",
         subtitle: "Premiered 1748 · Written by Takeda Izumo II, Miyoshi Shōraku, and Namiki Senryū",
-        summary: "Staged during Kabukiza's prestigious November Kaomise ('Face-Showing') gala, this full-day production presents Japan's most celebrated theatrical epic: Kanadehon Chūshingura. Based on the historical Akō Vendetta of 1701–1703—in which forty-seven masterless samurai (rōnin) avenged the forced ritual suicide of their lord Asano Naganori by assassinating the corrupt court official Kira Yoshinaka—the playwrights transposed the story back to the 14th-century Muromachi shogunate (as chronicled in the Taiheiki) to evade strict Tokugawa shogunal censorship. Thus, Lord Asano becomes Enya Hangan Takasada, Kira Yoshinaka becomes the arrogant Kō no Moronao, and the chief retainer Ōishi Kuranosuke becomes Ōboshi Yuranosuke.",
+        summary: "Staged during Kabukiza's prestigious November Kaomise ('Face-Showing') gala, this full-day production presents Japan's most celebrated theatrical epic: Kanadehon Chūshingura. Based on the historical Akō Vendetta of 1701–1703—in which forty-seven masterless samurai (rōnin) avenged the forced ritual suicide of their lord Asano Naganori by assassinating the corrupt court official Kira Yoshinaka—the playwrights transposed the story back to the 14th-century Muromachi shogunate (as chronicled in the Taiheiki) to evade strict Tokugawa shogunal censorship. Thus, Lord Asano becomes Enya Hangan Takasada, Kira Yoshinaka becomes the arrogant Kō no Moronō, and the chief retainer Ōishi Kuranosuke becomes Ōboshi Yuranosuke.",
         bullets: [
           {
             title: "The Meaning of 'Kanadehon' (仮名手本)",
@@ -197,11 +227,11 @@ window.PERFORMANCES = [
         bullets: [
           {
             title: "Act I: Tsurugaoka Shrine Helmet Inspection (大序：鶴ヶ岡社頭兜改めの場)",
-            text: "At Tsurugaoka Hachiman Shrine in Kamakura, Ashikaga Tadayoshi presides over the dedication of forty-seven helmets taken after the defeat of Nitta Yoshisada. Lady Kaoyo (Enya Hangan's virtuous wife) is summoned to identify Yoshisada's sacred helmet by its rare 'Ten-Pellet' incense (兰奢待 / Ranjatai). Afterwards, the lecherous Governor Kō no Moronao attempts to force a love poem onto Kaoyo; Momonoi Wakasanosuke rescues her, sparking Moronao's bitter vendetta against both lords."
+            text: "At Tsurugaoka Hachiman Shrine in Kamakura, Ashikaga Tadayoshi presides over the dedication of forty-seven helmets taken after the defeat of Nitta Yoshisada. Lady Kaoyo (Enya Hangan's virtuous wife) is summoned to identify Yoshisada's sacred helmet by its rare 'Ten-Pellet' incense (蘭奢待 / Ranjatai). Afterwards, the lecherous Governor Kō no Moronō attempts to force a love poem onto Kaoyo; Momonoi Wakasanosuke rescues her, sparking Moronō's bitter vendetta against both lords."
           },
           {
             title: "Act III: The Bribe at the Gate & Drawing the Sword in the Pine Corridor (三段目：足利館門前進物の場・松の間刃傷の場)",
-            text: "Wakasanosuke's chief retainer Kakogawa Honzō secretly delivers lavish bribes of gold and silk to Moronao at dawn, defusing Moronao's hostility toward Wakasanosuke. When Enya Hangan arrives empty-handed, Moronao redirects all his pent-up malice onto Hangan—mocking him as a 'carp in a well' (井の中の鮒) and humiliating him before the court until Hangan's patience snaps and he draws his short sword inside the palace. Meanwhile, Hangan's retainer Hayano Kanpei, dallying outside with Okaru, misses his master's crisis and is overwhelmed by shame."
+            text: "Wakasanosuke's chief retainer Kakogawa Honzō secretly delivers lavish bribes of gold and silk to Moronō at dawn, defusing Moronō's hostility toward Wakasanosuke. When Enya Hangan arrives empty-handed, Moronō redirects all his pent-up malice onto Hangan—mocking him as a 'carp in a well' (井の中の鮒) and humiliating him before the court until Hangan's patience snaps and he draws his short sword inside the palace. Meanwhile, Hangan's retainer Hayano Kanpei, dallying outside with Okaru, misses his master's crisis and is overwhelmed by shame."
           },
           {
             title: "Act IV: Enya Hangan's Seppuku & Surrender of the Castle (四段目：扇ヶ谷塩冶判官切腹・表門城明渡しの場)",
@@ -209,7 +239,7 @@ window.PERFORMANCES = [
           },
           {
             title: "Kiyomoto Dance-Drama: Michiyuki Tabiji no Hanamuko (道行旅路の花聟 — Journey of the Bridal Pair)",
-            text: "A radiant dance interlude accompanied by soaring Kiyomoto chanting. Disgraced by his absence during Hangan's crisis, Kanpei flees Kamakura with Okaru toward her parents' mountain cottage in Yamazaki under blossoming spring cherry trees. They fend off the buffoonish Moronao retainer Sagisaka Bannai in stylized rhythmic combat."
+            text: "A radiant dance interlude accompanied by soaring Kiyomoto chanting. Disgraced by his absence during Hangan's crisis, Kanpei flees Kamakura with Okaru toward her parents' mountain cottage in Yamazaki under blossoming spring cherry trees. They fend off the buffoonish Moronō retainer Sagisaka Bannai in stylized rhythmic combat."
           }
         ]
       },
@@ -224,15 +254,15 @@ window.PERFORMANCES = [
           },
           {
             title: "Act VI: Yoichibei's Cottage — Kanpei's Seppuku (六段目：与市兵衛内勘平腹切の場)",
-            text: "At Yoichibei's thatched cottage, the Ichimonjiya brothel master arrives to claim Okaru for Gion. When Yoichibei's corpse is brought home and the striped purse is recognized, Kanpei's mother-in-law accuses him of murdering the old man. When envoys Hara Gōemon and Senzaki Yagorō arrive and reject Kanpei's blood-stained money, the despairing Kanpei commits seppuku. Inspecting Yoichibei's corpse, Yagorō discovers the old man died from a sword wound—not a musket ball—proving Kanpei actually slew his father-in-law's killer. Before dying, Kanpei is permitted to seal the vendetta oath-scroll (renpanjō) with his own blood."
+            text: "At Yoichibei's thatched cottage, the Ichimonjiya proprietress Osai (with procurer Genroku) arrives to claim Okaru for Gion. When Yoichibei's corpse is brought home and the striped purse is recognized, Kanpei's mother-in-law Okaya accuses him of murdering the old man. When envoys Fuwa Kazuemon and Senzaki Yagorō arrive and reject Kanpei's blood-stained money, the despairing Kanpei commits seppuku. Inspecting Yoichibei's corpse, Yagorō discovers the old man died from a sword wound—not a musket ball—proving Kanpei actually slew his father-in-law's killer. Before dying, Kanpei is permitted to seal the vendetta oath-scroll (renpanjō) with his own blood."
           },
           {
             title: "Act VII: Ichiriki Teahouse in Gion (七段目：祇園一力茶屋の場)",
-            text: "At the bustling Ichiriki Teahouse in Kyoto, Yuranosuke feigns drunken debauchery—playing blindman's buff and eating octopus on the anniversary of his lord's death—to deceive Moronao's spies (Ono Kudayū) and his young ally Heiemon (Okaru's brother). While reading a secret scroll from Lady Kaoyo on the veranda, Yuranosuke's trailing letter is read by Okaru from the upper balcony using a hand mirror and by Kudayū hiding beneath the floorboards. Discovering both, Yuranosuke offers to redeem Okaru's contract and tests Heiemon's loyalty before having Kudayū dragged into the muddy pond."
+            text: "At the bustling Ichiriki Teahouse in Kyoto, Yuranosuke feigns drunken debauchery—playing blindman's buff and eating octopus on the anniversary of his lord's death—to deceive Moronō's spies (Ono Kudayū) and his young ally Heiemon (Okaru's brother). While reading a secret scroll from Lady Kaoyo on the veranda, Yuranosuke's trailing letter is read by Okaru from the upper balcony using a hand mirror and by Kudayū hiding beneath the floorboards. Discovering both, Yuranosuke offers to redeem Okaru's contract and tests Heiemon's loyalty before having Kudayū dragged into the muddy pond."
           },
           {
             title: "Act XI: The Night Raid, Charcoal Shed & Triumphal Retreat (十一段目：高家表門討入り・奥庭泉水・炭部屋・引揚げの場)",
-            text: "Under heavy winter snow, the forty-seven rōnin in black zig-zag coats scale the walls of Moronao's mansion to the beat of the Yamaga drum. Following fierce sword duels across the snow-covered arched bridge over the garden pond, the retainers discover Moronao cowering inside the charcoal shed. When Moronao tries a treacherous slash, they strike him down with Enya Hangan's own blood-stained dirk and march across Ryōgoku Bridge at dawn toward Sengakuji Temple."
+            text: "Under heavy winter snow, the forty-seven rōnin in black zig-zag coats scale the walls of Moronō's mansion to the beat of the Yamaga drum. Following fierce sword duels across the snow-covered arched bridge over the garden pond, the retainers discover Moronō cowering inside the charcoal shed. When Moronō tries a treacherous slash, they strike him down with Enya Hangan's own blood-stained dirk and march across Ryōgoku Bridge at dawn toward Kōmyōji Temple (光明寺; corresponding to Sengakuji in the historical Akō incident)."
           }
         ]
       }
@@ -249,13 +279,32 @@ window.PERFORMANCES = [
             playwright: "竹田出雲・三好松洛・並木千柳 (Takeda Izumo II, Miyoshi Shōraku & Namiki Senryū)",
             premiere: "1748 (Kan'en 1) · Takemoto-za / Kabuki adaptation 1748",
             playType: "時代物 (Jidaimono — Historical Chronicle / Ceremonial Opening)",
-            synopsis: "At Tsurugaoka Hachiman Shrine in Kamakura, Shogun's brother Ashikaga Tadayoshi presides over the inspection of forty-seven helmets captured from the fallen general Nitta Yoshisada. Enya Hangan's wife, Lady Kaoyo, identifies the true sacred helmet by its lingering 'Ten-Pellet' Ranjatai incense. Afterwards, the corrupt Governor Kō no Moronao forces an illicit love poem upon Kaoyo; Momonoi Wakasanosuke intervenes to rescue her, igniting Moronao's venomous grudge against both young lords.",
-            highlights: "Watch the ceremonial 'Daijo' opening: the curtain parts to 47 slow clapper beats while the actors sit motionless with bowed heads like lifeless puppets, awakening only when the Gidayū chanter calls each character's name.",
+            time: "11:00–11:48",
+            intervalAfter: "5 min",
+            textCoverage: "highlights",
+            synopsis: "At Tsurugaoka Hachiman Shrine in Kamakura, Shogun's brother Ashikaga Tadayoshi presides over the inspection of forty-seven helmets captured from the fallen general Nitta Yoshisada. Enya Hangan's wife, Lady Kaoyo, identifies the true sacred helmet by its lingering 'Ten-Pellet' Ranjatai incense. Afterwards, the corrupt Governor Kō no Moronō forces an illicit love poem upon Kaoyo; Momonoi Wakasanosuke intervenes to rescue her, igniting Moronō's venomous grudge against both young lords.",
+            highlights: "Watch the ceremonial 'Daijo' opening: the curtain parts to 47 slow clapper beats while the actors sit motionless with bowed heads like lifeless puppets, awakening only when the Gidayū chanter calls each character's name. (The kōjō ningyō announces the cast around 10:50 before the curtain.)",
+            actors: {
+              A: [
+                { role: "Kō no Moronō", roleJp: "高師直", actor: "Nakamura Ganjirō", actorJp: "中村鴈治郎" },
+                { role: "Enya Hangan", roleJp: "塩冶判官", actor: "Onoe Ukon", actorJp: "尾上右近" },
+                { role: "Momonoi Wakasanosuke", roleJp: "桃井若狭之助", actor: "Nakamura Shidō", actorJp: "中村獅童" },
+                { role: "Ashikaga Tadayoshi", roleJp: "足利直義", actor: "Nakamura Yonekichi", actorJp: "中村米吉" },
+                { role: "Lady Kaoyo", roleJp: "顔世御前", actor: "Nakamura Senjaku", actorJp: "中村扇雀" }
+              ],
+              B: [
+                { role: "Kō no Moronō", roleJp: "高師直", actor: "Bandō Yajūrō", actorJp: "坂東彌十郎" },
+                { role: "Enya Hangan", roleJp: "塩冶判官", actor: "Nakamura Shichinosuke", actorJp: "中村七之助" },
+                { role: "Momonoi Wakasanosuke", roleJp: "桃井若狭之助", actor: "Nakamura Kashō", actorJp: "中村歌昇" },
+                { role: "Ashikaga Tadayoshi", roleJp: "足利直義", actor: "Nakamura Yonekichi", actorJp: "中村米吉" },
+                { role: "Lady Kaoyo", roleJp: "顔世御前", actor: "Nakamura Manju", actorJp: "中村萬壽" }
+              ]
+            },
             cast: [
-              { nameJp: "高師直", nameEn: "Kō no Moronao", role: "Corrupt Chief Councilor of Kamakura (historical Kira Yoshinaka)", headOrStyle: "Katakiyaku (敵役 — Grand Villain)" },
+              { nameJp: "高師直", nameEn: "Kō no Moronō", role: "Corrupt Chief Councilor of Kamakura (historical Kira Yoshinaka)", headOrStyle: "Katakiyaku (敵役 — Grand Villain)" },
               { nameJp: "塩冶判官", nameEn: "Enya Hangan Takasada", role: "Feudal Lord of Hōki Province (historical Asano Naganori)", headOrStyle: "Wagoto-Tachiyaku (和事味立役 — Noble Young Lord)" },
               { nameJp: "顔世御前", nameEn: "Lady Kaoyo", role: "Virtuous wife of Enya Hangan & former Imperial court lady", headOrStyle: "Tate-Oyama (立女方 — Noble Matron)" },
-              { nameJp: "桃井若狭助", nameEn: "Momonoi Wakasanosuke", role: "Hot-blooded young lord who defends Kaoyo from Moronao", headOrStyle: "Aragoto-Tachiyaku (荒事味立役)" },
+              { nameJp: "桃井若狭之助", nameEn: "Momonoi Wakasanosuke", role: "Hot-blooded young lord who defends Kaoyo from Moronō", headOrStyle: "Aragoto-Tachiyaku (荒事味立役)" },
               { nameJp: "足利直義", nameEn: "Ashikaga Tadayoshi", role: "Younger brother and deputy to the Shogun Ashikaga Takauji", headOrStyle: "Kuge-aku / Noble Arbiter" }
             ]
           },
@@ -265,12 +314,31 @@ window.PERFORMANCES = [
             playwright: "竹田出雲・三好松洛・並木千柳 (Takeda Izumo II, Miyoshi Shōraku & Namiki Senryū)",
             premiere: "1748 (Kan'en 1)",
             playType: "時代物 (Jidaimono — Palace Intrigue & Tragedy)",
-            synopsis: "At dawn outside Ashikaga Palace, Wakasanosuke's chief retainer Kakogawa Honzō secretly bribes Moronao with gold and silk, neutralizing Moronao's plan to humiliate Wakasanosuke. When Enya Hangan arrives later without bribes and delivers a blunt refusal poem from Lady Kaoyo, Moronao unleashes cruel public insults upon him in the Pine Corridor until Hangan loses control and slashes Moronao across the forehead, only to be held back from a fatal strike by Honzō.",
-            highlights: "Notice the psychological pressure cooker in the Pine Corridor: Enya Hangan endures Moronao's relentless taunts ('like a carp in a tiny well') with trembling restraint until the climactic drawing of the short sword (chiisagatana).",
+            time: "11:53–12:36",
+            intervalAfter: "35 min",
+            textCoverage: "highlights",
+            synopsis: "At dawn outside Ashikaga Palace, Wakasanosuke's chief retainer Kakogawa Honzō secretly bribes Moronō with gold and silk, neutralizing Moronō's plan to humiliate Wakasanosuke. When Enya Hangan arrives later without bribes and delivers a blunt refusal poem from Lady Kaoyo, Moronō unleashes cruel public insults upon him in the Pine Corridor until Hangan loses control and slashes Moronō across the forehead, only to be held back from a fatal strike by Honzō.",
+            highlights: "Notice the psychological pressure cooker in the Pine Corridor: Enya Hangan endures Moronō's relentless taunts ('like a carp in a tiny well') with trembling restraint until the climactic drawing of the short sword (chiisagatana).",
+            actors: {
+              A: [
+                { role: "Kō no Moronō", roleJp: "高師直", actor: "Nakamura Ganjirō", actorJp: "中村鴈治郎" },
+                { role: "Enya Hangan", roleJp: "塩冶判官", actor: "Onoe Ukon", actorJp: "尾上右近" },
+                { role: "Momonoi Wakasanosuke", roleJp: "桃井若狭之助", actor: "Nakamura Shidō", actorJp: "中村獅童" },
+                { role: "Ashikaga Tadayoshi", roleJp: "足利直義", actor: "Nakamura Yonekichi", actorJp: "中村米吉" },
+                { role: "Lady Kaoyo", roleJp: "顔世御前", actor: "Nakamura Senjaku", actorJp: "中村扇雀" }
+              ],
+              B: [
+                { role: "Kō no Moronō", roleJp: "高師直", actor: "Bandō Yajūrō", actorJp: "坂東彌十郎" },
+                { role: "Enya Hangan", roleJp: "塩冶判官", actor: "Nakamura Shichinosuke", actorJp: "中村七之助" },
+                { role: "Momonoi Wakasanosuke", roleJp: "桃井若狭之助", actor: "Nakamura Kashō", actorJp: "中村歌昇" },
+                { role: "Ashikaga Tadayoshi", roleJp: "足利直義", actor: "Nakamura Yonekichi", actorJp: "中村米吉" },
+                { role: "Lady Kaoyo", roleJp: "顔世御前", actor: "Nakamura Manju", actorJp: "中村萬壽" }
+              ]
+            },
             cast: [
               { nameJp: "塩冶判官", nameEn: "Enya Hangan", role: "Driven to draw his blade inside the shogun's palace out of wounded honor", headOrStyle: "Tachiyaku (立役 — Tragic Lord)" },
-              { nameJp: "高師直", nameEn: "Kō no Moronao", role: "Flatters Wakasanosuke after receiving bribes, then mercilessly bullies Hangan", headOrStyle: "Jitsubō / Katakiyaku (敵役)" },
-              { nameJp: "加古川本蔵", nameEn: "Kakogawa Honzō", role: "Chief retainer of Wakasanosuke who bribes Moronao and restrains Hangan", headOrStyle: "Fukeoyama-gata / Senior Retainer (老け役)" },
+              { nameJp: "高師直", nameEn: "Kō no Moronō", role: "Flatters Wakasanosuke after receiving bribes, then mercilessly bullies Hangan", headOrStyle: "Jitsubō / Katakiyaku (敵役)" },
+              { nameJp: "加古川本蔵", nameEn: "Kakogawa Honzō", role: "Chief retainer of Wakasanosuke who bribes Moronō and restrains Hangan", headOrStyle: "Fukeoyama-gata / Senior Retainer (老け役)" },
               { nameJp: "早野勘平", nameEn: "Hayano Kanpei", role: "Hangan's young attendant who leaves his post for a tryst with Okaru", headOrStyle: "Nimaime (二枚目 — Young Lover)" },
               { nameJp: "腰元お軽", nameEn: "Okaru", role: "Lady Kaoyo's lady-in-waiting and Kanpei's devoted sweetheart", headOrStyle: "Waka-Onnagata (若女方)" }
             ]
@@ -281,10 +349,33 @@ window.PERFORMANCES = [
             playwright: "竹田出雲・三好松洛・並木千柳 (Takeda Izumo II, Miyoshi Shōraku & Namiki Senryū)",
             premiere: "1748 (Kan'en 1)",
             playType: "時代物 (Jidaimono — High Ritual Tragedy)",
+            time: "13:11–14:43",
+            intervalAfter: "20 min",
+            textCoverage: "highlights",
             synopsis: "Confined to his Ōgigayatsu mansion, Enya Hangan receives the shogunate's sentence of seppuku and confiscation of his domain from envoys Ishidō and Yakushiji. Wearing pure white death robes beneath his formal kamishimo, Hangan delays the fatal cut as long as possible hoping to see his chief retainer Ōboshi Yuranosuke. Yuranosuke arrives at the final breath; Hangan entrusts him with the blood-stained dagger and his unspoken desire for vengeance before dying. At the outer gate, Yuranosuke surrenders the mansion and pledges the retainers to patience.",
-            highlights: "Historically treated as a sacred act in Kabuki (historically doors were locked during Act IV). Watch Hangan slowly fold back the corners of his ceremonial mat, Yuranosuke's breathless entrance down the Hanamichi, and Yuranosuke's famous 'Three Backward Glances' (三度見返り) as he leaves the castle forever.",
+            highlights: "Act IV is a 通さん場 (tōsanba): latecomers are held outside once the act begins at 13:11. Watch Hangan slowly fold back the corners of his ceremonial mat, Yuranosuke's breathless entrance down the Hanamichi, and Yuranosuke's famous 'Three Backward Glances' (三度見返り) as he leaves the castle forever.",
+            actors: {
+              A: [
+                { role: "Ōboshi Yuranosuke", roleJp: "大星由良之助", actor: "Matsumoto Kōshirō", actorJp: "松本幸四郎" },
+                { role: "Enya Hangan", roleJp: "塩冶判官", actor: "Onoe Ukon", actorJp: "尾上右近" },
+                { role: "Ōboshi Rikiya", roleJp: "大星力弥", actor: "Ichikawa Somegorō", actorJp: "市川染五郎" },
+                { role: "Yakushiji Jirōzaemon", roleJp: "薬師寺次郎左衛門", actor: "Ichikawa Omezō", actorJp: "市川男女蔵" },
+                { role: "Hara Gōemon", roleJp: "原郷右衛門", actor: "Ichikawa Komazō", actorJp: "市川高麗蔵" },
+                { role: "Lady Kaoyo", roleJp: "顔世御前", actor: "Nakamura Senjaku", actorJp: "中村扇雀" },
+                { role: "Ishidō Umanojō", roleJp: "石堂右馬丞", actor: "Nakamura Karoku", actorJp: "中村歌六" }
+              ],
+              B: [
+                { role: "Ōboshi Yuranosuke", roleJp: "大星由良之助", actor: "Matsumoto Kōshirō", actorJp: "松本幸四郎" },
+                { role: "Enya Hangan", roleJp: "塩冶判官", actor: "Nakamura Shichinosuke", actorJp: "中村七之助" },
+                { role: "Ōboshi Rikiya", roleJp: "大星力弥", actor: "Onoe Tatsunosuke", actorJp: "尾上辰之助" },
+                { role: "Yakushiji Jirōzaemon", roleJp: "薬師寺次郎左衛門", actor: "Ichikawa Omezō", actorJp: "市川男女蔵" },
+                { role: "Hara Gōemon", roleJp: "原郷右衛門", actor: "Ichikawa Komazō", actorJp: "市川高麗蔵" },
+                { role: "Lady Kaoyo", roleJp: "顔世御前", actor: "Nakamura Manju", actorJp: "中村萬壽" },
+                { role: "Ishidō Umanojō", roleJp: "石堂右馬丞", actor: "Nakamura Shikan", actorJp: "中村芝翫" }
+              ]
+            },
             cast: [
-              { nameJp: "大星由良助", nameEn: "Ōboshi Yuranosuke", role: "Chief retainer of the Enya house (historical Ōishi Kuranosuke)", headOrStyle: "Tachiyaku / Zagashira (座頭 — Grand Leader)" },
+              { nameJp: "大星由良之助", nameEn: "Ōboshi Yuranosuke", role: "Chief retainer of the Enya house (historical Ōishi Kuranosuke)", headOrStyle: "Tachiyaku / Zagashira (座頭 — Grand Leader)" },
               { nameJp: "塩冶判官", nameEn: "Enya Hangan", role: "Performs ritual disembowelment in white death robes", headOrStyle: "Tachiyaku (立役)" },
               { nameJp: "石堂右馬丞", nameEn: "Ishidō Umanojō", role: "Compassionate shogunal envoy who respects Hangan's samurai dignity", headOrStyle: "Sabaki-yaku (捌き役)" },
               { nameJp: "斧九太夫", nameEn: "Ono Kudayū", role: "Greedy elder retainer who cares only for his stipend", headOrStyle: "Katakiyaku (敵役)" },
@@ -297,12 +388,27 @@ window.PERFORMANCES = [
             playwright: "三升屋二三治 (Mimasuya Nisōji — Kiyomoto Dance Text)",
             premiere: "1833 (Tenpō 4) · Kiyomoto Dance Adaptation",
             playType: "所作事・道行 (Shosagoto — Lyric Kiyomoto Dance Interlude)",
-            synopsis: "Unable to return to the mansion after missing his lord's fateful hour, Hayano Kanpei contemplates suicide on the road from Kamakura, but Okaru persuades him to flee first to her parents' country home in Yamazaki. Beneath billowing cherry blossoms, the lovers recall their courtship and fend off Moronao's comical henchman Sagisaka Bannai and his foot soldiers.",
+            time: "15:03–15:42",
+            intervalAfter: null,
+            textCoverage: "highlights",
+            synopsis: "Unable to return to the mansion after missing his lord's fateful hour, Hayano Kanpei contemplates suicide on the road from Kamakura, but Okaru persuades him to flee first to her parents' country home in Yamazaki. Beneath billowing cherry blossoms, the lovers recall their courtship and fend off Moronō's comical henchman Sagisaka Bannai and his foot soldiers.",
             highlights: "A shimmering visual and musical contrast to the austere tragedy of Act IV. Enjoy the high-register, plaintive Kiyomoto shamisen and vocal style (清元節) and the stylized 'tate' (sword-dance choreography) against Bannai's troupe.",
+            actors: {
+              A: [
+                { role: "Hayano Kanpei", roleJp: "早野勘平", actor: "Nakamura Kinnosuke", actorJp: "中村錦之助" },
+                { role: "Sagisaka Bannai", roleJp: "鷺坂伴内", actor: "Nakamura Toranosuke", actorJp: "中村虎之介" },
+                { role: "Okaru", roleJp: "腰元お軽", actor: "Onoe Kikugorō VIII", actorJp: "八代目尾上菊五郎" }
+              ],
+              B: [
+                { role: "Hayano Kanpei", roleJp: "早野勘平", actor: "Ichikawa Somegorō", actorJp: "市川染五郎" },
+                { role: "Sagisaka Bannai", roleJp: "鷺坂伴内", actor: "Nakamura Tanenosuke", actorJp: "中村種之助" },
+                { role: "Okaru", roleJp: "腰元お軽", actor: "Nakamura Tokizō", actorJp: "中村時蔵" }
+              ]
+            },
             cast: [
               { nameJp: "早野勘平", nameEn: "Hayano Kanpei", role: "Disgraced young retainer traveling in a black silk haori with Okaru", headOrStyle: "Wagoto / Shosagoto (和事・所作)" },
               { nameJp: "腰元お軽", nameEn: "Okaru", role: "Court maid whose devotion sustains Kanpei on their flight", headOrStyle: "Onnagata Dance Role (女方舞踊)" },
-              { nameJp: "鷺坂伴内", nameEn: "Sagisaka Bannai", role: "Moronao's boastful, comical retainer who tries to abduct Okaru", headOrStyle: "Sanmaime / Dōkegata (三枚目・道化方)" }
+              { nameJp: "鷺坂伴内", nameEn: "Sagisaka Bannai", role: "Moronō's boastful, comical retainer who tries to abduct Okaru", headOrStyle: "Sanmaime / Dōkegata (三枚目・道化方)" }
             ]
           }
         ]
@@ -318,8 +424,33 @@ window.PERFORMANCES = [
             playwright: "竹田出雲・三好松洛・並木千柳 (Takeda Izumo II, Miyoshi Shōraku & Namiki Senryū)",
             premiere: "1748 (Kan'en 1)",
             playType: "世話物 (Sewamono — Rainy Night Highway Melodrama)",
-            synopsis: "Living as a hunter near Yamazaki, Kanpei shelters from a torrential downpour with fellow retainer Senzaki Yagorō and pledges to contribute fifty ryō toward the league's fund. Moments later on the dark highway, the murderous rōnin Ono Sadakurō slays Okaru's old father Yoichibei and steals his striped purse containing fifty ryō—the advance payment from selling Okaru to a Gion brothel. Firing his musket at a wild boar in the dark, Kanpei accidentally shoots Sadakurō dead and takes the purse from the corpse, believing he has killed a traveler.",
+            time: "16:30–18:13 (Acts V–VI combined)",
+            intervalAfter: "30 min (after Act VI)",
+            textCoverage: "highlights",
+            synopsis: "Living as a hunter near Yamazaki, Kanpei shelters from a torrential downpour with fellow retainer Senzaki Yagorō and pledges to contribute fifty ryō toward the league's fund. Moments later on the dark highway, the murderous rōnin Ono Sadakurō slays Okaru's old father Yoichibei and steals his striped purse containing fifty ryō—the advance payment from selling Okaru to a Gion teahouse. Firing his musket at a wild boar in the dark, Kanpei accidentally shoots Sadakurō dead and takes the purse from the corpse, believing he has killed a traveler.",
             highlights: "Look for the iconic graphic silhouette of Ono Sadakurō: dressed in a torn black kimono with bare white limbs, squeezing rainwater from his hem, holding a broken oiled-paper umbrella, and clenching the stolen purse in his teeth in a striking mie pose.",
+            actors: {
+              A: [
+                { role: "Hayano Kanpei", roleJp: "早野勘平", actor: "Nakamura Hayato", actorJp: "中村隼人" },
+                { role: "Okaru", roleJp: "女房お軽", actor: "Onoe Kikugorō VIII", actorJp: "八代目尾上菊五郎" },
+                { role: "Ono Sadakurō", roleJp: "斧定九郎", actor: "Onoe Shōroku", actorJp: "尾上松緑" },
+                { role: "Senzaki Yagorō", roleJp: "千崎弥五郎", actor: "Nakamura Hashinosuke", actorJp: "中村橋之助" },
+                { role: "Genroku", roleJp: "源六", actor: "Bandō Kamezō", actorJp: "坂東亀蔵" },
+                { role: "Mother Okaya", roleJp: "母おかや", actor: "Ichikawa Saiyū", actorJp: "市川齊入" },
+                { role: "Osai", roleJp: "お才", actor: "Nakamura Tokizō", actorJp: "中村時蔵" },
+                { role: "Fuwa Kazuemon", roleJp: "不破数右衛門", actor: "Nakamura Matagorō", actorJp: "中村又五郎" }
+              ],
+              B: [
+                { role: "Hayano Kanpei", roleJp: "早野勘平", actor: "Nakamura Hayato", actorJp: "中村隼人" },
+                { role: "Okaru", roleJp: "女房お軽", actor: "Onoe Ukon", actorJp: "尾上右近" },
+                { role: "Ono Sadakurō", roleJp: "斧定九郎", actor: "Nakamura Shidō", actorJp: "中村獅童" },
+                { role: "Senzaki Yagorō", roleJp: "千崎弥五郎", actor: "Nakamura Hashinosuke", actorJp: "中村橋之助" },
+                { role: "Genroku", roleJp: "源六", actor: "Bandō Kamezō", actorJp: "坂東亀蔵" },
+                { role: "Mother Okaya", roleJp: "母おかや", actor: "Ichikawa Saiyū", actorJp: "市川齊入" },
+                { role: "Osai", roleJp: "お才", actor: "Nakamura Jakuemon", actorJp: "中村雀右衛門" },
+                { role: "Fuwa Kazuemon", roleJp: "不破数右衛門", actor: "Nakamura Matagorō", actorJp: "中村又五郎" }
+              ]
+            },
             cast: [
               { nameJp: "早野勘平", nameEn: "Hayano Kanpei", role: "Hunter desperately seeking funds to rejoin the loyal retainers' league", headOrStyle: "Tachiyaku / Wagoto (立役)" },
               { nameJp: "斧定九郎", nameEn: "Ono Sadakurō", role: "Wicked son of Ono Kudayū turned highway robber", headOrStyle: "Iroaku (色悪 — Stylish Villain)" },
@@ -333,13 +464,39 @@ window.PERFORMANCES = [
             playwright: "竹田出雲・三好松洛・並木千柳 (Takeda Izumo II, Miyoshi Shōraku & Namiki Senryū)",
             premiere: "1748 (Kan'en 1)",
             playType: "世話物 (Sewamono — Domestic Tragedy)",
-            synopsis: "The next morning at Yoichibei's cottage, Okaru bids a tearful farewell as the Ichimonjiya brothel master takes her away to Gion. Soon hunters carry in Yoichibei's murdered body, and Kanpei's mother-in-law Kaya discovers the blood-stained striped purse in Kanpei's coat, accusing him of murdering her husband. When Enya retainers Hara Gōemon and Senzaki Yagorō arrive and denounce Kanpei for offering tainted money, the grief-stricken Kanpei plunges his sword into his belly. Examining Yoichibei's wound, Yagorō realizes it was made by a blade, not a musket—proving Kanpei actually avenged his father-in-law by shooting Sadakurō.",
+            time: "16:30–18:13 (Acts V–VI combined)",
+            intervalAfter: "30 min",
+            textCoverage: "highlights",
+            synopsis: "The next morning at Yoichibei's cottage, Okaru bids a tearful farewell as the Ichimonjiya proprietress Osai (with procurer Genroku) arrives to take her away to Gion. Soon hunters carry in Yoichibei's murdered body, and Kanpei's mother-in-law Okaya discovers the blood-stained striped purse in Kanpei's coat, accusing him of murdering her husband. When Enya retainers Fuwa Kazuemon and Senzaki Yagorō arrive and denounce Kanpei for offering tainted money, the grief-stricken Kanpei plunges his sword into his belly. Examining Yoichibei's wound, Yagorō realizes it was made by a blade, not a musket—proving Kanpei actually avenged his father-in-law by shooting Sadakurō.",
             highlights: "One of the supreme tragic acting showcases in Kabuki. Watch the agonizing irony as Kanpei realizes the striped purse he took in the dark belonged to his father-in-law, and his final redemption as he presses his bloodied handprint onto the vendetta oath-scroll.",
+            actors: {
+              A: [
+                { role: "Hayano Kanpei", roleJp: "早野勘平", actor: "Nakamura Hayato", actorJp: "中村隼人" },
+                { role: "Okaru", roleJp: "女房お軽", actor: "Onoe Kikugorō VIII", actorJp: "八代目尾上菊五郎" },
+                { role: "Ono Sadakurō", roleJp: "斧定九郎", actor: "Onoe Shōroku", actorJp: "尾上松緑" },
+                { role: "Senzaki Yagorō", roleJp: "千崎弥五郎", actor: "Nakamura Hashinosuke", actorJp: "中村橋之助" },
+                { role: "Genroku", roleJp: "源六", actor: "Bandō Kamezō", actorJp: "坂東亀蔵" },
+                { role: "Mother Okaya", roleJp: "母おかや", actor: "Ichikawa Saiyū", actorJp: "市川齊入" },
+                { role: "Osai", roleJp: "お才", actor: "Nakamura Tokizō", actorJp: "中村時蔵" },
+                { role: "Fuwa Kazuemon", roleJp: "不破数右衛門", actor: "Nakamura Matagorō", actorJp: "中村又五郎" }
+              ],
+              B: [
+                { role: "Hayano Kanpei", roleJp: "早野勘平", actor: "Nakamura Hayato", actorJp: "中村隼人" },
+                { role: "Okaru", roleJp: "女房お軽", actor: "Onoe Ukon", actorJp: "尾上右近" },
+                { role: "Ono Sadakurō", roleJp: "斧定九郎", actor: "Nakamura Shidō", actorJp: "中村獅童" },
+                { role: "Senzaki Yagorō", roleJp: "千崎弥五郎", actor: "Nakamura Hashinosuke", actorJp: "中村橋之助" },
+                { role: "Genroku", roleJp: "源六", actor: "Bandō Kamezō", actorJp: "坂東亀蔵" },
+                { role: "Mother Okaya", roleJp: "母おかや", actor: "Ichikawa Saiyū", actorJp: "市川齊入" },
+                { role: "Osai", roleJp: "お才", actor: "Nakamura Jakuemon", actorJp: "中村雀右衛門" },
+                { role: "Fuwa Kazuemon", roleJp: "不破数右衛門", actor: "Nakamura Matagorō", actorJp: "中村又五郎" }
+              ]
+            },
             cast: [
               { nameJp: "早野勘平", nameEn: "Hayano Kanpei", role: "Commits seppuku under false suspicion, then is redeemed before death", headOrStyle: "Tachiyaku / Tragic Hero (立役)" },
               { nameJp: "女房お軽", nameEn: "Okaru", role: "Sells herself into the Gion pleasure quarter for her husband's sake", headOrStyle: "Onnagata (女方)" },
               { nameJp: "母おかや", nameEn: "Mother Okaya", role: "Okaru's mother who grief-strickenly accuses Kanpei of murdering Yoichibei", headOrStyle: "Fukeoyama (老女方)" },
-              { nameJp: "原郷右衛門", nameEn: "Hara Gōemon", role: "Senior Enya retainer who brings the vendetta scroll so Kanpei can sign in blood", headOrStyle: "Jitsugoto (実事)" },
+              { nameJp: "お才 / 源六", nameEn: "Osai & Genroku", role: "Ichimonjiya teahouse proprietress Osai and procurer Genroku who come to collect Okaru", headOrStyle: "Kasha-gata / Sanmaime" },
+              { nameJp: "不破数右衛門", nameEn: "Fuwa Kazuemon", role: "Senior Enya retainer who arrives with Yagorō and brings the vendetta scroll so Kanpei can sign in blood", headOrStyle: "Jitsugoto (実事)" },
               { nameJp: "千崎弥五郎", nameEn: "Senzaki Yagorō", role: "Inspects Yoichibei's corpse and clears Kanpei's name", headOrStyle: "Tachiyaku (立役)" }
             ]
           },
@@ -349,13 +506,30 @@ window.PERFORMANCES = [
             playwright: "竹田出雲・三好松洛・並木千柳 (Takeda Izumo II, Miyoshi Shōraku & Namiki Senryū)",
             premiere: "1748 (Kan'en 1)",
             playType: "時代世話 (Jidai-Sewa — Pleasure Quarter Intrigue)",
-            synopsis: "At the glamorous Ichiriki Teahouse in Kyoto's Gion district, Ōboshi Yuranosuke masquerades as a dissipated prodigal to throw Moronao's spies off the scent. Tested by the traitorous Ono Kudayū—who offers him forbidden octopus on the anniversary of Hangan's death—Yuranosuke feigns drunken oblivion. Later, while reading a secret scroll along the veranda, he discovers Okaru reading it from the upstairs balcony with a hand mirror and Kudayū reading the torn paper beneath the floorboards. Yuranosuke learns from Okaru's brother Teraoka Heiemon of Kanpei's tragic death, prevents Heiemon from killing Okaru, and guides Okaru's hand to stab the spying Kudayū through the tatami.",
+            time: "18:43–20:29",
+            intervalAfter: "15 min",
+            textCoverage: "highlights",
+            synopsis: "At the glamorous Ichiriki Teahouse in Kyoto's Gion district, Ōboshi Yuranosuke masquerades as a dissipated prodigal to throw Moronō's spies off the scent. Tested by the traitorous Ono Kudayū—who offers him forbidden octopus on the anniversary of Hangan's death—Yuranosuke feigns drunken oblivion. Later, while reading a secret scroll along the veranda, he discovers Okaru reading it from the upstairs balcony with a hand mirror and Kudayū reading the torn paper beneath the floorboards. Yuranosuke learns from Okaru's brother Teraoka Heiemon of Kanpei's tragic death, prevents Heiemon from killing Okaru, and guides Okaru's hand to stab the spying Kudayū through the tatami.",
             highlights: "Notice the dazzling visual interplay across three vertical levels: Okaru high on the red-railed balcony holding her hand mirror, Yuranosuke at center unrolling the yards-long letter scroll, and the villain Kudayū lurking beneath the veranda steps.",
+            actors: {
+              A: [
+                { role: "Ōboshi Yuranosuke", roleJp: "大星由良之助", actor: "Matsumoto Kōshirō", actorJp: "松本幸四郎" },
+                { role: "Teraoka Heiemon", roleJp: "寺岡平右衛門", actor: "Nakamura Mantarō", actorJp: "中村萬太郎" },
+                { role: "Ōboshi Rikiya", roleJp: "大星力弥", actor: "Ichikawa Somegorō", actorJp: "市川染五郎" },
+                { role: "Okaru", roleJp: "遊女お軽", actor: "Onoe Kikugorō VIII", actorJp: "八代目尾上菊五郎" }
+              ],
+              B: [
+                { role: "Ōboshi Yuranosuke", roleJp: "大星由良之助", actor: "Matsumoto Kōshirō", actorJp: "松本幸四郎" },
+                { role: "Teraoka Heiemon", roleJp: "寺岡平右衛門", actor: "Onoe Shōroku", actorJp: "尾上松緑" },
+                { role: "Ōboshi Rikiya", roleJp: "大星力弥", actor: "Nakamura Toranosuke", actorJp: "中村虎之介" },
+                { role: "Okaru", roleJp: "遊女お軽", actor: "Onoe Ukon", actorJp: "尾上右近" }
+              ]
+            },
             cast: [
-              { nameJp: "大星由良助", nameEn: "Ōboshi Yuranosuke", role: "Masks his iron resolve behind drunken revelry at the Ichiriki Teahouse", headOrStyle: "Shinbō-Tachiyaku / Zagashira (座頭)" },
+              { nameJp: "大星由良之助", nameEn: "Ōboshi Yuranosuke", role: "Masks his iron resolve behind drunken revelry at the Ichiriki Teahouse", headOrStyle: "Shinbō-Tachiyaku / Zagashira (座頭)" },
               { nameJp: "遊女お軽", nameEn: "Okaru", role: "Now a Gion courtesan; unaware that her father and husband Kanpei are dead", headOrStyle: "Keisei / Onnagata (傾城・女方)" },
               { nameJp: "寺岡平右衛門", nameEn: "Teraoka Heiemon", role: "Okaru's loyal brother, a low-ranking foot soldier (ashigaru) begging to join the 47", headOrStyle: "Tachiyaku (立役)" },
-              { nameJp: "斧九太夫", nameEn: "Ono Kudayū", role: "Former Enya elder now spying for Moronao; hides under the veranda", headOrStyle: "Katakiyaku (敵役)" },
+              { nameJp: "斧九太夫", nameEn: "Ono Kudayū", role: "Former Enya elder now spying for Moronō; hides under the veranda", headOrStyle: "Katakiyaku (敵役)" },
               { nameJp: "大星力弥", nameEn: "Ōboshi Rikiya", role: "Arrives at the teahouse gate carrying a secret urgent dispatch from Lady Kaoyo", headOrStyle: "Wakashu-gata (若衆方)" }
             ]
           },
@@ -365,13 +539,37 @@ window.PERFORMANCES = [
             playwright: "竹田出雲・三好松洛・並木千柳 (Takeda Izumo II, Miyoshi Shōraku & Namiki Senryū)",
             premiere: "1748 (Kan'en 1)",
             playType: "時代物 (Jidaimono — Climactic Night Raid & Vendetta)",
-            synopsis: "On a snowy winter night, the forty-seven loyal retainers—dressed in black battle coats with white sawtooth borders—storm Kō no Moronao's fortified mansion to the signal of Yuranosuke's Yamaga war-drum. After intense sword fights across the snow-blanketed garden pond and arched red bridge (tate), the retainers drag the cowering Moronao from the charcoal storage shed. When Moronao feigns contrition to launch a sneak attack, Yuranosuke strikes him down with Enya Hangan's ancestral dagger, fulfilling their vow before marching across Ryōgoku Bridge at daybreak.",
-            highlights: "Spectacular winter stagecraft (雪の立廻り): acrobatic somersaults into the pond, rhythmic bamboo-and-steel sword clashes on the snowy arched bridge, and the solemn dawn procession along the Hanamichi.",
+            time: "20:44–21:11",
+            intervalAfter: null,
+            textCoverage: "highlights",
+            synopsis: "On a snowy winter night, the forty-seven loyal retainers—dressed in black battle coats with white sawtooth borders—storm Kō no Moronō's fortified mansion to the signal of Yuranosuke's Yamaga war-drum. After intense sword fights across the snow-blanketed garden pond and arched red bridge (tate), the retainers drag the cowering Moronō from the charcoal storage shed. When Moronō feigns contrition to launch a sneak attack, Yuranosuke strikes him down with Enya Hangan's ancestral dagger, fulfilling their vow before marching toward Kōmyōji Temple (光明寺; corresponding to Sengakuji in history) at daybreak.",
+            highlights: "Spectacular winter stagecraft (雪の立廻り): acrobatic somersaults into the pond, rhythmic bamboo-and-steel sword clashes on the snowy arched bridge, and the solemn dawn procession past Hattori Itsurō along the Hanamichi toward Kōmyōji.",
+            actors: {
+              A: [
+                { role: "Ōboshi Yuranosuke", roleJp: "大星由良之助", actor: "Matsumoto Kōshirō", actorJp: "松本幸四郎" },
+                { role: "Kobayashi Heihachirō", roleJp: "小林平八郎", actor: "Nakamura Kashō", actorJp: "中村歌昇" },
+                { role: "Takemori Kitahachi", roleJp: "竹森喜多八", actor: "Nakamura Tanenosuke", actorJp: "中村種之助" },
+                { role: "Ōboshi Rikiya", roleJp: "大星力弥", actor: "Ichikawa Somegorō", actorJp: "市川染五郎" },
+                { role: "Hara Gōemon", roleJp: "原郷右衛門", actor: "Kawarasaki Gonjūrō", actorJp: "河原崎権十郎" },
+                { role: "Teraoka Heiemon", roleJp: "寺岡平右衛門", actor: "Nakamura Mantarō", actorJp: "中村萬太郎" },
+                { role: "Hattori Itsurō", roleJp: "服部逸郎", actor: "Nakamura Baigyoku", actorJp: "中村梅玉" }
+              ],
+              B: [
+                { role: "Ōboshi Yuranosuke", roleJp: "大星由良之助", actor: "Matsumoto Kōshirō", actorJp: "松本幸四郎" },
+                { role: "Kobayashi Heihachirō", roleJp: "小林平八郎", actor: "Nakamura Takanosuke", actorJp: "中村鷹之資" },
+                { role: "Takemori Kitahachi", roleJp: "竹森喜多八", actor: "Onoe Tatsunosuke", actorJp: "尾上辰之助" },
+                { role: "Ōboshi Rikiya", roleJp: "大星力弥", actor: "Nakamura Toranosuke", actorJp: "中村虎之介" },
+                { role: "Hara Gōemon", roleJp: "原郷右衛門", actor: "Kawarasaki Gonjūrō", actorJp: "河原崎権十郎" },
+                { role: "Teraoka Heiemon", roleJp: "寺岡平右衛門", actor: "Onoe Shōroku", actorJp: "尾上松緑" },
+                { role: "Hattori Itsurō", roleJp: "服部逸郎", actor: "Nakamura Baigyoku", actorJp: "中村梅玉" }
+              ]
+            },
             cast: [
-              { nameJp: "大星由良助", nameEn: "Ōboshi Yuranosuke", role: "Commands the night raid with the Yamaga drum rhythms and avenges his lord", headOrStyle: "Tachiyaku (立役)" },
-              { nameJp: "高師直", nameEn: "Kō no Moronao", role: "Discovered hiding in the charcoal shed in white silk nightclothes", headOrStyle: "Katakiyaku (敵役)" },
-              { nameJp: "小林平八郎", nameEn: "Kobayashi Heihachirō", role: "Moronao's master swordsman who fights the retainers on the snowy bridge", headOrStyle: "Jitsubō / Tate-shi (立役・立廻り)" },
-              { nameJp: "服部逸郎 / 大鷲文吾", nameEn: "Ōwashi Bungo & Retainers", role: "Fierce Enya warriors who breach the gate and corner Moronao", headOrStyle: "Aragoto / Tachiyaku" }
+              { nameJp: "大星由良之助", nameEn: "Ōboshi Yuranosuke", role: "Commands the night raid with the Yamaga drum rhythms and avenges his lord", headOrStyle: "Tachiyaku (立役)" },
+              { nameJp: "高師直", nameEn: "Kō no Moronō", role: "Discovered hiding in the charcoal shed in white silk nightclothes", headOrStyle: "Katakiyaku (敵役)" },
+              { nameJp: "小林平八郎", nameEn: "Kobayashi Heihachirō", role: "Moronō's master swordsman who fights the retainers on the snowy bridge", headOrStyle: "Jitsubō / Tate-shi (立役・立廻り)" },
+              { nameJp: "服部逸郎", nameEn: "Hattori Itsurō", role: "A lord's retainer who encounters the rōnin during their dawn retreat toward Kōmyōji and lets them pass in admiration", headOrStyle: "Sabaki-yaku / Senior Samurai" },
+              { nameJp: "大鷲文吾", nameEn: "Ōwashi Bungo", role: "Fierce Enya retainer among the 47 warriors who breach the gate and corner Moronō", headOrStyle: "Aragoto / Tachiyaku" }
             ]
           }
         ]
@@ -610,6 +808,7 @@ window.PERFORMANCES = [
             playwright: "容楊黛 (Yō Yōtai)",
             premiere: "1782 (Tenmei 2) · Toyotake-za / Edo Geki-za",
             playType: "時代物・御殿物 (Jidaimono — Palace Women's Vendetta)",
+            textCoverage: "highlights",
             synopsis: "Inside the grand palace quarters, the scheming noblewoman Iwafuji harbors bitter resentment toward the gentle Middle Counselor Lady Onoe, who rose to high rank despite her merchant origins. Having secretly swapped a sacred heirloom incense case with an old straw sandal (zōri), Iwafuji publicly accuses Onoe of treachery and beats her across the forehead with the filthy sandal in front of the assembled court ladies.",
             highlights: "Compare the contrasting puppet heads (kashira): Iwafuji uses the sharp, fierce Yashio head reserved for domineering female villains, while Lady Onoe uses the serene, aristocratic Fukeoyama head, trembling with silent humiliation as she endures the blows.",
             cast: [
@@ -624,6 +823,7 @@ window.PERFORMANCES = [
             playwright: "容楊黛 (Yō Yōtai)",
             premiere: "1782 (Tenmei 2)",
             playType: "時代物 (Jidaimono — Palace Intrigue)",
+            textCoverage: "highlights",
             synopsis: "Along the long wooden corridor connecting the palace reception halls to the ladies' residential quarters, the fiercely loyal maidservant Ohatsu learns of her mistress Onoe's public humiliation and intercepts Iwafuji's mocking attendants, barely restraining her blade out of concern for Onoe's position.",
             highlights: "Notice the brisk, tense shamisen rhythms accompanying Ohatsu's stride along the palace corridor and the sharp contrast between her samurai spirit and her servant status.",
             cast: [
@@ -637,6 +837,7 @@ window.PERFORMANCES = [
             playwright: "容楊黛 (Yō Yōtai)",
             premiere: "1782 (Tenmei 2)",
             playType: "時代物 (Jidaimono — High Domestic Pathos)",
+            textCoverage: "highlights",
             synopsis: "In her private rooms in the Nagatsubone, Lady Onoe is comforted by Ohatsu, who gently dresses her disheveled hair. Secretly resolved to clear her merchant family's honor through death, Onoe sends Ohatsu away on an errand with a keepsake box containing the soiled sandal. Sensing an eerie chill and the ominous howling of dogs along the darkened corridor, Ohatsu rushes back to discover Onoe dying behind a folding screen.",
             highlights: "Watch the delicate hair-combing sequence (髪梳き) where Ohatsu's puppet fingers tenderly tend to Onoe's hair, followed by Ohatsu's spine-tingling return with a paper lantern as the shamisen plays eerie night tones.",
             cast: [
@@ -650,6 +851,7 @@ window.PERFORMANCES = [
             playwright: "容楊黛 (Yō Yōtai)",
             premiere: "1782 (Tenmei 2)",
             playType: "時代物 (Jidaimono — Climactic Vengeance)",
+            textCoverage: "highlights",
             synopsis: "Summoning Iwafuji to the inner garden under the pretense that Onoe wishes to apologize, Ohatsu confronts the arrogant court lady. Drawing forth the blood-stained straw sandal from Onoe's keepsake box, Ohatsu strikes Iwafuji across the face in retribution and cuts her down in a fierce duel, earning the lord's praise and succession to the name of Second Onoe.",
             highlights: "A rare, thrilling female-vs-female sword duel in Bunraku! Watch Ohatsu's dynamic footwork (ashi-zukai) as she turns the tables on Iwafuji with the straw sandal.",
             cast: [
@@ -670,6 +872,7 @@ window.PERFORMANCES = [
             playwright: "竹田出雲・三好松洛・並木千柳 (Takeda Izumo II, Miyoshi Shōraku & Namiki Senryū)",
             premiere: "1747 (Enkyō 4) · Takemoto-za, Osaka",
             playType: "時代世話 (Jidai-Sewa — Roadside Comedy & Intrigue)",
+            textCoverage: "highlights",
             synopsis: "Beneath a great pasania tree at a roadside teahouse in Shimoichi Village, the charming scoundrel Igami no Gonta arrives with his long-suffering wife Kozue and young son Zentarō. When the noble Heike fugitive Wakaba no Naishi, her son Rokudai, and retainer Kogingo stop to rest, Gonta slyly swaps his own luggage basket with Kogingo's and later uses the mix-up as an excuse to extort twenty ryō from his mother.",
             highlights: "Notice Gonta's swaggering, rakish charm: he is operated with the Danshichi or Genda head and wears his kimono tucked up in the 'amikake' style, balancing streetwise comedy with underlying warmth toward his wife and child.",
             cast: [
@@ -685,6 +888,7 @@ window.PERFORMANCES = [
             playwright: "竹田出雲・三好松洛・並木千柳 (Takeda Izumo II, Miyoshi Shōraku & Namiki Senryū)",
             premiere: "1747 (Enkyō 4)",
             playType: "時代物 (Jidaimono — Heroic Battle Scene)",
+            textCoverage: "highlights",
             synopsis: "Pursued through the pine groves by Genji soldiers under猪熊大之進 (Inokuma Dainoshin), young Shume no Kogingo fights off scores of attackers to buy time for Wakaba no Naishi and young Lord Rokudai to escape toward Mount Yoshino. Exhausted and pierced by multiple wounds, Kogingo dies heroically; soon after, sushi-shop owner Yazaemon passes by on his way home, discovers the noble youth's corpse, and severs the head to use as a substitute for Lord Koremori.",
             highlights: "Spectacular Bunraku sword-fighting (tate) as the three puppeteers operating Kogingo leap, spin, and clash blades against waves of Genji foot soldiers before his poignant final breath.",
             cast: [
@@ -698,6 +902,7 @@ window.PERFORMANCES = [
             playwright: "竹田出雲・三好松洛・並木千柳 (Takeda Izumo II, Miyoshi Shōraku & Namiki Senryū)",
             premiere: "1747 (Enkyō 4)",
             playType: "時代世話 (Jidai-Sewa — Masterpiece of Tragic Redemption / Modori)",
+            textCoverage: "highlights",
             synopsis: "At Yazaemon's Tsurube Sushi Shop in Shimoichi, Taira no Koremori lives disguised as the shop hand Yasuke, beloved by Yazaemon's daughter Osato. That night, Wakaba no Naishi and her son arrive seeking shelter, revealing Yasuke's noble identity to the heartbroken Osato. When Gonta steals the sushi tub containing Kogingo's severed head and delivers it along with a bound mother and child to the Genji general Kajiwara Kagetoki for a reward, Yazaemon stabs Gonta in fury. Dying, Gonta reveals his heroic deception (*modori*): realizing he had accidentally swapped baskets earlier, he substituted Kogingo's head and handed over his own wife and son as captives to save Koremori's family.",
             highlights: "One of the most famous 'Modori' (character reversal from villain to hero) scenes in Japanese theater. Watch Gonta's agonizing death confession while clutching his bleeding stomach, and the bittersweet farewell as Koremori shaves his head to become a monk.",
             cast: [
@@ -714,6 +919,7 @@ window.PERFORMANCES = [
             playwright: "竹田出雲・三好松洛・並木千柳 (Takeda Izumo II, Miyoshi Shōraku & Namiki Senryū)",
             premiere: "1747 (Enkyō 4)",
             playType: "道行・景事 (Michiyuki — Cherry-Blossom Dance Journey)",
+            textCoverage: "highlights",
             synopsis: "Under a canopy of a thousand blooming cherry trees on Mount Yoshino, Yoshitsune's mistress Lady Shizuka travels in search of her lord. When she strikes the sacred Hatsune ('First Song of Spring') hand-drum, her loyal bodyguard Satō Tadanobu magically appears beside her. Together they reenact the great Battle of Yashima using a folding fan and Yoshitsune's suit of armor—unaware that this Tadanobu is actually a white fox spirit yearning for the drum made from his parents' skins.",
             highlights: "Watch the uncanny, nimble fox-like hand gestures (kitsune-de) and sudden leaps of Tadanobu whenever Shizuka strikes the Hatsune tsuzumi drum, accompanied by a colorful ensemble of multiple Tayū chanters and Shamisen players (kakeai).",
             cast: [
@@ -734,6 +940,7 @@ window.PERFORMANCES = [
             playwright: "近松門左衛門 (Chikamatsu Monzaemon)",
             premiere: "1703 (Genroku 16) · Takemoto-za, Osaka",
             playType: "世話物 (Sewamono — Foundational Domestic Tragedy)",
+            textCoverage: "highlights",
             synopsis: "At the lively grounds of Ikutama Shrine in Osaka, Ohatsu—a courtesan of the Tenmaya house in the Shijimi River quarter—spots her lover Tokubei, a clerk at the Hirano-ya soy-sauce shop. Tokubei confesses that his uncle forced a marriage arrangement behind his back; although Tokubei retrieved the two-kanme silver dowry to return it, his treacherous friend Kuheiji wheedled him into lending the silver until the seventh of the month. When Kuheiji swaggeringly arrives, he claims his seal was reported lost days earlier, accuses Tokubei of forgery, and has his cronies beat Tokubei in front of Ohatsu.",
             highlights: "Notice the stark contrast between the refined, fragile Wakaotoko head of Tokubei and the sneering, red-complexioned Danshichi head of the swindler Kuheiji as Tokubei's merchant credit and honor are destroyed in public.",
             cast: [
@@ -748,6 +955,7 @@ window.PERFORMANCES = [
             playwright: "近松門左衛門 (Chikamatsu Monzaemon)",
             premiere: "1703 (Genroku 16)",
             playType: "世話物 (Sewamono — Domestic Tragedy Climax)",
+            textCoverage: "highlights",
             synopsis: "That night at the Tenmaya teahouse, Ohatsu anxieties over Tokubei's fate until he slips quietly through the lattice door in a straw hat. Ohatsu hides him beneath her trailing outer robe under the verandah steps just as the boastful Kuheiji enters as a customer and slanders Tokubei. Sitting on the edge of the steps smoking her long pipe, Ohatsu speaks ostensibly to Kuheiji while asking Tokubei below if he is resolved to die; hidden in the dark beneath the porch, Tokubei takes Ohatsu's bare white ankle and draws it across his throat to pledge suicide.",
             highlights: "The most famous gesture in all of Bunraku: female puppets normally have no feet, yet for this scene Ohatsu's puppet is specially fitted with bare human-like feet so Tokubei can grasp her ankle beneath the veranda and draw it across his throat.",
             cast: [
@@ -762,6 +970,7 @@ window.PERFORMANCES = [
             playwright: "近松門左衛門 (Chikamatsu Monzaemon)",
             premiere: "1703 (Genroku 16)",
             playType: "世話物・道行 (Sewamono Michiyuki — Poetic Journey to Death)",
+            textCoverage: "highlights",
             synopsis: "Slipping out of the Tenmaya under cover of darkness, Tokubei and Ohatsu walk barefoot along the riverbanks toward the sacred woods of Sonezaki Tenjin Shrine as the dawn bells toll seven times. Reaching the symbolic 'Twin Tree of Love'—where a pine and a palm grow from a single trunk—they bind themselves together with Ohatsu's silk sash. With trembling hands, Tokubei takes Ohatsu's life with a razor before plunging it into his own throat, achieving eternal union as 'models of true love for all generations.'",
             highlights: "Listen to Chikamatsu's sublime poetic opening ('Kono yo no nagori, yo mo nagori...') chanted with heartbreaking lyricism by the Tayū, and watch Ohatsu's pure white silk under-robe glow against the dark stage.",
             cast: [
@@ -1013,6 +1222,7 @@ window.PERFORMANCES = [
             playwright: "近松門左衛門 (Chikamatsu Monzaemon)",
             premiere: "1722 (Kyōhō 7) · Takemoto-za, Osaka",
             playType: "世話物 (Sewamono — Chikamatsu's Final Domestic Tragedy)",
+            textCoverage: "highlights",
             synopsis: "While the adopted greengrocer Hanbei was away in浜松 (Hamamatsu), his cruel stepmother evicted his pregnant wife Ochiyo and sent her back to her native village of Ueda with a bill of divorce. Returning from his trip unaware of this, Hanbei visits his bedridden father-in-law Yamawaki Heiemon, who furiously berates him for heartlessness. Mortified, Hanbei draws his short sword to commit seppuku on the spot; realizing Hanbei knew nothing of the scheme, Heiemon stops him and sends the couple back to Osaka after sharing ominous farewell cups of water (mizusakazuki) and lighting a funeral gatefire (kadobi).",
             highlights: "Watch the stoic samurai dignity of old Heiemon (operated with the Masamune head) as he strikes a flint to light the purifying gatefire at the threshold—silently signaling to his son-in-law and daughter that death may be their only honorable refuge.",
             cast: [
@@ -1028,6 +1238,7 @@ window.PERFORMANCES = [
             playwright: "近松門左衛門 (Chikamatsu Monzaemon)",
             premiere: "1722 (Kyōhō 7)",
             playType: "世話物 (Sewamono — Conflict of Filial Duty vs. Marital Love)",
+            textCoverage: "highlights",
             synopsis: "Returning to the Kawachiya greengrocer shop in Osaka on the eve of the Kōshin vigil, Hanbei pleads with his adoptive father Jin'emon and tyrannical stepmother Otsuru to let Ochiyo back into the house. When Otsuru brandishes a kitchen radish knife and threatens to slash her own throat if Ochiyo stays—accusing Hanbei of monstrous unfiliality—Hanbei is trapped by Confucian duty to the adoptive parents who raised him. Feigning compliance, he writes a bill of divorce and casts Ochiyo out the door, only to step outside moments later so they can die together as husband and wife.",
             highlights: "Notice the grotesque, domineering energy of the stepmother (Baba head) waving the kitchen knife and stamping her feet, contrasted with Ochiyo's silent weeping outside the shop curtain (noren) and Hanbei's agonizing inner conflict.",
             cast: [
@@ -1043,6 +1254,7 @@ window.PERFORMANCES = [
             playwright: "近松門左衛門 (Chikamatsu Monzaemon)",
             premiere: "1722 (Kyōhō 7)",
             playType: "世話物・道行 (Sewamono Michiyuki — Poetic Journey on Kōshin Eve)",
+            textCoverage: "highlights",
             synopsis: "Walking hand in hand through the chilly fourth-month night while townspeople keep the all-night Kōshin vigil (dedicated to the monkey-messenger deity Saruta-hiko), Hanbei and Ochiyo journey toward the Great Buddha Hall near Ikutama Shrine.Weeping for her unborn child and her aged father in Ueda, Ochiyo joins Hanbei in prayer as Chikamatsu's verse plays on the word 'saru' (monkey / to divorce / to depart this world). Because Hanbei was born a samurai, he takes Ochiyo's life mercifully and then commits ritual disembowelment.",
             highlights: "Listen for Chikamatsu's haunting triple pun on 'saru' (去る・猿): refusing to 'divorce' (saranu) as husband and wife, they instead 'depart' (saru) from this floating world on the night of the Monkey (Kōshin).",
             cast: [
@@ -1063,6 +1275,7 @@ window.PERFORMANCES = [
             playwright: "近松半二・松田ばく・栄善平・近松東南・三好松洛 (Chikamatsu Hanji & collaborators)",
             premiere: "1771 (Meiwa 8) · Takemoto-za, Osaka",
             playType: "時代物 (Jidaimono — Mythic Romance & Political Intrigue)",
+            textCoverage: "highlights",
             synopsis: "At a sake brewery marked by sacred cedar boughs at the foot of Mount Miwa in Yamato Province, the brewer's innocent daughter Omiwa is passionately in love with her neighbor Motome, a handsome court-cap maker (who is secretly the nobleman Fujiwara no Tankai). When the noble fugitive Princess Tachibana arrives pursued by retainers and also confesses her love for Motome, Motome realizes she is the sister of the tyrant Soga no Iruka. As Tachibana departs for Iruka's palace, Motome threads a needle attached to a spool of white hemp onto her trailing hem to track her; discovering them, the jealous Omiwa threads a spool of red hemp onto Motome's sleeve and chases after him.",
             highlights: "Notice the folkloric inversion of the ancient Mount Miwa serpent-bridegroom myth: here two spools of thread (odamaki)—one white, one red—unspool across the stage as three lovers chase each other in a triangle of love and destiny.",
             cast: [
@@ -1077,6 +1290,7 @@ window.PERFORMANCES = [
             playwright: "近松半二 ほか (Chikamatsu Hanji & collaborators)",
             premiere: "1771 (Meiwa 8)",
             playType: "道行・景事 (Michiyuki — Three-Way Thread Dance Journey)",
+            textCoverage: "highlights",
             synopsis: "Along the mountain path leading toward Soga no Iruka's Mikasa Palace, Motome follows the white thread attached to Princess Tachibana's kimono, while Omiwa follows the red thread attached to Motome's sleeve. Pulling on the threads like puppet strings, Omiwa and Tachibana vie for Motome's heart in an intricate, athletic dance until the threads snap and Motome vanishes ahead toward the palace.",
             highlights: "A masterpiece of Bunraku ensemble choreography: watch how the puppeteers manipulate the taut red and white hemp threads without tangling as Motome is pulled back and forth between the graceful court princess and the fiery town maiden.",
             cast: [
@@ -1091,6 +1305,7 @@ window.PERFORMANCES = [
             playwright: "近松半二 ほか (Chikamatsu Hanji & collaborators)",
             premiere: "1771 (Meiwa 8)",
             playType: "時代物 (Jidaimono — Grand Palace Confrontation)",
+            textCoverage: "highlights",
             synopsis: "At Soga no Iruka's glittering Mikasa Palace, the rough-mannered, one-eyed fisherman Fukashichi (secretly Fujiwara no Kamatari's stalwart retainer Kanawa Gorō Imakuni) arrives as an envoy bearing a letter and gift from Kamatari. Suspecting him of espionage, Iruka's sneering courtier荒巻弥藤次 (Aramaki Yatōji) and attendants mock Fukashichi's commoner manners and force him to drink a giant bowl of poisoned sake; having taken an antidote beforehand, Fukashichi drains the bowl with gusto and strides into the inner palace.",
             highlights: "Enjoy the bold, humorous swagger of Fukashichi (operated with a rugged one-eyed Bunshichi/Kenbishi head): watch him casually scratch himself, sprawl across the palace tatami, and gulp down the poisoned wine while intimidating Iruka's guards.",
             cast: [
@@ -1106,6 +1321,7 @@ window.PERFORMANCES = [
             playwright: "近松半二 ほか (Chikamatsu Hanji & collaborators)",
             premiere: "1771 (Meiwa 8)",
             playType: "時代物 (Jidaimono — Supreme Tragic Climax of Bunraku)",
+            textCoverage: "highlights",
             synopsis: "Following her broken red thread into the Golden Pavilion, the innocent Omiwa begs the haughty palace maids (tsubone) to let her see Motome. The cruel maids mock her country manners, force her to sing a wedding song while her hair falls loose, and taunt her that Motome is inside marrying a noble princess. Hearing celebratory music from the inner hall, Omiwa's heartbreak turns into demon-like jealousy ('the phase of suspicion,' 疑着の相). Suddenly Kanawa Gorō leaps out and plunges his sword into Omiwa's side: because Iruka can only be slain by a flute steeped in the lifeblood of a woman consumed by jealousy, Omiwa's blood is collected into the flute. Learning that her death will save her beloved Prince Tankai, Omiwa dies in radiant joy.",
             highlights: "The pinnacle of female puppet acting (originally perfected by Yoshida Minosuke III). Watch the famous 'Tsubone no Naburi' (torment by the court ladies) and the breathtaking moment when Omiwa's Musume head transforms in posture and spirit from a weeping country girl into a ferocious demon of jealousy, and then back into a gentle, smiling bride in death.",
             cast: [
