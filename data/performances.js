@@ -592,16 +592,32 @@ window.PERFORMANCES = [
   {
     id: "2026-12-bunraku",
     label: "2026年12月 文楽 (Tokyo)",
-    subtitle: "令和8年12月文楽公演 · Dec 6–19, 2026 · Tokyo Metropolitan Theatre",
+    subtitle: "三代吉田簑助三回忌追善 令和8年12月文楽公演 · Dec 6–19, 2026 · Tokyo Metropolitan Theatre",
     genre: "bunraku",
     dataFile: "data/2026-12-bunraku.js",
+    // Full-text scenes are merged over the highlights by data/2026-12-bunraku-full/merge.js (must stay last).
+    dataFiles: [
+      "data/2026-12-bunraku.js",
+      "data/2026-12-bunraku-full/dec_p1_zouriuchi.js",
+      "data/2026-12-bunraku-full/dec_p1_roka.js",
+      "data/2026-12-bunraku-full/dec_p1_nagatsubone.js",
+      "data/2026-12-bunraku-full/dec_p1_okuniwa.js",
+      "data/2026-12-bunraku-full/dec_p2_shiinoki.js",
+      "data/2026-12-bunraku-full/dec_p2_kogingo.js",
+      "data/2026-12-bunraku-full/dec_p2_sushiya.js",
+      "data/2026-12-bunraku-full/dec_p2_michiyuki.js",
+      "data/2026-12-bunraku-full/dec_p3_ikutama.js",
+      "data/2026-12-bunraku-full/dec_p3_tenmaya.js",
+      "data/2026-12-bunraku-full/dec_p3_tenjin.js",
+      "data/2026-12-bunraku-full/merge.js"
+    ],
     venue: {
       name: "Tokyo Metropolitan Theatre — Playhouse (Ikebukuro, Tokyo)",
       nameJp: "東京芸術劇場 プレイハウス（東京・池袋）",
       address: "1-8-1 Nishi-Ikebukuro, Toshima-ku, Tokyo 171-0021 (〒171-0021 東京都豊島区西池袋1-8-1)",
       access: "2-minute walk from Ikebukuro Station (池袋駅, JR / Tokyo Metro / Seibu / Tobu Lines) West Exit; directly connected via underground passage Exit 2b (地下通路2b出口直結).",
       mapUrl: "https://www.google.com/maps/search/?api=1&query=Tokyo+Metropolitan+Theatre+Ikebukuro",
-      scheduleNote: "Dec 6–19, 2026 (While the National Theatre in Hanzōmon undergoes reconstruction, Tokyo Bunraku runs are hosted at Tokyo Metropolitan Theatre Playhouse). Part 1: 11:00 AM / Part 2: 2:30 PM / Part 3: 7:00 PM."
+      scheduleNote: "Dec 6–19, 2026 (Dark day / 休演日: Thu, Dec 10). Memorial performance marking the 2nd anniversary of the passing of Living National Treasure Yoshida Minosuke III (1933–2024). Program I: 11:00 AM–1:45 PM / Program II: 2:30 PM–6:15 PM / Program III: 7:00 PM–8:50 PM (doors open 30 min prior; 1F seating only)."
     },
     ticketing: {
       officialLinks: [
@@ -610,46 +626,47 @@ window.PERFORMANCES = [
           lang: "Japanese",
           url: "https://ticket.ntj.jac.go.jp/",
           badge: "Official Box Office (JP)",
-          description: "Primary Japan Arts Council online booking system for all three parts, student discounts, and seat map selection."
+          description: "Primary Japan Arts Council online booking system for all three programs, Part Tickets (幕見席), student discounts, and seat map selection."
         },
         {
           label: "National Theatre English Ticket Portal",
           lang: "English",
-          url: "https://www.ntj.jac.go.jp/en/tickets.html",
+          url: "https://ticket.ntj.jac.go.jp/top_e.htm",
           badge: "English Portal",
-          description: "Official English reservation portal for international visitors (no Japanese registration required; pick up at box office or print-at-home)."
+          description: "Official English reservation portal for international visitors (booking opens Nov 14, 2026 at 10:00 AM JST)."
         },
         {
-          label: "Tokyo Metropolitan Theatre Box Office (東京芸術劇場ボックスオフィス)",
+          label: "Official Performance Page (NTJ)",
           lang: "JP / EN",
-          url: "https://www.geigeki.jp/t/",
-          badge: "Venue Box Office",
-          description: "In-person counter (1F Atrium) and online ticketing operated directly by Tokyo Metropolitan Theatre in Ikebukuro."
+          url: "https://www.ntj.jac.go.jp/schedule/kokuritsu_s/2026/0812/?lan=e",
+          badge: "Official Info",
+          description: "Japan Arts Council official schedule, Part Ticket breakdown, cast list, and EG-G subtitle/audio guide details."
         }
       ],
       pricingTiers: [
-        { tier: "Part 1 or Part 2 — S Seat (1等席)", price: "¥7,500", note: "Orchestra and front balcony prime viewing of both the puppets and the yuka dais." },
-        { tier: "Part 1 or Part 2 — A Seat (2等席)", price: "¥5,500", note: "Rear orchestra and side/balcony seating." },
-        { tier: "Part 3 Evening (Sonezaki Shinjū) — S Seat", price: "¥5,000", note: "Special evening single-play pricing for Chikamatsu's complete Sonezaki Shinjū." },
-        { tier: "Part 3 Evening — A Seat", price: "¥3,500", note: "Budget evening seating for Part 3." },
-        { tier: "Student / Youth Discount (学生割引)", price: "30%–50% OFF", note: "Available via National Theatre Ticket Centre with valid student ID." }
+        { tier: "Program I, II, or III — All Seats Uniform (均一・1階席のみ)", price: "¥9,000", note: "All reserved 1F seats (Student: ¥6,300; 20% off for persons with disabilities + 1 companion)." },
+        { tier: "Part Ticket A — Program I: Zōriuchi (幕見席 A幕)", price: "¥2,000", note: "Starts 11:00 AM. Kagamiyama: Beating with a Sandal." },
+        { tier: "Part Ticket B — Program I: Rōka / Nagatsubone / Okuniwa (B幕)", price: "¥7,000", note: "Scheduled 11:55 AM. Kagamiyama: Corridor, Onoe's Room, and Inner Garden." },
+        { tier: "Part Ticket C — Program II: Shiinoki / Kokingo Uchijini (C幕)", price: "¥3,000", note: "Starts 2:30 PM. Yoshitsune Senbon Zakura: Gathering Nuts & Death of Kokingo." },
+        { tier: "Part Ticket D — Program II: Sushiya (D幕)", price: "¥6,000", note: "Scheduled 3:45 PM. Yoshitsune Senbon Zakura: The Sushi Shop." },
+        { tier: "Part Ticket E — Program II: Michiyuki Hatsune no Tabi (E幕)", price: "¥2,000", note: "Yoshitsune Senbon Zakura: The Travel on Mt. Yoshino." }
       ],
-      sameDayInfo: "Same-day tickets (当日券) and Under-25 / Student discounted seats are sold at the Tokyo Metropolitan Theatre Playhouse entrance box office starting 60 minutes before each part's curtain time, subject to availability.",
+      sameDayInfo: "If seats remain, same-day tickets (当日券) are sold in person at the Tokyo Metropolitan Theatre Playhouse box office from 10:00 AM until each program's curtain time. Arrive at least 20 minutes before curtain for Part Tickets.",
       lobbyAmenities: [
         {
-          item: "English Audio Guide / Tablet Captioning (英語イヤホンガイド)",
-          price: "¥800",
-          description: "Available at the Playhouse foyer counter before curtain. Provides live scene context, musical cues, and puppet head explanations."
+          item: "Audio Guide — Earphone Guide (日本語・英語イヤホンガイド)",
+          price: "¥1,000 rental / ¥500 EG-G app",
+          description: "Available in English and Japanese as either a traditional rental receiver (¥1,000) or via the EG-G smartphone app (¥500, pre-download required). Note: EG-G audio guide and EG-G subtitles cannot run simultaneously on the same phone."
         },
         {
-          item: "Official Performance Program & Yukahon (プログラム・床本)",
-          price: "¥1,500",
-          description: "Includes the complete Jōruri chanting text (yukahon) for all three parts, cast assignments for Tayū, Shamisen, and Puppeteers, and scholarly essays."
+          item: "EG-G Subtitle App (字幕アプリ EG-G・日英対応)",
+          price: "App download",
+          description: "Live Japanese and English subtitles on your own smartphone or tablet. Note: there is NO overhead stage subtitle projection at this venue."
         },
         {
-          item: "Complimentary English Synopsis Booklet",
-          price: "Free",
-          description: "Distributed free to foreign guests at the entrance desk; summarizes Kagamiyama, Yoshitsune Senbon Zakura, and Sonezaki Shinjū."
+          item: "Official Bilingual Program (公演プログラム・日英併記)",
+          price: "¥1,000",
+          description: "Includes English synopsis, cast assignments for Tayū, Shamisen, and Puppeteers, and essays honoring Yoshida Minosuke III."
         }
       ]
     },

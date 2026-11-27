@@ -1,4 +1,4 @@
-const CACHE_NAME = 'bunraku-companion-v1';
+const CACHE_NAME = 'bunraku-companion-v2';
 
 const PRECACHE_URLS = [
   './',
@@ -16,7 +16,19 @@ const PRECACHE_URLS = [
   './data/kabuki-full/nov_kabuki_rokudanme.js',
   './data/kabuki-full/nov_kabuki_shichidanme.js',
   './data/kabuki-full/nov_kabuki_juichidanme.js',
-  './data/kabuki-full/merge.js'
+  './data/kabuki-full/merge.js',
+  './data/2026-12-bunraku-full/dec_p1_zouriuchi.js',
+  './data/2026-12-bunraku-full/dec_p1_roka.js',
+  './data/2026-12-bunraku-full/dec_p1_nagatsubone.js',
+  './data/2026-12-bunraku-full/dec_p1_okuniwa.js',
+  './data/2026-12-bunraku-full/dec_p2_shiinoki.js',
+  './data/2026-12-bunraku-full/dec_p2_kogingo.js',
+  './data/2026-12-bunraku-full/dec_p2_sushiya.js',
+  './data/2026-12-bunraku-full/dec_p2_michiyuki.js',
+  './data/2026-12-bunraku-full/dec_p3_ikutama.js',
+  './data/2026-12-bunraku-full/dec_p3_tenmaya.js',
+  './data/2026-12-bunraku-full/dec_p3_tenjin.js',
+  './data/2026-12-bunraku-full/merge.js'
 ];
 
 self.addEventListener('install', (event) => {
